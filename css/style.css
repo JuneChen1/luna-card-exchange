@@ -32,3 +32,8 @@ body {
   font-size: 0.7rem;
   padding: 0.2rem 0.3rem;
 }
+
+.app-footer {
+  color: #6c757d;
+  border-top: 1px solid #dee2e6;
+}
