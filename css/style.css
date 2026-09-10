@@ -1,14 +1,14 @@
 :root {
-  --luna-primary: #4b3f72;
-  --luna-accent: #d8b4fe;
+  --luna-primary: #16324f;
+  --luna-accent: #8ecae6;
 }
 
 body {
-  background: #f5f3fa;
+  background: #eef2f7;
 }
 
 .app-navbar {
-  background: linear-gradient(90deg, var(--luna-primary), #7c5fb0);
+  background: linear-gradient(90deg, var(--luna-primary), #2f6690);
 }
 
 .card-item img {
