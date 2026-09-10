@@ -1,63 +1,57 @@
 [
   {
-    "id": 0,
-    "name": "愚者",
-    "english_name": "The Fool",
-    "image_url": "/card_images/22.png"
-  },
-  {
     "id": 1,
     "name": "魔法師",
     "english_name": "The Magician",
-    "image_url": "/card_images/01.png"
+    "image_url": "/card_images/1.png"
   },
   {
     "id": 2,
     "name": "女祭司",
     "english_name": "The High Priestess",
-    "image_url": "/card_images/02.png"
+    "image_url": "/card_images/2.png"
   },
   {
     "id": 3,
     "name": "女皇",
     "english_name": "The Empress",
-    "image_url": "/card_images/03.png"
+    "image_url": "/card_images/3.png"
   },
   {
     "id": 4,
     "name": "皇帝",
     "english_name": "The Emperor",
-    "image_url": "/card_images/04.png"
+    "image_url": "/card_images/4.png"
   },
   {
     "id": 5,
     "name": "聖職者",
     "english_name": "The Hierophant",
-    "image_url": "/card_images/05.png"
+    "image_url": "/card_images/5.png"
   },
   {
     "id": 6,
     "name": "戀人",
     "english_name": "The Lovers",
-    "image_url": "/card_images/06.png"
+    "image_url": "/card_images/6.png"
   },
   {
     "id": 7,
     "name": "戰車",
     "english_name": "The Chariot",
-    "image_url": "/card_images/07.png"
+    "image_url": "/card_images/7.png"
   },
   {
     "id": 8,
     "name": "力量",
     "english_name": "Strength",
-    "image_url": "/card_images/08.png"
+    "image_url": "/card_images/8.png"
   },
   {
     "id": 9,
     "name": "隱者",
     "english_name": "The Hermit",
-    "image_url": "/card_images/09.png"
+    "image_url": "/card_images/9.png"
   },
   {
     "id": 10,
@@ -130,5 +124,11 @@
     "name": "世界",
     "english_name": "The World",
     "image_url": "/card_images/21.png"
+  },
+  {
+    "id": 0,
+    "name": "愚者",
+    "english_name": "The Fool",
+    "image_url": "/card_images/0.png"
   }
 ]
