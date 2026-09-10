@@ -1,0 +1,34 @@
+:root {
+  --luna-primary: #4b3f72;
+  --luna-accent: #d8b4fe;
+}
+
+body {
+  background: #f5f3fa;
+}
+
+.app-navbar {
+  background: linear-gradient(90deg, var(--luna-primary), #7c5fb0);
+}
+
+.card-item img {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 0.5rem;
+}
+
+.card-item.status-offered {
+  border-color: #198754;
+  border-width: 2px;
+}
+
+.card-item.status-wanted {
+  border-color: #dc3545;
+  border-width: 2px;
+}
+
+.status-toggle .btn {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.3rem;
+}

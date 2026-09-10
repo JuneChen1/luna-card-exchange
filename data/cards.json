@@ -1,0 +1,134 @@
+[
+  {
+    "id": 0,
+    "name": "愚者",
+    "english_name": "The Fool",
+    "image_url": "/card_images/22.png"
+  },
+  {
+    "id": 1,
+    "name": "魔法師",
+    "english_name": "The Magician",
+    "image_url": "/card_images/01.png"
+  },
+  {
+    "id": 2,
+    "name": "女祭司",
+    "english_name": "The High Priestess",
+    "image_url": "/card_images/02.png"
+  },
+  {
+    "id": 3,
+    "name": "女皇",
+    "english_name": "The Empress",
+    "image_url": "/card_images/03.png"
+  },
+  {
+    "id": 4,
+    "name": "皇帝",
+    "english_name": "The Emperor",
+    "image_url": "/card_images/04.png"
+  },
+  {
+    "id": 5,
+    "name": "聖職者",
+    "english_name": "The Hierophant",
+    "image_url": "/card_images/05.png"
+  },
+  {
+    "id": 6,
+    "name": "戀人",
+    "english_name": "The Lovers",
+    "image_url": "/card_images/06.png"
+  },
+  {
+    "id": 7,
+    "name": "戰車",
+    "english_name": "The Chariot",
+    "image_url": "/card_images/07.png"
+  },
+  {
+    "id": 8,
+    "name": "力量",
+    "english_name": "Strength",
+    "image_url": "/card_images/08.png"
+  },
+  {
+    "id": 9,
+    "name": "隱者",
+    "english_name": "The Hermit",
+    "image_url": "/card_images/09.png"
+  },
+  {
+    "id": 10,
+    "name": "命運之輪",
+    "english_name": "The Wheel of Fortune",
+    "image_url": "/card_images/10.png"
+  },
+  {
+    "id": 11,
+    "name": "正義",
+    "english_name": "Justice",
+    "image_url": "/card_images/11.png"
+  },
+  {
+    "id": 12,
+    "name": "倒吊人",
+    "english_name": "The Hanged Man",
+    "image_url": "/card_images/12.png"
+  },
+  {
+    "id": 13,
+    "name": "死神",
+    "english_name": "Death",
+    "image_url": "/card_images/13.png"
+  },
+  {
+    "id": 14,
+    "name": "節制",
+    "english_name": "Temperance",
+    "image_url": "/card_images/14.png"
+  },
+  {
+    "id": 15,
+    "name": "魔鬼",
+    "english_name": "The Devil",
+    "image_url": "/card_images/15.png"
+  },
+  {
+    "id": 16,
+    "name": "塔",
+    "english_name": "The Tower",
+    "image_url": "/card_images/16.png"
+  },
+  {
+    "id": 17,
+    "name": "星",
+    "english_name": "The Star",
+    "image_url": "/card_images/17.png"
+  },
+  {
+    "id": 18,
+    "name": "月亮",
+    "english_name": "The Moon",
+    "image_url": "/card_images/18.png"
+  },
+  {
+    "id": 19,
+    "name": "太陽",
+    "english_name": "The Sun",
+    "image_url": "/card_images/19.png"
+  },
+  {
+    "id": 20,
+    "name": "審判",
+    "english_name": "Judgement",
+    "image_url": "/card_images/20.png"
+  },
+  {
+    "id": 21,
+    "name": "世界",
+    "english_name": "The World",
+    "image_url": "/card_images/21.png"
+  }
+]
