@@ -30,7 +30,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 if (getToken()) {
-  location.href = '/?page=dashboard';
+  location.href = '/dashboard.html';
 }
 
 if (new URLSearchParams(location.search).get('registered')) {
@@ -53,7 +53,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
   try {
     const result = await authApi.login({ username, password });
     setSession(result.data.token, username);
-    location.href = '/?page=dashboard';
+    location.href = '/dashboard.html';
   } catch (error) {
     showAlert(error.message);
   }

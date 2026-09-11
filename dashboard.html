@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>月諭聖牌交換站 Luna Card Exchange</title>
+  <title data-i18n="title.dashboard">個人頁面 - 月諭聖牌交換站</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
@@ -15,16 +15,14 @@
   <nav class="navbar navbar-expand-lg navbar-dark app-navbar">
     <div class="container">
       <a class="navbar-brand fw-bold" href="/">月諭聖牌交換站 <small class="fw-normal">Luna Card Exchange</small></a>
-      <div id="auth-area" class="d-flex gap-2 align-items-center">
+      <div class="d-flex align-items-center gap-2">
         <div class="dropdown lang-dropdown">
           <button type="button" class="btn btn-outline-light btn-sm dropdown-toggle lang-dropdown-toggle" data-lang-dropdown-toggle aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5zm1 0V4h2.355a7.97 7.97 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077M4.09 4a9.3 9.3 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.96 6.96 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5h2.653V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a6.7 6.7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7.03 7.03 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472a7.03 7.03 0 0 0 3.072-2.472h-1.835a9.3 9.3 0 0 1-.64 1.539 6.7 6.7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.244-.457.468-1.068zm3.68-1h1.834a6.96 6.96 0 0 0 .656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.49-3.5a6.96 6.96 0 0 0-.656-2.5H12.51c.174.782.282 1.623.312 2.5zM11.28 4a9.3 9.3 0 0 0-.64-1.539 6.7 6.7 0 0 0-.597-.933A7.03 7.03 0 0 1 13.745 4z"/></svg> <span data-lang-current-label></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" data-lang-menu></ul>
         </div>
-        <a class="btn btn-outline-light btn-sm" href="/login.html" id="btn-show-login" data-i18n="nav.login">登入</a>
-        <a class="btn btn-light btn-sm" href="/register.html" id="btn-show-register" data-i18n="nav.register">註冊</a>
-        <div class="dropdown d-none" id="welcome-dropdown">
+        <div class="dropdown" id="welcome-dropdown">
           <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="welcome-text" data-bs-toggle="dropdown" aria-expanded="false"></button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li><a class="dropdown-item" href="/dashboard.html" data-i18n="nav.myPage">個人頁面</a></li>
@@ -45,40 +43,33 @@
       <button type="button" class="btn-close" id="btn-alert-close" aria-label="Close"></button>
     </div>
 
-    <div id="exchange-section" class="mb-5">
-      <div class="card mb-3">
+    <div id="uid-list-section">
+      <div class="row g-3 mb-4" id="uid-list"></div>
+
+      <div class="card mb-4">
         <div class="card-body">
-          <button class="btn btn-outline-luna-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#exchange-filter-body" aria-expanded="false" aria-controls="exchange-filter-body">
-            <span data-i18n="index.findExchange">尋找交換對象</span> <span aria-hidden="true">▾</span>
-          </button>
-          <div class="collapse" id="exchange-filter-body">
-            <form id="exchange-form" class="row g-3 pt-3">
-              <div class="col-md-4">
-                <label class="form-label" data-i18n="index.wantedLabel">我想要的牌</label>
-                <div class="border rounded p-2 exchange-card-picker" id="exchange-wanted"></div>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label" data-i18n="index.offeredLabel">我多出的牌</label>
-                <div class="border rounded p-2 exchange-card-picker" id="exchange-offered"></div>
-              </div>
-              <div class="col-md-4">
-                <label for="exchange-server" class="form-label" data-i18n="index.serverLabel">伺服器</label>
-                <select class="form-select" id="exchange-server">
-                  <option value="" data-i18n="index.serverAny">不限</option>
-                  <option value="Europe">Europe</option>
-                  <option value="America">America</option>
-                  <option value="Asia">Asia</option>
-                  <option value="TWHKMO">TW,HK,MO</option>
-                </select>
-              </div>
-              <div class="col-md-4 offset-md-4 text-center mt-3">
-                <button type="submit" class="btn btn-luna-primary" style="padding-left: 20px; padding-right: 20px;" data-i18n="index.search">搜尋</button>
-              </div>
-            </form>
+          <label for="new-uid-input" class="form-label fw-bold" data-i18n="index.addUidLabel">新增原神 UID</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="new-uid-input" placeholder="輸入原神 UID" data-i18n-placeholder="index.uidPlaceholder">
+            <button class="btn btn-luna-primary" id="btn-add-uid" data-i18n="index.addUidBtn">新增</button>
           </div>
+          <div class="form-text" data-i18n="index.addUidHint">新增後即可設定該 UID 的聖牌多餘 / 缺少狀態</div>
         </div>
       </div>
-      <div id="exchange-results" class="row g-3"></div>
+
+      <p class="text-start text-muted small mb-0"><span data-i18n="index.supportedServersPrefix">支援的伺服器：</span>Europe / America / Asia / TW,HK,MO</p>
+    </div>
+
+    <div id="cards-section" class="d-none">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-outline-secondary btn-sm" id="btn-back-to-list">&larr; <span data-i18n="index.back">返回</span></button>
+        <h5 class="mb-0"><span data-i18n="index.cardStatusTitle">聖牌狀態</span><span data-i18n="index.parenOpen">（</span><span id="uid-label"></span><span data-i18n="index.parenClose">）</span></h5>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-danger btn-sm" id="btn-delete-uid" data-i18n="index.deleteUid">刪除此 UID</button>
+          <button class="btn btn-luna-primary" id="btn-save" data-i18n="index.saveChanges">儲存變更</button>
+        </div>
+      </div>
+      <div class="row g-3" id="cards-grid"></div>
     </div>
 
   </main>
@@ -87,16 +78,39 @@
     <p class="mb-0 small"><span data-i18n="footer.contact">聯絡我們：</span><a href="mailto:card.exchange.dev@outlook.com">card.exchange.dev@outlook.com</a></p>
   </footer>
 
-  <!-- 交換媒合搜尋結果範本 -->
-  <template id="exchange-result-template">
+  <!-- UID 列表卡片範本 -->
+  <template id="uid-card-template">
     <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
+      <div class="card h-100 uid-card" role="button">
         <div class="card-body">
-          <h6 class="card-title fw-bold exchange-result-uid"></h6>
-          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-success" data-i18n="index.badgeOffered">多餘</span><span class="d-flex flex-wrap gap-1 exchange-result-offered"></span></p>
-          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-danger" data-i18n="index.badgeWanted">缺少</span><span class="d-flex flex-wrap gap-1 exchange-result-wanted"></span></p>
-          <p class="mb-1 small fw-bold exchange-result-user"></p>
-          <p class="mb-0 small text-muted exchange-result-contact"></p>
+          <div class="d-flex justify-content-between align-items-start gap-2">
+            <h6 class="card-title fw-bold uid-card-uid mb-0"></h6>
+            <button type="button" class="btn btn-outline-danger btn-sm uid-card-delete" data-i18n="index.deleteBtn">刪除</button>
+          </div>
+          <p class="mb-1 small d-flex align-items-center gap-1 mt-2"><span class="badge bg-success" data-i18n="index.badgeOffered">多餘</span><span class="uid-card-offered"></span></p>
+          <p class="mb-0 small d-flex align-items-center gap-1"><span class="badge bg-danger" data-i18n="index.badgeWanted">缺少</span><span class="uid-card-wanted"></span></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- 卡牌狀態切換用的隱藏範本 -->
+  <template id="card-template">
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="card card-item h-100" data-card-id="">
+        <img class="card-img-top" src="" alt="">
+        <div class="card-body p-2 text-center">
+          <div class="small fw-bold card-name mb-2"></div>
+          <div class="btn-group w-100 status-toggle" role="group">
+            <input type="radio" class="btn-check" name="" value="none" autocomplete="off" checked id="">
+            <label class="btn btn-outline-secondary btn-sm" for="" data-i18n="index.statusNone">未設定</label>
+
+            <input type="radio" class="btn-check" name="" value="offered" autocomplete="off" id="">
+            <label class="btn btn-outline-success btn-sm" for="" data-i18n="index.badgeOffered">多餘</label>
+
+            <input type="radio" class="btn-check" name="" value="wanted" autocomplete="off" id="">
+            <label class="btn btn-outline-danger btn-sm" for="" data-i18n="index.badgeWanted">缺少</label>
+          </div>
         </div>
       </div>
     </div>
@@ -105,6 +119,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/api.js"></script>
-  <script src="/js/app.js"></script>
+  <script src="/js/dashboard.js"></script>
 </body>
 </html>

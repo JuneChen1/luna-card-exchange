@@ -14,6 +14,7 @@ const i18n = (function () {
 
       'title.login': '登入 - 月諭聖牌交換站',
       'title.register': '註冊 - 月諭聖牌交換站',
+      'title.dashboard': '個人頁面 - 月諭聖牌交換站',
       'title.profile': '編輯個人資料 - 月諭聖牌交換站',
       'title.changePassword': '修改密碼 - 月諭聖牌交換站',
       'title.forgotPassword': '忘記密碼 - 月諭聖牌交換站',
@@ -109,6 +110,7 @@ const i18n = (function () {
 
       'title.login': 'Login - Luna Card Exchange',
       'title.register': 'Register - Luna Card Exchange',
+      'title.dashboard': 'My Page - Luna Card Exchange',
       'title.profile': 'Edit Profile - Luna Card Exchange',
       'title.changePassword': 'Change Password - Luna Card Exchange',
       'title.forgotPassword': 'Forgot Password - Luna Card Exchange',

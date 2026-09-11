@@ -30,7 +30,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 if (getToken()) {
-  location.href = '/?page=dashboard';
+  location.href = '/dashboard.html';
 }
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;

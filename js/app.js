@@ -1,6 +1,5 @@
 let allCards = [];
 let cardsById = new Map();
-let currentUid = '';
 let lastExchangeResults = [];
 
 function cardName(card) {
@@ -16,17 +15,9 @@ const authArea = {
   welcomeText: document.getElementById('welcome-text')
 };
 
-const dashboard = document.getElementById('dashboard');
 const alertBox = document.getElementById('alert-box');
 const alertMessage = document.getElementById('alert-message');
 const alertIcon = document.getElementById('alert-icon');
-const uidListSection = document.getElementById('uid-list-section');
-const uidList = document.getElementById('uid-list');
-const uidCardTemplate = document.getElementById('uid-card-template');
-const cardsSection = document.getElementById('cards-section');
-const cardsGrid = document.getElementById('cards-grid');
-const uidLabel = document.getElementById('uid-label');
-const cardTemplate = document.getElementById('card-template');
 
 const exchangeForm = document.getElementById('exchange-form');
 const exchangeWantedSelect = document.getElementById('exchange-wanted');
@@ -63,96 +54,10 @@ function refreshAuthUI() {
   authArea.loginBtn.classList.toggle('d-none', isLoggedIn);
   authArea.registerBtn.classList.toggle('d-none', isLoggedIn);
   authArea.welcomeDropdown.classList.toggle('d-none', !isLoggedIn);
-  dashboard.classList.toggle('d-none', !isLoggedIn);
 
   if (isLoggedIn) {
     authArea.welcomeText.textContent = username;
-    loadUidSummaries();
   }
-}
-
-async function deleteUid(uid) {
-  const confirmed = window.confirm(i18n.t('index.confirmDeleteUid', { uid }));
-  if (!confirmed) return false;
-
-  try {
-    await myCardsApi.remove(uid);
-    return true;
-  } catch (error) {
-    showAlert(error.message);
-    return false;
-  }
-}
-
-function renderUidList(summaries) {
-  uidList.innerHTML = '';
-
-  const separator = i18n.getLang() === 'en' ? ', ' : '、';
-
-  summaries.forEach((summary) => {
-    const fragment = uidCardTemplate.content.cloneNode(true);
-    const cardEl = fragment.querySelector('.uid-card');
-    const uidEl = fragment.querySelector('.uid-card-uid');
-    const offeredEl = fragment.querySelector('.uid-card-offered');
-    const wantedEl = fragment.querySelector('.uid-card-wanted');
-    const deleteBtn = fragment.querySelector('.uid-card-delete');
-
-    i18n.applyI18n(fragment);
-    uidEl.textContent = summary.genshin_uid;
-    offeredEl.textContent = summary.offered.map((cardId) => cardName(cardsById.get(cardId))).join(separator) || i18n.t('index.none');
-    wantedEl.textContent = summary.wanted.map((cardId) => cardName(cardsById.get(cardId))).join(separator) || i18n.t('index.none');
-
-    cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
-    deleteBtn.addEventListener('click', async (event) => {
-      event.stopPropagation();
-      hideAlert();
-      const deleted = await deleteUid(summary.genshin_uid);
-      if (!deleted) return;
-      showAlert(i18n.t('index.deletedSuccess'), 'success');
-      loadUidSummaries();
-    });
-
-    uidList.appendChild(fragment);
-  });
-}
-
-async function loadUidSummaries() {
-  try {
-    const result = await myCardsApi.listUids();
-    renderUidList(result.data);
-  } catch (error) {
-    showAlert(error.message);
-  }
-}
-
-async function openEditor(uid) {
-  hideAlert();
-
-  try {
-    const result = await myCardsApi.get(uid);
-    const statusByCardId = new Map(result.data.map((item) => [item.card.id, item.status]));
-
-    currentUid = uid;
-    uidLabel.textContent = uid;
-    renderCardsGrid(statusByCardId);
-    uidListSection.classList.add('d-none');
-    cardsSection.classList.remove('d-none');
-    history.replaceState(null, '', `?uid=${encodeURIComponent(uid)}`);
-  } catch (error) {
-    showAlert(error.message);
-  }
-}
-
-function showDashboardList() {
-  cardsSection.classList.add('d-none');
-  uidListSection.classList.remove('d-none');
-  history.replaceState(null, '', '?page=dashboard');
-}
-
-function backToList() {
-  hideAlert();
-  showDashboardList();
-  loadUidSummaries();
 }
 
 async function loadCardsCatalog() {
@@ -270,122 +175,12 @@ exchangeForm.addEventListener('submit', (event) => {
   searchExchange();
 });
 
-function renderCardsGrid(statusByCardId) {
-  cardsGrid.innerHTML = '';
-
-  allCards.forEach((card) => {
-    const fragment = cardTemplate.content.cloneNode(true);
-    const cardItem = fragment.querySelector('.card-item');
-    const img = fragment.querySelector('img');
-    const nameEl = fragment.querySelector('.card-name');
-    const radios = fragment.querySelectorAll('input[type="radio"]');
-
-    const status = statusByCardId.get(card.id) || 'none';
-
-    i18n.applyI18n(fragment);
-    cardItem.dataset.cardId = card.id;
-    cardItem.classList.add(`status-${status}`);
-    img.src = card.image_url;
-    img.alt = cardName(card);
-    nameEl.textContent = cardName(card);
-
-    radios.forEach((radio) => {
-      const radioId = `status-${card.id}-${radio.value}`;
-      const label = radio.nextElementSibling;
-
-      radio.id = radioId;
-      radio.name = `status-${card.id}`;
-      radio.checked = radio.value === status;
-      label.setAttribute('for', radioId);
-
-      radio.addEventListener('change', () => {
-        cardItem.classList.remove('status-none', 'status-offered', 'status-wanted');
-        cardItem.classList.add(`status-${radio.value}`);
-      });
-    });
-
-    cardsGrid.appendChild(fragment);
-  });
-}
-
-function collectStatusPayload() {
-  const offered = [];
-  const wanted = [];
-
-  document.querySelectorAll('.card-item').forEach((cardItem) => {
-    const cardId = Number(cardItem.dataset.cardId);
-    const checked = cardItem.querySelector('input[type="radio"]:checked');
-
-    if (checked?.value === 'offered') offered.push(cardId);
-    if (checked?.value === 'wanted') wanted.push(cardId);
-  });
-
-  return { genshinUid: currentUid, offered, wanted };
-}
-
-function collectStatusMap() {
-  const map = new Map();
-
-  document.querySelectorAll('.card-item').forEach((cardItem) => {
-    const cardId = Number(cardItem.dataset.cardId);
-    const checked = cardItem.querySelector('input[type="radio"]:checked');
-    map.set(cardId, checked?.value || 'none');
-  });
-
-  return map;
-}
-
 authArea.logoutBtn.addEventListener('click', () => {
   clearSession();
-  cardsSection.classList.add('d-none');
-  uidListSection.classList.remove('d-none');
-  history.replaceState(null, '', location.pathname);
   refreshAuthUI();
 });
 
-document.getElementById('btn-add-uid').addEventListener('click', () => {
-  hideAlert();
-  const uidInput = document.getElementById('new-uid-input');
-  const uid = uidInput.value.trim();
-
-  if (!uid) {
-    showAlert(i18n.t('index.enterUid'));
-    return;
-  }
-
-  uidInput.value = '';
-  openEditor(uid);
-});
-
-document.getElementById('btn-back-to-list').addEventListener('click', backToList);
-
-document.getElementById('btn-delete-uid').addEventListener('click', async () => {
-  hideAlert();
-  const deleted = await deleteUid(currentUid);
-  if (!deleted) return;
-  showDashboardList();
-  showAlert(i18n.t('index.deletedSuccess'), 'success');
-  loadUidSummaries();
-});
-
-document.getElementById('btn-save').addEventListener('click', async () => {
-  hideAlert();
-
-  try {
-    await myCardsApi.save(collectStatusPayload());
-    showAlert(i18n.t('index.saveSuccess'), 'success');
-  } catch (error) {
-    showAlert(error.message);
-  }
-});
-
 document.addEventListener('langchange', () => {
-  if (!cardsSection.classList.contains('d-none')) {
-    renderCardsGrid(collectStatusMap());
-  }
-  if (getToken() && !uidListSection.classList.contains('d-none')) {
-    loadUidSummaries();
-  }
   populateExchangeCardOptions();
   renderExchangeResults(lastExchangeResults);
 });
@@ -395,10 +190,4 @@ document.addEventListener('langchange', () => {
   populateExchangeCardOptions();
   searchExchange();
   refreshAuthUI();
-
-  const uidFromUrl = new URLSearchParams(location.search).get('uid');
-  if (getToken()) {
-    if (uidFromUrl) openEditor(uidFromUrl);
-    else showDashboardList();
-  }
 })();

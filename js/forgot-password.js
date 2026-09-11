@@ -21,7 +21,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 if (getToken()) {
-  location.href = '/?page=dashboard';
+  location.href = '/dashboard.html';
 }
 
 document.getElementById('forgot-form').addEventListener('submit', async (event) => {
