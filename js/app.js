@@ -1,4 +1,5 @@
 let allCards = [];
+let cardsById = new Map();
 let currentUid = '';
 
 const authArea = {
@@ -70,8 +71,8 @@ function renderUidList(summaries) {
     const wantedEl = fragment.querySelector('.uid-card-wanted');
 
     uidEl.textContent = summary.genshin_uid;
-    offeredEl.textContent = summary.offered.map((card) => card.name).join('、') || '無';
-    wantedEl.textContent = summary.wanted.map((card) => card.name).join('、') || '無';
+    offeredEl.textContent = summary.offered.map((cardId) => cardsById.get(cardId)?.name).join('、') || '無';
+    wantedEl.textContent = summary.wanted.map((cardId) => cardsById.get(cardId)?.name).join('、') || '無';
 
     cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
 
@@ -121,6 +122,7 @@ function backToList() {
 async function loadCardsCatalog() {
   const response = await fetch('/data/cards.json');
   allCards = await response.json();
+  cardsById = new Map(allCards.map((card) => [card.id, card]));
 }
 
 function renderCardsGrid(statusByCardId) {
