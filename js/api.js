@@ -44,6 +44,9 @@ const authApi = {
 };
 
 const myCardsApi = {
+  listUids() {
+    return apiRequest('/my-cards/uids');
+  },
   get(genshinUid) {
     return apiRequest(`/my-cards?uid=${encodeURIComponent(genshinUid)}`);
   },

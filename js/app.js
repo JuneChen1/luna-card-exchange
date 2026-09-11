@@ -11,6 +11,9 @@ const authArea = {
 const guestHint = document.getElementById('guest-hint');
 const dashboard = document.getElementById('dashboard');
 const alertBox = document.getElementById('alert-box');
+const uidListSection = document.getElementById('uid-list-section');
+const uidList = document.getElementById('uid-list');
+const uidCardTemplate = document.getElementById('uid-card-template');
 const cardsSection = document.getElementById('cards-section');
 const cardsGrid = document.getElementById('cards-grid');
 const uidLabel = document.getElementById('uid-label');
@@ -40,6 +43,53 @@ function refreshAuthUI() {
 
   if (isLoggedIn) {
     authArea.welcomeText.textContent = `你好，${username}`;
+    loadUidSummaries();
+  }
+}
+
+function renderUidList(summaries) {
+  uidList.innerHTML = '';
+
+  summaries.forEach((summary) => {
+    const fragment = uidCardTemplate.content.cloneNode(true);
+    const cardEl = fragment.querySelector('.uid-card');
+    const uidEl = fragment.querySelector('.uid-card-uid');
+    const offeredEl = fragment.querySelector('.uid-card-offered');
+    const wantedEl = fragment.querySelector('.uid-card-wanted');
+
+    uidEl.textContent = summary.genshin_uid;
+    offeredEl.textContent = `多餘：${summary.offered.map((card) => card.name).join('、') || '無'}`;
+    wantedEl.textContent = `缺少：${summary.wanted.map((card) => card.name).join('、') || '無'}`;
+
+    cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
+
+    uidList.appendChild(fragment);
+  });
+}
+
+async function loadUidSummaries() {
+  try {
+    const result = await myCardsApi.listUids();
+    renderUidList(result.data);
+  } catch (error) {
+    showAlert(error.message);
+  }
+}
+
+async function openEditor(uid) {
+  hideAlert();
+
+  try {
+    const result = await myCardsApi.get(uid);
+    const statusByCardId = new Map(result.data.map((item) => [item.card.id, item.status]));
+
+    currentUid = uid;
+    uidLabel.textContent = uid;
+    renderCardsGrid(statusByCardId);
+    uidListSection.classList.add('d-none');
+    cardsSection.classList.remove('d-none');
+  } catch (error) {
+    showAlert(error.message);
   }
 }
 
@@ -129,7 +179,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
 
   try {
     const result = await authApi.login({ username, password: formData.get('password') });
-    setSession(result.token, username);
+    setSession(result.data.token, username);
     bootstrap.Modal.getInstance(document.getElementById('loginModal'))?.hide();
     event.target.reset();
     refreshAuthUI();
@@ -141,29 +191,29 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
 authArea.logoutBtn.addEventListener('click', () => {
   clearSession();
   cardsSection.classList.add('d-none');
+  uidListSection.classList.remove('d-none');
   refreshAuthUI();
 });
 
-document.getElementById('btn-load-uid').addEventListener('click', async () => {
+document.getElementById('btn-add-uid').addEventListener('click', () => {
   hideAlert();
-  const uid = document.getElementById('uid-input').value.trim();
+  const uidInput = document.getElementById('new-uid-input');
+  const uid = uidInput.value.trim();
 
   if (!uid) {
     showAlert('請輸入原神 UID');
     return;
   }
 
-  try {
-    const result = await myCardsApi.get(uid);
-    const statusByCardId = new Map((result.cards || result || []).map((item) => [item.cardId ?? item.card_id, item.status]));
+  uidInput.value = '';
+  openEditor(uid);
+});
 
-    currentUid = uid;
-    uidLabel.textContent = uid;
-    renderCardsGrid(statusByCardId);
-    cardsSection.classList.remove('d-none');
-  } catch (error) {
-    showAlert(error.message);
-  }
+document.getElementById('btn-back-to-list').addEventListener('click', () => {
+  hideAlert();
+  cardsSection.classList.add('d-none');
+  uidListSection.classList.remove('d-none');
+  loadUidSummaries();
 });
 
 document.getElementById('btn-save').addEventListener('click', async () => {
