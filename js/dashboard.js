@@ -234,6 +234,7 @@ document.getElementById('btn-save').addEventListener('click', async () => {
 
   try {
     await myCardsApi.save(collectStatusPayload());
+    backToList();
     showAlert(i18n.t('index.saveSuccess'), 'success');
   } catch (error) {
     showAlert(error.message);

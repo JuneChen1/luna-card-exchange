@@ -35,7 +35,7 @@
     </div>
   </nav>
 
-  <main class="container py-4">
+  <main class="container pt-4 pb-3 d-flex flex-column">
 
     <div id="alert-box" class="alert d-none alert-dismissible d-flex align-items-center" role="alert">
       <svg id="alert-icon" width="16" height="16" fill="currentColor" class="flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-hidden="true"></svg>
@@ -43,21 +43,23 @@
       <button type="button" class="btn-close" id="btn-alert-close" aria-label="Close"></button>
     </div>
 
-    <div id="uid-list-section">
+    <div id="uid-list-section" class="d-flex flex-column flex-fill">
       <div class="row g-3 mb-4" id="uid-list"></div>
 
-      <div class="card mb-4">
-        <div class="card-body">
-          <label for="new-uid-input" class="form-label fw-bold" data-i18n="index.addUidLabel">新增原神 UID</label>
-          <div class="input-group">
-            <input type="text" class="form-control" id="new-uid-input" placeholder="輸入原神 UID" data-i18n-placeholder="index.uidPlaceholder">
-            <button class="btn btn-luna-primary" id="btn-add-uid" data-i18n="index.addUidBtn">新增</button>
+      <div class="mt-auto">
+        <div class="card mb-3">
+          <div class="card-body">
+            <label for="new-uid-input" class="form-label fw-bold" data-i18n="index.addUidLabel">新增原神 UID</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="new-uid-input" placeholder="輸入原神 UID" data-i18n-placeholder="index.uidPlaceholder">
+              <button class="btn btn-luna-primary" id="btn-add-uid" data-i18n="index.addUidBtn">新增</button>
+            </div>
+            <div class="form-text" data-i18n="index.addUidHint">新增後即可設定該 UID 的聖牌多餘 / 缺少狀態</div>
           </div>
-          <div class="form-text" data-i18n="index.addUidHint">新增後即可設定該 UID 的聖牌多餘 / 缺少狀態</div>
         </div>
-      </div>
 
-      <p class="text-start text-muted small mb-0"><span data-i18n="index.supportedServersPrefix">支援的伺服器：</span>Europe / America / Asia / TW,HK,MO</p>
+        <p class="text-start text-muted small mb-0"><span data-i18n="index.supportedServersPrefix">支援的伺服器：</span>Europe / America / Asia / TW,HK,MO</p>
+      </div>
     </div>
 
     <div id="cards-section" class="d-none">
@@ -74,7 +76,7 @@
 
   </main>
 
-  <footer class="app-footer text-center py-4 mt-5">
+  <footer class="app-footer text-center py-4">
     <p class="mb-0 small"><span data-i18n="footer.contact">聯絡我們：</span><a href="mailto:card.exchange.dev@outlook.com">card.exchange.dev@outlook.com</a></p>
   </footer>
 
