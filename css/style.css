@@ -26,6 +26,15 @@ main {
   background: linear-gradient(90deg, var(--luna-primary), #2f6690);
 }
 
+.app-navbar .btn-outline-light:hover,
+.app-navbar .btn-outline-light:focus,
+.app-navbar .btn-outline-light:active,
+.app-navbar .btn-outline-light.show {
+  background-color: #2f6690;
+  border-color: #2f6690;
+  color: #fff;
+}
+
 .btn-luna-primary {
   background-color: #2f6690;
   border-color: #2f6690;

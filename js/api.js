@@ -43,6 +43,18 @@ const authApi = {
   }
 };
 
+const profileApi = {
+  getMe() {
+    return apiRequest('/users/me');
+  },
+  updateMe(payload) {
+    return apiRequest('/users/me', { method: 'PATCH', body: JSON.stringify(payload) });
+  },
+  updatePassword(payload) {
+    return apiRequest('/users/me/password', { method: 'PATCH', body: JSON.stringify(payload) });
+  }
+};
+
 const myCardsApi = {
   listUids() {
     return apiRequest('/my-cards/uids');

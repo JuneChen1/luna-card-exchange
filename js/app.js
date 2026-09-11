@@ -4,6 +4,7 @@ let currentUid = '';
 const authArea = {
   loginBtn: document.getElementById('btn-show-login'),
   registerBtn: document.getElementById('btn-show-register'),
+  welcomeDropdown: document.getElementById('welcome-dropdown'),
   logoutBtn: document.getElementById('btn-logout'),
   welcomeText: document.getElementById('welcome-text')
 };
@@ -48,13 +49,12 @@ function refreshAuthUI() {
 
   authArea.loginBtn.classList.toggle('d-none', isLoggedIn);
   authArea.registerBtn.classList.toggle('d-none', isLoggedIn);
-  authArea.logoutBtn.classList.toggle('d-none', !isLoggedIn);
-  authArea.welcomeText.classList.toggle('d-none', !isLoggedIn);
+  authArea.welcomeDropdown.classList.toggle('d-none', !isLoggedIn);
   guestHint.classList.toggle('d-none', isLoggedIn);
   dashboard.classList.toggle('d-none', !isLoggedIn);
 
   if (isLoggedIn) {
-    authArea.welcomeText.textContent = `你好，${username}`;
+    authArea.welcomeText.textContent = username;
     loadUidSummaries();
   }
 }
