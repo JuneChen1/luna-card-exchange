@@ -20,6 +20,7 @@ const alertMessage = document.getElementById('alert-message');
 const alertIcon = document.getElementById('alert-icon');
 
 const exchangeForm = document.getElementById('exchange-form');
+const exchangeFilterBody = document.getElementById('exchange-filter-body');
 const exchangeWantedSelect = document.getElementById('exchange-wanted');
 const exchangeOfferedSelect = document.getElementById('exchange-offered');
 const exchangeServerSelect = document.getElementById('exchange-server');
@@ -173,6 +174,7 @@ exchangeForm.addEventListener('submit', (event) => {
   event.preventDefault();
   hideAlert();
   searchExchange();
+  bootstrap.Collapse.getOrCreateInstance(exchangeFilterBody).hide();
 });
 
 authArea.logoutBtn.addEventListener('click', () => {
