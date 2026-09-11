@@ -62,10 +62,35 @@ async function deleteUid(uid) {
   }
 }
 
+function renderCardChips(cardIds, container) {
+  cardIds.forEach((cardId) => {
+    const card = cardsById.get(cardId);
+    if (!card) return;
+
+    const chip = document.createElement('span');
+    chip.className = 'exchange-card-chip';
+    chip.title = cardName(card);
+
+    const img = document.createElement('img');
+    img.className = 'exchange-card-thumb';
+    img.src = card.image_url;
+    img.alt = cardName(card);
+
+    const name = document.createElement('span');
+    name.textContent = cardName(card);
+
+    chip.appendChild(img);
+    chip.appendChild(name);
+    container.appendChild(chip);
+  });
+
+  const isEmpty = !container.children.length;
+  container.classList.toggle('is-empty', isEmpty);
+  if (isEmpty) container.textContent = i18n.t('index.none');
+}
+
 function renderUidList(summaries) {
   uidList.innerHTML = '';
-
-  const separator = i18n.getLang() === 'en' ? ', ' : '、';
 
   summaries.forEach((summary) => {
     const fragment = uidCardTemplate.content.cloneNode(true);
@@ -76,9 +101,9 @@ function renderUidList(summaries) {
     const deleteBtn = fragment.querySelector('.uid-card-delete');
 
     i18n.applyI18n(fragment);
-    uidEl.textContent = summary.genshin_uid;
-    offeredEl.textContent = summary.offered.map((cardId) => cardName(cardsById.get(cardId))).join(separator) || i18n.t('index.none');
-    wantedEl.textContent = summary.wanted.map((cardId) => cardName(cardsById.get(cardId))).join(separator) || i18n.t('index.none');
+    uidEl.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+    renderCardChips(summary.offered, offeredEl);
+    renderCardChips(summary.wanted, wantedEl);
 
     cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
     deleteBtn.addEventListener('click', async (event) => {
