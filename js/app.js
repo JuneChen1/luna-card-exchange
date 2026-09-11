@@ -65,6 +65,19 @@ function refreshAuthUI() {
   }
 }
 
+async function deleteUid(uid) {
+  const confirmed = window.confirm(`確定要刪除 UID ${uid} 的所有卡牌資料嗎？此動作無法復原`);
+  if (!confirmed) return false;
+
+  try {
+    await myCardsApi.remove(uid);
+    return true;
+  } catch (error) {
+    showAlert(error.message);
+    return false;
+  }
+}
+
 function renderUidList(summaries) {
   uidList.innerHTML = '';
 
@@ -74,12 +87,21 @@ function renderUidList(summaries) {
     const uidEl = fragment.querySelector('.uid-card-uid');
     const offeredEl = fragment.querySelector('.uid-card-offered');
     const wantedEl = fragment.querySelector('.uid-card-wanted');
+    const deleteBtn = fragment.querySelector('.uid-card-delete');
 
     uidEl.textContent = summary.genshin_uid;
     offeredEl.textContent = summary.offered.map((cardId) => cardsById.get(cardId)?.name).join('、') || '無';
     wantedEl.textContent = summary.wanted.map((cardId) => cardsById.get(cardId)?.name).join('、') || '無';
 
     cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
+    deleteBtn.addEventListener('click', async (event) => {
+      event.stopPropagation();
+      hideAlert();
+      const deleted = await deleteUid(summary.genshin_uid);
+      if (!deleted) return;
+      showAlert('已刪除', 'success');
+      loadUidSummaries();
+    });
 
     uidList.appendChild(fragment);
   });
@@ -298,6 +320,15 @@ document.getElementById('btn-add-uid').addEventListener('click', () => {
 });
 
 document.getElementById('btn-back-to-list').addEventListener('click', backToList);
+
+document.getElementById('btn-delete-uid').addEventListener('click', async () => {
+  hideAlert();
+  const deleted = await deleteUid(currentUid);
+  if (!deleted) return;
+  showDashboardList();
+  showAlert('已刪除', 'success');
+  loadUidSummaries();
+});
 
 document.getElementById('btn-save').addEventListener('click', async () => {
   hideAlert();

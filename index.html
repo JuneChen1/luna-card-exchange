@@ -97,7 +97,10 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <button class="btn btn-outline-secondary btn-sm" id="btn-back-to-list">&larr; 返回</button>
           <h5 class="mb-0">聖牌狀態（<span id="uid-label"></span>）</h5>
-          <button class="btn btn-luna-primary" id="btn-save">儲存變更</button>
+          <div class="d-flex gap-2">
+            <button class="btn btn-outline-danger btn-sm" id="btn-delete-uid">刪除此 UID</button>
+            <button class="btn btn-luna-primary" id="btn-save">儲存變更</button>
+          </div>
         </div>
         <div class="row g-3" id="cards-grid"></div>
       </div>
@@ -114,8 +117,11 @@
     <div class="col-md-6 col-lg-4">
       <div class="card h-100 uid-card" role="button">
         <div class="card-body">
-          <h6 class="card-title fw-bold uid-card-uid"></h6>
-          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-success">多餘</span><span class="uid-card-offered"></span></p>
+          <div class="d-flex justify-content-between align-items-start gap-2">
+            <h6 class="card-title fw-bold uid-card-uid mb-0"></h6>
+            <button type="button" class="btn btn-outline-danger btn-sm uid-card-delete">刪除</button>
+          </div>
+          <p class="mb-1 small d-flex align-items-center gap-1 mt-2"><span class="badge bg-success">多餘</span><span class="uid-card-offered"></span></p>
           <p class="mb-0 small d-flex align-items-center gap-1"><span class="badge bg-danger">缺少</span><span class="uid-card-wanted"></span></p>
         </div>
       </div>

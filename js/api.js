@@ -70,6 +70,9 @@ const myCardsApi = {
   },
   save(payload) {
     return apiRequest('/my-cards', { method: 'POST', body: JSON.stringify(payload) });
+  },
+  remove(genshinUid) {
+    return apiRequest(`/my-cards?uid=${encodeURIComponent(genshinUid)}`, { method: 'DELETE' });
   }
 };
 
