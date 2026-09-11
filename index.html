@@ -39,8 +39,40 @@
       <button type="button" class="btn-close" id="btn-alert-close" aria-label="Close"></button>
     </div>
 
-    <div id="guest-hint" class="text-center py-5">
-      <p class="fs-5 text-muted">登入後即可管理你的月諭聖牌多餘 / 缺少狀態</p>
+    <div id="exchange-section" class="mb-5">
+      <div class="card mb-3">
+        <div class="card-body">
+          <button class="btn btn-outline-luna-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#exchange-filter-body" aria-expanded="false" aria-controls="exchange-filter-body">
+            尋找交換對象 <span aria-hidden="true">▾</span>
+          </button>
+          <div class="collapse" id="exchange-filter-body">
+            <form id="exchange-form" class="row g-3 pt-3">
+              <div class="col-md-4">
+                <label class="form-label">我想要的牌</label>
+                <div class="border rounded p-2 exchange-card-picker" id="exchange-wanted"></div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">我多出的牌</label>
+                <div class="border rounded p-2 exchange-card-picker" id="exchange-offered"></div>
+              </div>
+              <div class="col-md-4">
+                <label for="exchange-server" class="form-label">伺服器</label>
+                <select class="form-select" id="exchange-server">
+                  <option value="">不限</option>
+                  <option value="Europe">Europe</option>
+                  <option value="America">America</option>
+                  <option value="Asia">Asia</option>
+                  <option value="TWHKMO">TW,HK,MO</option>
+                </select>
+              </div>
+              <div class="col-md-4 offset-md-4 text-center mt-3">
+                <button type="submit" class="btn btn-luna-primary" style="padding-left: 20px; padding-right: 20px;">搜尋</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div id="exchange-results" class="row g-3"></div>
     </div>
 
     <div id="dashboard" class="d-none">
@@ -85,6 +117,21 @@
           <h6 class="card-title fw-bold uid-card-uid"></h6>
           <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-success">多餘</span><span class="uid-card-offered"></span></p>
           <p class="mb-0 small d-flex align-items-center gap-1"><span class="badge bg-danger">缺少</span><span class="uid-card-wanted"></span></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- 交換媒合搜尋結果範本 -->
+  <template id="exchange-result-template">
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="card-title fw-bold exchange-result-uid"></h6>
+          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-success">多餘</span><span class="d-flex flex-wrap gap-1 exchange-result-offered"></span></p>
+          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-danger">缺少</span><span class="d-flex flex-wrap gap-1 exchange-result-wanted"></span></p>
+          <p class="mb-1 small fw-bold exchange-result-user"></p>
+          <p class="mb-0 small text-muted exchange-result-contact"></p>
         </div>
       </div>
     </div>

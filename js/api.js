@@ -66,3 +66,15 @@ const myCardsApi = {
     return apiRequest('/my-cards', { method: 'POST', body: JSON.stringify(payload) });
   }
 };
+
+const exchangeApi = {
+  search({ wanted = [], offered = [], server = '' } = {}) {
+    const params = new URLSearchParams();
+    if (wanted.length) params.set('wanted', wanted.join(','));
+    if (offered.length) params.set('offered', offered.join(','));
+    if (server) params.set('server', server);
+
+    const query = params.toString();
+    return apiRequest(`/exchange${query ? `?${query}` : ''}`);
+  }
+};

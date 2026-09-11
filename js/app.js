@@ -10,7 +10,6 @@ const authArea = {
   welcomeText: document.getElementById('welcome-text')
 };
 
-const guestHint = document.getElementById('guest-hint');
 const dashboard = document.getElementById('dashboard');
 const alertBox = document.getElementById('alert-box');
 const alertMessage = document.getElementById('alert-message');
@@ -22,6 +21,13 @@ const cardsSection = document.getElementById('cards-section');
 const cardsGrid = document.getElementById('cards-grid');
 const uidLabel = document.getElementById('uid-label');
 const cardTemplate = document.getElementById('card-template');
+
+const exchangeForm = document.getElementById('exchange-form');
+const exchangeWantedSelect = document.getElementById('exchange-wanted');
+const exchangeOfferedSelect = document.getElementById('exchange-offered');
+const exchangeServerSelect = document.getElementById('exchange-server');
+const exchangeResults = document.getElementById('exchange-results');
+const exchangeResultTemplate = document.getElementById('exchange-result-template');
 
 const ALERT_ICON_PATHS = {
   success:
@@ -51,7 +57,6 @@ function refreshAuthUI() {
   authArea.loginBtn.classList.toggle('d-none', isLoggedIn);
   authArea.registerBtn.classList.toggle('d-none', isLoggedIn);
   authArea.welcomeDropdown.classList.toggle('d-none', !isLoggedIn);
-  guestHint.classList.toggle('d-none', isLoggedIn);
   dashboard.classList.toggle('d-none', !isLoggedIn);
 
   if (isLoggedIn) {
@@ -124,6 +129,99 @@ async function loadCardsCatalog() {
   allCards = await response.json();
   cardsById = new Map(allCards.map((card) => [card.id, card]));
 }
+
+function createCardCheckbox(card, groupId) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'form-check';
+
+  const input = document.createElement('input');
+  input.className = 'form-check-input';
+  input.type = 'checkbox';
+  input.value = card.id;
+  input.id = `${groupId}-${card.id}`;
+
+  const label = document.createElement('label');
+  label.className = 'form-check-label';
+  label.setAttribute('for', input.id);
+  label.textContent = card.name;
+
+  wrapper.appendChild(input);
+  wrapper.appendChild(label);
+  return wrapper;
+}
+
+function populateExchangeCardOptions() {
+  allCards.forEach((card) => {
+    exchangeWantedSelect.appendChild(createCardCheckbox(card, 'exchange-wanted'));
+    exchangeOfferedSelect.appendChild(createCardCheckbox(card, 'exchange-offered'));
+  });
+}
+
+function renderCardThumbs(cardIds, container) {
+  cardIds.forEach((cardId) => {
+    const card = cardsById.get(cardId);
+    if (!card) return;
+
+    const chip = document.createElement('span');
+    chip.className = 'exchange-card-chip';
+
+    const img = document.createElement('img');
+    img.className = 'exchange-card-thumb';
+    img.src = card.image_url;
+    img.alt = card.name;
+
+    const name = document.createElement('span');
+    name.textContent = card.name;
+
+    chip.appendChild(img);
+    chip.appendChild(name);
+    container.appendChild(chip);
+  });
+
+  if (!container.children.length) container.textContent = '無';
+}
+
+function renderExchangeResults(results) {
+  exchangeResults.innerHTML = '';
+
+  if (results.length === 0) {
+    exchangeResults.innerHTML = '<p class="text-muted text-center py-3">目前沒有符合的交換對象</p>';
+    return;
+  }
+
+  results.forEach((item) => {
+    const fragment = exchangeResultTemplate.content.cloneNode(true);
+
+    fragment.querySelector('.exchange-result-user').textContent = item.user_name;
+    fragment.querySelector('.exchange-result-uid').textContent = item.genshin_uid;
+    renderCardThumbs(item.offered_card_ids, fragment.querySelector('.exchange-result-offered'));
+    renderCardThumbs(item.wanted_card_ids, fragment.querySelector('.exchange-result-wanted'));
+    fragment.querySelector('.exchange-result-contact').textContent = item.contact_info
+      ? `聯絡方式：${item.contact_info}`
+      : '聯絡方式：未公開';
+
+    exchangeResults.appendChild(fragment);
+  });
+}
+
+async function searchExchange() {
+  const wanted = Array.from(exchangeWantedSelect.querySelectorAll('input:checked')).map((input) => input.value);
+  const offered = Array.from(exchangeOfferedSelect.querySelectorAll('input:checked')).map((input) => input.value);
+  const server = exchangeServerSelect.value;
+
+  try {
+    const result = await exchangeApi.search({ wanted, offered, server });
+    renderExchangeResults(result.data);
+  } catch (error) {
+    showAlert(error.message);
+  }
+}
+
+exchangeForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  hideAlert();
+  searchExchange();
+});
 
 function renderCardsGrid(statusByCardId) {
   cardsGrid.innerHTML = '';
@@ -214,6 +312,8 @@ document.getElementById('btn-save').addEventListener('click', async () => {
 
 (async function init() {
   await loadCardsCatalog();
+  populateExchangeCardOptions();
+  searchExchange();
   refreshAuthUI();
 
   const uidFromUrl = new URLSearchParams(location.search).get('uid');
