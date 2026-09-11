@@ -89,14 +89,31 @@
 
   <!-- 交換媒合搜尋結果範本 -->
   <template id="exchange-result-template">
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="card-title fw-bold exchange-result-uid"></h6>
-          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-success" data-i18n="index.badgeOffered">多餘</span><span class="d-flex flex-wrap gap-1 exchange-result-offered"></span></p>
-          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-danger" data-i18n="index.badgeWanted">缺少</span><span class="d-flex flex-wrap gap-1 exchange-result-wanted"></span></p>
-          <p class="mb-1 small fw-bold exchange-result-user"></p>
-          <p class="mb-0 small text-muted exchange-result-contact"></p>
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 exchange-result-card">
+        <div class="card-body d-flex flex-column">
+          <div class="exchange-result-header">
+            <p class="exchange-result-uid mb-0"></p>
+            <p class="exchange-result-user mb-0"></p>
+          </div>
+
+          <div class="exchange-result-group exchange-result-group-offered">
+            <p class="exchange-result-group-title" data-i18n="index.badgeOffered">多餘</p>
+            <div class="exchange-result-offered exchange-card-list"></div>
+          </div>
+
+          <div class="exchange-result-group exchange-result-group-wanted">
+            <p class="exchange-result-group-title" data-i18n="index.badgeWanted">缺少</p>
+            <div class="exchange-result-wanted exchange-card-list"></div>
+          </div>
+
+          <div class="exchange-result-footer mt-auto">
+            <span class="exchange-result-footer-label" data-i18n="index.contactPrefix">聯絡方式：</span>
+            <span class="exchange-contact-badge exchange-result-contact">
+              <svg class="exchange-contact-icon" width="12" height="12" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894m-.789 4.286a11 11 0 0 1-1.865.499c-.35.05-.706.108-1.024.187-.09.023-.184.045-.28.067-.032.008-.132.003-.174-.06-.043-.062-.019-.15.047-.209.076-.067.157-.148.243-.243a11 11 0 0 0 1.293-1.89A8 8 0 0 1 0 8c0-4.418 4.03-8 9-8s9 3.582 9 8-4.03 8-9 8a9 9 0 0 1-2.347-.306 12 12 0 0 1-2.764 1.13z"/></svg>
+              <span class="exchange-result-contact-text"></span>
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -95,6 +95,7 @@ const i18n = (function () {
       'index.saveSuccess': '儲存成功',
       'index.noResults': '目前沒有符合的交換對象',
       'index.none': '無',
+      'index.uidLabel': 'UID：',
       'index.contactPrefix': '聯絡方式：',
       'index.contactHidden': '未公開',
       'index.confirmDeleteUid': '確定要刪除 UID {uid} 的所有卡牌資料嗎？此動作無法復原'
@@ -191,6 +192,7 @@ const i18n = (function () {
       'index.saveSuccess': 'Saved successfully',
       'index.noResults': 'No matching exchange partners found',
       'index.none': 'None',
+      'index.uidLabel': 'UID: ',
       'index.contactPrefix': 'Contact: ',
       'index.contactHidden': 'Not public',
       'index.confirmDeleteUid': 'Are you sure you want to delete all card data for UID {uid}? This action cannot be undone.'

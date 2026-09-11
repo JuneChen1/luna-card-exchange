@@ -127,7 +127,9 @@ function renderCardThumbs(cardIds, container) {
     container.appendChild(chip);
   });
 
-  if (!container.children.length) container.textContent = i18n.t('index.none');
+  const isEmpty = !container.children.length;
+  container.classList.toggle('is-empty', isEmpty);
+  if (isEmpty) container.textContent = i18n.t('index.none');
 }
 
 function renderExchangeResults(results) {
@@ -147,11 +149,17 @@ function renderExchangeResults(results) {
 
     i18n.applyI18n(fragment);
     fragment.querySelector('.exchange-result-user').textContent = item.user_name;
-    fragment.querySelector('.exchange-result-uid').textContent = item.genshin_uid;
+    fragment.querySelector('.exchange-result-uid').textContent = i18n.t('index.uidLabel') + item.genshin_uid;
     renderCardThumbs(item.offered_card_ids, fragment.querySelector('.exchange-result-offered'));
     renderCardThumbs(item.wanted_card_ids, fragment.querySelector('.exchange-result-wanted'));
-    fragment.querySelector('.exchange-result-contact').textContent = i18n.t('index.contactPrefix')
-      + (item.contact_info || i18n.t('index.contactHidden'));
+
+    const hasContact = Boolean(item.contact_info);
+    const contactBadge = fragment.querySelector('.exchange-result-contact');
+    contactBadge.classList.toggle('has-contact', hasContact);
+    contactBadge.classList.toggle('no-contact', !hasContact);
+    fragment.querySelector('.exchange-result-contact-text').textContent = hasContact
+      ? item.contact_info
+      : i18n.t('index.contactHidden');
 
     exchangeResults.appendChild(fragment);
   });

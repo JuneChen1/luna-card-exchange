@@ -96,26 +96,142 @@ main {
   background: #ffffff;
 }
 
-.exchange-card-chip {
-  display: inline-flex;
-  align-items: center;
+.lang-dropdown-toggle {
+  white-space: nowrap;
+}
+
+/* 首頁交換結果卡片 */
+.exchange-result-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.exchange-result-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
   gap: 4px;
-  background: #f1f3f5;
-  border-radius: 4px;
-  padding: 2px 6px 2px 2px;
+  margin-bottom: 0.75rem;
+}
+
+.exchange-result-uid {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #16324f;
+}
+
+.exchange-result-user {
   font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.exchange-result-group {
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.exchange-result-group-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.exchange-result-group-offered {
+  background: #f0fdf4;
+}
+
+.exchange-result-group-offered .exchange-result-group-title {
+  color: #15803d;
+}
+
+.exchange-result-group-wanted {
+  background: #fff1f2;
+}
+
+.exchange-result-group-wanted .exchange-result-group-title {
+  color: #be123c;
+}
+
+.exchange-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  min-height: 57px;
+  max-height: 57px;
+  overflow-y: auto;
+}
+
+.exchange-card-list.is-empty {
+  align-content: center;
+}
+
+.exchange-card-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 56px;
+  padding: 2px;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.exchange-card-chip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .exchange-card-thumb {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
-  background: #ffffff;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  padding: 1px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 3px;
 }
 
-.lang-dropdown-toggle {
-  white-space: nowrap;
+.exchange-result-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid #eee;
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.exchange-result-footer-label {
+  font-size: 0.9rem;
+}
+
+.exchange-contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.exchange-contact-badge.has-contact {
+  background: #eef1ff;
+  color: #4c51bf;
+}
+
+.exchange-contact-badge.no-contact {
+  background: #f3f4f6;
+  color: #6b7280;
 }
