@@ -55,7 +55,7 @@ const i18n = (function () {
       'changePassword.newPassword': '新密碼',
       'changePassword.confirmNewPassword': '確認新密碼',
       'changePassword.submit': '更新密碼',
-      'changePassword.backToProfile': '返回個人資料',
+      'changePassword.backToProfile': '返回',
       'changePassword.updateSuccess': '密碼更新成功',
 
       'forgotPassword.title': '忘記密碼',
@@ -151,7 +151,7 @@ const i18n = (function () {
       'changePassword.newPassword': 'New Password',
       'changePassword.confirmNewPassword': 'Confirm New Password',
       'changePassword.submit': 'Update Password',
-      'changePassword.backToProfile': 'Back to Profile',
+      'changePassword.backToProfile': 'Back',
       'changePassword.updateSuccess': 'Password updated successfully',
 
       'forgotPassword.title': 'Forgot Password',
