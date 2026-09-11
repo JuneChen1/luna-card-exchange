@@ -42,6 +42,7 @@ document.getElementById('register-form').addEventListener('submit', async (event
   const formData = new FormData(event.target);
   const username = formData.get('username').trim();
   const password = formData.get('password');
+  const confirmPassword = formData.get('confirm_password');
 
   if (!username) {
     showAlert('請輸入帳號');
@@ -51,9 +52,13 @@ document.getElementById('register-form').addEventListener('submit', async (event
     showAlert('密碼至少需要 8 碼，且需同時包含英文字母與數字');
     return;
   }
+  if (password !== confirmPassword) {
+    showAlert('兩次輸入的密碼不一致');
+    return;
+  }
 
   try {
-    await authApi.register({ username, password });
+    await authApi.register({ username, password, confirm_password: confirmPassword });
     location.href = '/login.html?registered=1';
   } catch (error) {
     showAlert(error.message);
