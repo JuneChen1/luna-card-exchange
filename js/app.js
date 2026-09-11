@@ -106,6 +106,19 @@ function populateExchangeCardOptions() {
   });
 }
 
+const cardPreviewModalEl = document.getElementById('card-preview-modal');
+const cardPreviewImg = document.getElementById('card-preview-img');
+const cardPreviewName = document.getElementById('card-preview-name');
+let cardPreviewModal;
+
+function showCardPreview(card) {
+  cardPreviewImg.src = card.image_url;
+  cardPreviewImg.alt = cardName(card);
+  cardPreviewName.textContent = cardName(card);
+  cardPreviewModal = cardPreviewModal || new bootstrap.Modal(cardPreviewModalEl);
+  cardPreviewModal.show();
+}
+
 function renderCardThumbs(cardIds, container) {
   cardIds.forEach((cardId) => {
     const card = cardsById.get(cardId);
@@ -113,6 +126,16 @@ function renderCardThumbs(cardIds, container) {
 
     const chip = document.createElement('span');
     chip.className = 'exchange-card-chip';
+    chip.setAttribute('role', 'button');
+    chip.tabIndex = 0;
+    chip.title = cardName(card);
+    chip.addEventListener('click', () => showCardPreview(card));
+    chip.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        showCardPreview(card);
+      }
+    });
 
     const img = document.createElement('img');
     img.className = 'exchange-card-thumb';

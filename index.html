@@ -119,6 +119,21 @@
     </div>
   </template>
 
+  <!-- 卡牌放大預覽 -->
+  <div class="modal fade" id="card-preview-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center pt-0">
+          <img id="card-preview-img" src="" alt="" class="card-preview-img mb-3">
+          <p id="card-preview-name" class="fw-bold fs-5 mb-0"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/api.js"></script>
