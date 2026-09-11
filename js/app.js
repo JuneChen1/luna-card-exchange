@@ -1,6 +1,12 @@
 let allCards = [];
 let cardsById = new Map();
 let currentUid = '';
+let lastExchangeResults = [];
+
+function cardName(card) {
+  if (!card) return '';
+  return i18n.getLang() === 'en' ? (card.english_name || card.name) : card.name;
+}
 
 const authArea = {
   loginBtn: document.getElementById('btn-show-login'),
@@ -66,7 +72,7 @@ function refreshAuthUI() {
 }
 
 async function deleteUid(uid) {
-  const confirmed = window.confirm(`確定要刪除 UID ${uid} 的所有卡牌資料嗎？此動作無法復原`);
+  const confirmed = window.confirm(i18n.t('index.confirmDeleteUid', { uid }));
   if (!confirmed) return false;
 
   try {
@@ -81,6 +87,8 @@ async function deleteUid(uid) {
 function renderUidList(summaries) {
   uidList.innerHTML = '';
 
+  const separator = i18n.getLang() === 'en' ? ', ' : '、';
+
   summaries.forEach((summary) => {
     const fragment = uidCardTemplate.content.cloneNode(true);
     const cardEl = fragment.querySelector('.uid-card');
@@ -89,9 +97,10 @@ function renderUidList(summaries) {
     const wantedEl = fragment.querySelector('.uid-card-wanted');
     const deleteBtn = fragment.querySelector('.uid-card-delete');
 
+    i18n.applyI18n(fragment);
     uidEl.textContent = summary.genshin_uid;
-    offeredEl.textContent = summary.offered.map((cardId) => cardsById.get(cardId)?.name).join('、') || '無';
-    wantedEl.textContent = summary.wanted.map((cardId) => cardsById.get(cardId)?.name).join('、') || '無';
+    offeredEl.textContent = summary.offered.map((cardId) => cardName(cardsById.get(cardId))).join(separator) || i18n.t('index.none');
+    wantedEl.textContent = summary.wanted.map((cardId) => cardName(cardsById.get(cardId))).join(separator) || i18n.t('index.none');
 
     cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
     deleteBtn.addEventListener('click', async (event) => {
@@ -99,7 +108,7 @@ function renderUidList(summaries) {
       hideAlert();
       const deleted = await deleteUid(summary.genshin_uid);
       if (!deleted) return;
-      showAlert('已刪除', 'success');
+      showAlert(i18n.t('index.deletedSuccess'), 'success');
       loadUidSummaries();
     });
 
@@ -165,7 +174,7 @@ function createCardCheckbox(card, groupId) {
   const label = document.createElement('label');
   label.className = 'form-check-label';
   label.setAttribute('for', input.id);
-  label.textContent = card.name;
+  label.textContent = cardName(card);
 
   wrapper.appendChild(input);
   wrapper.appendChild(label);
@@ -173,9 +182,21 @@ function createCardCheckbox(card, groupId) {
 }
 
 function populateExchangeCardOptions() {
+  const prevWanted = new Set(Array.from(exchangeWantedSelect.querySelectorAll('input:checked')).map((input) => input.value));
+  const prevOffered = new Set(Array.from(exchangeOfferedSelect.querySelectorAll('input:checked')).map((input) => input.value));
+
+  exchangeWantedSelect.innerHTML = '';
+  exchangeOfferedSelect.innerHTML = '';
+
   allCards.forEach((card) => {
-    exchangeWantedSelect.appendChild(createCardCheckbox(card, 'exchange-wanted'));
-    exchangeOfferedSelect.appendChild(createCardCheckbox(card, 'exchange-offered'));
+    const wantedCheckbox = createCardCheckbox(card, 'exchange-wanted');
+    const offeredCheckbox = createCardCheckbox(card, 'exchange-offered');
+
+    if (prevWanted.has(String(card.id))) wantedCheckbox.querySelector('input').checked = true;
+    if (prevOffered.has(String(card.id))) offeredCheckbox.querySelector('input').checked = true;
+
+    exchangeWantedSelect.appendChild(wantedCheckbox);
+    exchangeOfferedSelect.appendChild(offeredCheckbox);
   });
 }
 
@@ -190,37 +211,41 @@ function renderCardThumbs(cardIds, container) {
     const img = document.createElement('img');
     img.className = 'exchange-card-thumb';
     img.src = card.image_url;
-    img.alt = card.name;
+    img.alt = cardName(card);
 
     const name = document.createElement('span');
-    name.textContent = card.name;
+    name.textContent = cardName(card);
 
     chip.appendChild(img);
     chip.appendChild(name);
     container.appendChild(chip);
   });
 
-  if (!container.children.length) container.textContent = '無';
+  if (!container.children.length) container.textContent = i18n.t('index.none');
 }
 
 function renderExchangeResults(results) {
+  lastExchangeResults = results;
   exchangeResults.innerHTML = '';
 
   if (results.length === 0) {
-    exchangeResults.innerHTML = '<p class="text-muted text-center py-3">目前沒有符合的交換對象</p>';
+    const empty = document.createElement('p');
+    empty.className = 'text-muted text-center py-3';
+    empty.textContent = i18n.t('index.noResults');
+    exchangeResults.appendChild(empty);
     return;
   }
 
   results.forEach((item) => {
     const fragment = exchangeResultTemplate.content.cloneNode(true);
 
+    i18n.applyI18n(fragment);
     fragment.querySelector('.exchange-result-user').textContent = item.user_name;
     fragment.querySelector('.exchange-result-uid').textContent = item.genshin_uid;
     renderCardThumbs(item.offered_card_ids, fragment.querySelector('.exchange-result-offered'));
     renderCardThumbs(item.wanted_card_ids, fragment.querySelector('.exchange-result-wanted'));
-    fragment.querySelector('.exchange-result-contact').textContent = item.contact_info
-      ? `聯絡方式：${item.contact_info}`
-      : '聯絡方式：未公開';
+    fragment.querySelector('.exchange-result-contact').textContent = i18n.t('index.contactPrefix')
+      + (item.contact_info || i18n.t('index.contactHidden'));
 
     exchangeResults.appendChild(fragment);
   });
@@ -257,11 +282,12 @@ function renderCardsGrid(statusByCardId) {
 
     const status = statusByCardId.get(card.id) || 'none';
 
+    i18n.applyI18n(fragment);
     cardItem.dataset.cardId = card.id;
     cardItem.classList.add(`status-${status}`);
     img.src = card.image_url;
-    img.alt = card.name;
-    nameEl.textContent = card.name;
+    img.alt = cardName(card);
+    nameEl.textContent = cardName(card);
 
     radios.forEach((radio) => {
       const radioId = `status-${card.id}-${radio.value}`;
@@ -297,6 +323,18 @@ function collectStatusPayload() {
   return { genshinUid: currentUid, offered, wanted };
 }
 
+function collectStatusMap() {
+  const map = new Map();
+
+  document.querySelectorAll('.card-item').forEach((cardItem) => {
+    const cardId = Number(cardItem.dataset.cardId);
+    const checked = cardItem.querySelector('input[type="radio"]:checked');
+    map.set(cardId, checked?.value || 'none');
+  });
+
+  return map;
+}
+
 authArea.logoutBtn.addEventListener('click', () => {
   clearSession();
   cardsSection.classList.add('d-none');
@@ -311,7 +349,7 @@ document.getElementById('btn-add-uid').addEventListener('click', () => {
   const uid = uidInput.value.trim();
 
   if (!uid) {
-    showAlert('請輸入原神 UID');
+    showAlert(i18n.t('index.enterUid'));
     return;
   }
 
@@ -326,7 +364,7 @@ document.getElementById('btn-delete-uid').addEventListener('click', async () => 
   const deleted = await deleteUid(currentUid);
   if (!deleted) return;
   showDashboardList();
-  showAlert('已刪除', 'success');
+  showAlert(i18n.t('index.deletedSuccess'), 'success');
   loadUidSummaries();
 });
 
@@ -335,10 +373,21 @@ document.getElementById('btn-save').addEventListener('click', async () => {
 
   try {
     await myCardsApi.save(collectStatusPayload());
-    showAlert('儲存成功', 'success');
+    showAlert(i18n.t('index.saveSuccess'), 'success');
   } catch (error) {
     showAlert(error.message);
   }
+});
+
+document.addEventListener('langchange', () => {
+  if (!cardsSection.classList.contains('d-none')) {
+    renderCardsGrid(collectStatusMap());
+  }
+  if (getToken() && !uidListSection.classList.contains('d-none')) {
+    loadUidSummaries();
+  }
+  populateExchangeCardOptions();
+  renderExchangeResults(lastExchangeResults);
 });
 
 (async function init() {

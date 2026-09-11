@@ -45,15 +45,15 @@ document.getElementById('register-form').addEventListener('submit', async (event
   const confirmPassword = formData.get('confirm_password');
 
   if (!username) {
-    showAlert('請輸入帳號');
+    showAlert(i18n.t('register.enterUsername'));
     return;
   }
   if (!PASSWORD_REGEX.test(password)) {
-    showAlert('密碼至少需要 8 碼，且需同時包含英文字母與數字');
+    showAlert(i18n.t('common.passwordRule'));
     return;
   }
   if (password !== confirmPassword) {
-    showAlert('兩次輸入的密碼不一致');
+    showAlert(i18n.t('register.mismatch'));
     return;
   }
 

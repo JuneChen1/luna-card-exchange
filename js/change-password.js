@@ -48,13 +48,13 @@ document.getElementById('password-form').addEventListener('submit', async (event
   const confirmPassword = formData.get('confirm_password');
 
   if (!PASSWORD_REGEX.test(newPassword)) {
-    newPasswordErrorText.textContent = '密碼至少需要 8 碼，且需同時包含英文字母與數字';
+    newPasswordErrorText.textContent = i18n.t('common.passwordRule');
     newPasswordError.classList.remove('d-none');
     return;
   }
 
   if (newPassword !== confirmPassword) {
-    newPasswordErrorText.textContent = '兩次輸入的新密碼不一致';
+    newPasswordErrorText.textContent = i18n.t('common.newPasswordMismatch');
     newPasswordError.classList.remove('d-none');
     return;
   }
@@ -65,7 +65,7 @@ document.getElementById('password-form').addEventListener('submit', async (event
       new_password: newPassword,
       confirm_password: confirmPassword
     });
-    showAlert('密碼更新成功', 'success');
+    showAlert(i18n.t('changePassword.updateSuccess'), 'success');
     event.target.reset();
   } catch (error) {
     showAlert(error.message);

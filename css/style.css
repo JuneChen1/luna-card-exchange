@@ -115,3 +115,7 @@ main {
   border-radius: 4px;
   padding: 1px;
 }
+
+.lang-dropdown-toggle {
+  white-space: nowrap;
+}

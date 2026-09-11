@@ -34,7 +34,7 @@ if (getToken()) {
 }
 
 if (new URLSearchParams(location.search).get('registered')) {
-  showAlert('註冊成功，請登入', 'success');
+  showAlert(i18n.t('login.registeredSuccess'), 'success');
 }
 
 document.getElementById('login-form').addEventListener('submit', async (event) => {
@@ -46,7 +46,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
   const password = formData.get('password');
 
   if (!username || !password) {
-    showAlert('請輸入帳號與密碼');
+    showAlert(i18n.t('login.enterBoth'));
     return;
   }
 

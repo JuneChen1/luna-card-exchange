@@ -29,7 +29,7 @@ const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 const resetToken = new URLSearchParams(location.search).get('token');
 
 if (!resetToken) {
-  showAlert('重設連結無效，請重新申請忘記密碼');
+  showAlert(i18n.t('resetPassword.invalidLink'));
   resetForm.classList.add('d-none');
 }
 
@@ -43,13 +43,13 @@ resetForm.addEventListener('submit', async (event) => {
   const confirmPassword = formData.get('confirm_password');
 
   if (!PASSWORD_REGEX.test(newPassword)) {
-    newPasswordErrorText.textContent = '密碼至少需要 8 碼，且需同時包含英文字母與數字';
+    newPasswordErrorText.textContent = i18n.t('common.passwordRule');
     newPasswordError.classList.remove('d-none');
     return;
   }
 
   if (newPassword !== confirmPassword) {
-    newPasswordErrorText.textContent = '兩次輸入的新密碼不一致';
+    newPasswordErrorText.textContent = i18n.t('common.newPasswordMismatch');
     newPasswordError.classList.remove('d-none');
     return;
   }
@@ -60,7 +60,7 @@ resetForm.addEventListener('submit', async (event) => {
       new_password: newPassword,
       confirm_password: confirmPassword
     });
-    showAlert('密碼重設成功，請重新登入', 'success');
+    showAlert(i18n.t('resetPassword.resetSuccess'), 'success');
     resetForm.classList.add('d-none');
   } catch (error) {
     showAlert(error.message);

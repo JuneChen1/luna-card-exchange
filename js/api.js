@@ -28,7 +28,7 @@ async function apiRequest(path, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.message || '請求失敗');
+    throw new Error(data.message || i18n.t('common.requestFailed'));
   }
 
   return data;

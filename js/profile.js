@@ -60,7 +60,7 @@ profileForm.addEventListener('submit', async (event) => {
   const email = formData.get('email').trim();
 
   if (email && !EMAIL_REGEX.test(email)) {
-    showAlert('Email 格式錯誤');
+    showAlert(i18n.t('profile.emailInvalid'));
     return;
   }
 
@@ -69,7 +69,7 @@ profileForm.addEventListener('submit', async (event) => {
       email,
       contact_info: formData.get('contact_info')
     });
-    showAlert('個人資料已更新', 'success');
+    showAlert(i18n.t('profile.updateSuccess'), 'success');
   } catch (error) {
     showAlert(error.message);
   }

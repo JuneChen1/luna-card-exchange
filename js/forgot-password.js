@@ -32,7 +32,7 @@ document.getElementById('forgot-form').addEventListener('submit', async (event) 
   const email = formData.get('email').trim();
 
   if (!email) {
-    showAlert('請輸入 Email');
+    showAlert(i18n.t('forgotPassword.enterEmail'));
     return;
   }
 
