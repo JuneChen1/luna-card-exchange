@@ -11,6 +11,7 @@ const authArea = {
 const guestHint = document.getElementById('guest-hint');
 const dashboard = document.getElementById('dashboard');
 const alertBox = document.getElementById('alert-box');
+const alertMessage = document.getElementById('alert-message');
 const uidListSection = document.getElementById('uid-list-section');
 const uidList = document.getElementById('uid-list');
 const uidCardTemplate = document.getElementById('uid-card-template');
@@ -20,14 +21,16 @@ const uidLabel = document.getElementById('uid-label');
 const cardTemplate = document.getElementById('card-template');
 
 function showAlert(message, type = 'danger') {
-  alertBox.textContent = message;
-  alertBox.className = `alert alert-${type}`;
+  alertMessage.textContent = message;
+  alertBox.className = `alert alert-dismissible alert-${type}`;
   alertBox.classList.remove('d-none');
 }
 
 function hideAlert() {
   alertBox.classList.add('d-none');
 }
+
+document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 function refreshAuthUI() {
   const token = getToken();
@@ -58,8 +61,8 @@ function renderUidList(summaries) {
     const wantedEl = fragment.querySelector('.uid-card-wanted');
 
     uidEl.textContent = summary.genshin_uid;
-    offeredEl.textContent = `多餘：${summary.offered.map((card) => card.name).join('、') || '無'}`;
-    wantedEl.textContent = `缺少：${summary.wanted.map((card) => card.name).join('、') || '無'}`;
+    offeredEl.textContent = summary.offered.map((card) => card.name).join('、') || '無';
+    wantedEl.textContent = summary.wanted.map((card) => card.name).join('、') || '無';
 
     cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
 
@@ -88,9 +91,22 @@ async function openEditor(uid) {
     renderCardsGrid(statusByCardId);
     uidListSection.classList.add('d-none');
     cardsSection.classList.remove('d-none');
+    history.replaceState(null, '', `?uid=${encodeURIComponent(uid)}`);
   } catch (error) {
     showAlert(error.message);
   }
+}
+
+function showDashboardList() {
+  cardsSection.classList.add('d-none');
+  uidListSection.classList.remove('d-none');
+  history.replaceState(null, '', '?page=dashboard');
+}
+
+function backToList() {
+  hideAlert();
+  showDashboardList();
+  loadUidSummaries();
 }
 
 async function loadCardsCatalog() {
@@ -183,6 +199,7 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
     bootstrap.Modal.getInstance(document.getElementById('loginModal'))?.hide();
     event.target.reset();
     refreshAuthUI();
+    showDashboardList();
   } catch (error) {
     showAlert(error.message);
   }
@@ -192,6 +209,7 @@ authArea.logoutBtn.addEventListener('click', () => {
   clearSession();
   cardsSection.classList.add('d-none');
   uidListSection.classList.remove('d-none');
+  history.replaceState(null, '', location.pathname);
   refreshAuthUI();
 });
 
@@ -209,12 +227,7 @@ document.getElementById('btn-add-uid').addEventListener('click', () => {
   openEditor(uid);
 });
 
-document.getElementById('btn-back-to-list').addEventListener('click', () => {
-  hideAlert();
-  cardsSection.classList.add('d-none');
-  uidListSection.classList.remove('d-none');
-  loadUidSummaries();
-});
+document.getElementById('btn-back-to-list').addEventListener('click', backToList);
 
 document.getElementById('btn-save').addEventListener('click', async () => {
   hideAlert();
@@ -230,4 +243,10 @@ document.getElementById('btn-save').addEventListener('click', async () => {
 (async function init() {
   await loadCardsCatalog();
   refreshAuthUI();
+
+  const uidFromUrl = new URLSearchParams(location.search).get('uid');
+  if (getToken()) {
+    if (uidFromUrl) openEditor(uidFromUrl);
+    else showDashboardList();
+  }
 })();

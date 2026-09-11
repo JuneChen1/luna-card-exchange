@@ -26,9 +26,10 @@
 
   <main class="container py-4">
 
-    <div id="alert-box" class="alert d-none" role="alert"></div>
-
-    <p class="text-start text-muted small mb-0">支援的伺服器：Europe / America / Asia / TW,HK,MO</p>
+    <div id="alert-box" class="alert d-none alert-dismissible" role="alert">
+      <span id="alert-message"></span>
+      <button type="button" class="btn-close" id="btn-alert-close" aria-label="Close"></button>
+    </div>
 
     <div id="guest-hint" class="text-center py-5">
       <p class="fs-5 text-muted">登入後即可管理你的月諭聖牌多餘 / 缺少狀態</p>
@@ -38,23 +39,25 @@
       <div id="uid-list-section">
         <div class="row g-3 mb-4" id="uid-list"></div>
 
-        <div class="card">
+        <div class="card mb-4">
           <div class="card-body">
             <label for="new-uid-input" class="form-label fw-bold">新增原神 UID</label>
             <div class="input-group">
               <input type="text" class="form-control" id="new-uid-input" placeholder="輸入本帳或小帳 UID，例如 900123456">
-              <button class="btn btn-primary" id="btn-add-uid">新增</button>
+              <button class="btn btn-luna-primary" id="btn-add-uid">新增</button>
             </div>
             <div class="form-text">新增後即可設定該 UID 的聖牌多餘 / 缺少狀態</div>
           </div>
         </div>
+
+        <p class="text-start text-muted small mb-0">支援的伺服器：Europe / America / Asia / TW,HK,MO</p>
       </div>
 
       <div id="cards-section" class="d-none">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <button class="btn btn-outline-secondary btn-sm" id="btn-back-to-list">&larr; 返回列表</button>
+          <button class="btn btn-outline-secondary btn-sm" id="btn-back-to-list">&larr; 返回</button>
           <h5 class="mb-0">聖牌狀態（<span id="uid-label"></span>）</h5>
-          <button class="btn btn-success" id="btn-save">儲存變更</button>
+          <button class="btn btn-luna-primary" id="btn-save">儲存變更</button>
         </div>
         <div class="row g-3" id="cards-grid"></div>
       </div>
@@ -130,8 +133,8 @@
       <div class="card h-100 uid-card" role="button">
         <div class="card-body">
           <h6 class="card-title fw-bold uid-card-uid"></h6>
-          <p class="mb-1 small text-success uid-card-offered"></p>
-          <p class="mb-0 small text-danger uid-card-wanted"></p>
+          <p class="mb-1 small d-flex align-items-center gap-1"><span class="badge bg-success">多餘</span><span class="uid-card-offered"></span></p>
+          <p class="mb-0 small d-flex align-items-center gap-1"><span class="badge bg-danger">缺少</span><span class="uid-card-wanted"></span></p>
         </div>
       </div>
     </div>
