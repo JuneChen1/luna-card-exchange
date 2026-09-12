@@ -22,6 +22,7 @@ const i18n = (function () {
       'title.resetPassword': '重設密碼 - 月諭聖牌交換站',
 
       'common.username': '帳號',
+      'common.usernameCaseSensitiveHint': '※ 帳號區分大小寫（例如：UserA 與 usera 視為不同帳號）',
       'common.password': '密碼',
       'common.passwordRule': '密碼至少需要 8 碼，且需同時包含英文字母與數字',
       'common.newPasswordMismatch': '兩次輸入的新密碼不一致',
@@ -153,6 +154,7 @@ const i18n = (function () {
       'title.resetPassword': 'Reset Password - Luna Card Exchange',
 
       'common.username': 'Username',
+      'common.usernameCaseSensitiveHint': '※ Usernames are case-sensitive (e.g., "UserA" and "usera" are different)',
       'common.password': 'Password',
       'common.passwordRule': 'Password must be at least 8 characters long and contain both letters and numbers',
       'common.newPasswordMismatch': 'The new passwords do not match',
