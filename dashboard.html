@@ -45,6 +45,7 @@
     </div>
 
     <div id="uid-list-section" class="d-flex flex-column flex-fill">
+      <p id="uid-list-empty" class="text-center text-muted d-none" data-i18n="index.noUidsYet">你還沒有新增任何原神 UID，請在下方新增你的第一個 UID</p>
       <div class="row g-3 mb-4" id="uid-list"></div>
 
       <div class="mt-auto">
@@ -54,6 +55,11 @@
             <div class="input-group">
               <input type="text" class="form-control" id="new-uid-input" placeholder="輸入原神 UID" data-i18n-placeholder="index.uidPlaceholder">
               <button class="btn btn-luna-primary" id="btn-add-uid" data-i18n="index.addUidBtn">新增</button>
+            </div>
+            <div id="add-uid-error" class="alert alert-danger d-none alert-dismissible d-flex align-items-center mt-2 mb-0" role="alert">
+              <svg id="add-uid-error-icon" width="16" height="16" fill="currentColor" class="flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-hidden="true"></svg>
+              <div id="add-uid-error-message" class="flex-grow-1"></div>
+              <button type="button" class="btn-close" id="btn-add-uid-error-close" aria-label="Close"></button>
             </div>
             <div class="form-text" data-i18n="index.addUidHint">新增後即可設定該 UID 的聖牌多餘 / 缺少狀態</div>
           </div>

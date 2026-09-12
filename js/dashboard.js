@@ -16,6 +16,7 @@ const alertMessage = document.getElementById('alert-message');
 const alertIcon = document.getElementById('alert-icon');
 const uidListSection = document.getElementById('uid-list-section');
 const uidList = document.getElementById('uid-list');
+const uidListEmpty = document.getElementById('uid-list-empty');
 const uidCardTemplate = document.getElementById('uid-card-template');
 const cardsSection = document.getElementById('cards-section');
 const cardsGrid = document.getElementById('cards-grid');
@@ -34,11 +35,28 @@ function showAlert(message, type = 'danger') {
   alertMessage.textContent = message;
   alertBox.className = `alert alert-dismissible d-flex align-items-center alert-${type}`;
   alertBox.classList.remove('d-none');
+  alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function hideAlert() {
   alertBox.classList.add('d-none');
 }
+
+const addUidError = document.getElementById('add-uid-error');
+const addUidErrorIcon = document.getElementById('add-uid-error-icon');
+const addUidErrorMessage = document.getElementById('add-uid-error-message');
+
+function showAddUidError(message) {
+  addUidErrorIcon.innerHTML = ALERT_ICON_PATHS.danger;
+  addUidErrorMessage.textContent = message;
+  addUidError.classList.remove('d-none');
+}
+
+function hideAddUidError() {
+  addUidError.classList.add('d-none');
+}
+
+document.getElementById('btn-add-uid-error-close').addEventListener('click', hideAddUidError);
 
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
@@ -92,6 +110,7 @@ function renderCardChips(cardIds, container) {
 
 function renderUidList(summaries) {
   uidList.innerHTML = '';
+  uidListEmpty.classList.toggle('d-none', summaries.length > 0);
 
   summaries.forEach((summary) => {
     const fragment = uidCardTemplate.content.cloneNode(true);
@@ -129,7 +148,7 @@ async function loadUidSummaries() {
   }
 }
 
-async function openEditor(uid) {
+async function openEditor(uid, { onError } = {}) {
   hideAlert();
 
   try {
@@ -142,8 +161,11 @@ async function openEditor(uid) {
     uidListSection.classList.add('d-none');
     cardsSection.classList.remove('d-none');
     history.replaceState(null, '', `?uid=${encodeURIComponent(uid)}`);
+    return true;
   } catch (error) {
-    showAlert(error.message);
+    if (onError) onError(error);
+    else showAlert(error.message);
+    return false;
   }
 }
 
@@ -230,18 +252,19 @@ function collectStatusMap() {
   return map;
 }
 
-document.getElementById('btn-add-uid').addEventListener('click', () => {
+document.getElementById('btn-add-uid').addEventListener('click', async () => {
   hideAlert();
+  hideAddUidError();
   const uidInput = document.getElementById('new-uid-input');
   const uid = uidInput.value.trim();
 
   if (!uid) {
-    showAlert(i18n.t('index.enterUid'));
+    showAddUidError(i18n.t('index.enterUid'));
     return;
   }
 
-  uidInput.value = '';
-  openEditor(uid);
+  const success = await openEditor(uid, { onError: (error) => showAddUidError(error.message) });
+  if (success) uidInput.value = '';
 });
 
 document.getElementById('btn-back-to-list').addEventListener('click', backToList);
