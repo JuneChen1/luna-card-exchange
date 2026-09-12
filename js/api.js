@@ -107,6 +107,9 @@ const adminApi = {
   },
   unbanUser(id) {
     return apiRequest(`/admin/users/${id}/unban`, { method: 'PATCH' });
+  },
+  promoteUser(id) {
+    return apiRequest(`/admin/users/${id}/promote`, { method: 'PATCH' });
   }
 };
 

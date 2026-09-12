@@ -70,6 +70,14 @@ function renderRow(user) {
   actionBtn.classList.add(user.is_banned ? 'btn-outline-luna-primary' : 'btn-outline-danger');
   actionBtn.addEventListener('click', () => handleToggleBan(user));
 
+  const promoteBtn = fragment.querySelector('.admin-row-promote');
+  if (user.role === 'ADMIN') {
+    promoteBtn.remove();
+  } else {
+    promoteBtn.textContent = i18n.t('admin.promote');
+    promoteBtn.addEventListener('click', () => handlePromote(user));
+  }
+
   return fragment;
 }
 
@@ -86,6 +94,19 @@ async function handleToggleBan(user) {
       await adminApi.banUser(user.id);
       showAlert(i18n.t('admin.banSuccess', { name: user.name }), 'success');
     }
+    loadUsers(currentPage);
+  } catch (error) {
+    showAlert(error.message);
+  }
+}
+
+async function handlePromote(user) {
+  const confirmed = window.confirm(i18n.t('admin.confirmPromote', { name: user.name }));
+  if (!confirmed) return;
+
+  try {
+    await adminApi.promoteUser(user.id);
+    showAlert(i18n.t('admin.promoteSuccess', { name: user.name }), 'success');
     loadUsers(currentPage);
   } catch (error) {
     showAlert(error.message);
