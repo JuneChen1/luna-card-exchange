@@ -48,6 +48,10 @@ document.getElementById('register-form').addEventListener('submit', async (event
     showAlert(i18n.t('register.enterUsername'));
     return;
   }
+  if (username.length > 50) {
+    showAlert(i18n.t('register.usernameTooLong'));
+    return;
+  }
   if (!PASSWORD_REGEX.test(password)) {
     showAlert(i18n.t('common.passwordRule'));
     return;

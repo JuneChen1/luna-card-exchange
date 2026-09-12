@@ -40,6 +40,7 @@ const i18n = (function () {
       'register.hasAccountPrefix': '已經有帳號了嗎？',
       'register.goLogin': '前往登入',
       'register.enterUsername': '請輸入帳號',
+      'register.usernameTooLong': '帳號長度不可超過 50 個字元',
       'register.mismatch': '兩次輸入的密碼不一致',
 
       'profile.title': '編輯個人資料',
@@ -170,6 +171,7 @@ const i18n = (function () {
       'register.hasAccountPrefix': 'Already have an account?',
       'register.goLogin': 'Log in',
       'register.enterUsername': 'Please enter a username',
+      'register.usernameTooLong': 'Username must be 50 characters or fewer',
       'register.mismatch': 'The passwords do not match',
 
       'profile.title': 'Edit Profile',
