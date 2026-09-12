@@ -83,6 +83,10 @@ main {
 .status-toggle .btn {
   font-size: 0.7rem;
   padding: 0.2rem 0.3rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app-footer {

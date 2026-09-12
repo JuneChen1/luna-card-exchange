@@ -269,15 +269,6 @@ document.getElementById('btn-add-uid').addEventListener('click', async () => {
 
 document.getElementById('btn-back-to-list').addEventListener('click', backToList);
 
-document.getElementById('btn-delete-uid').addEventListener('click', async () => {
-  hideAlert();
-  const deleted = await deleteUid(currentUid);
-  if (!deleted) return;
-  showList();
-  showAlert(i18n.t('index.deletedSuccess'), 'success');
-  loadUidSummaries();
-});
-
 document.getElementById('btn-save').addEventListener('click', async () => {
   hideAlert();
 
