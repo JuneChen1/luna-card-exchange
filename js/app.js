@@ -203,14 +203,7 @@ async function handleAdminDeleteUid(item) {
   if (!confirmed) return;
 
   try {
-    const searchResult = await adminApi.searchUsers({ keyword: item.user_name, limit: 100 });
-    const targetUser = searchResult.data.users.find((user) => user.name === item.user_name);
-    if (!targetUser) {
-      showAlert(i18n.t('admin.userNotFound'));
-      return;
-    }
-
-    await adminApi.forceDeleteUidCards(targetUser.id, item.genshin_uid);
+    await adminApi.forceDeleteUidCards(item.user_id, item.genshin_uid);
     showAlert(i18n.t('admin.deleteUidDataSuccess', { uid: item.genshin_uid }), 'success');
     searchExchange();
   } catch (error) {
