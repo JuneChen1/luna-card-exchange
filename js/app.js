@@ -185,8 +185,37 @@ function renderExchangeResults(results) {
       ? item.contact_info
       : i18n.t('index.contactHidden');
 
+    const deleteBtn = fragment.querySelector('.exchange-result-admin-delete');
+    if (getUserRole() === 'ADMIN') {
+      deleteBtn.textContent = i18n.t('admin.deleteUidData');
+      deleteBtn.classList.remove('d-none');
+      deleteBtn.addEventListener('click', () => handleAdminDeleteUid(item));
+    }
+
     exchangeResults.appendChild(fragment);
   });
+}
+
+async function handleAdminDeleteUid(item) {
+  const confirmed = window.confirm(
+    i18n.t('admin.confirmDeleteUidData', { name: item.user_name, uid: item.genshin_uid })
+  );
+  if (!confirmed) return;
+
+  try {
+    const searchResult = await adminApi.searchUsers({ keyword: item.user_name, limit: 100 });
+    const targetUser = searchResult.data.users.find((user) => user.name === item.user_name);
+    if (!targetUser) {
+      showAlert(i18n.t('admin.userNotFound'));
+      return;
+    }
+
+    await adminApi.forceDeleteUidCards(targetUser.id, item.genshin_uid);
+    showAlert(i18n.t('admin.deleteUidDataSuccess', { uid: item.genshin_uid }), 'success');
+    searchExchange();
+  } catch (error) {
+    showAlert(error.message);
+  }
 }
 
 async function searchExchange() {
@@ -211,7 +240,7 @@ exchangeForm.addEventListener('submit', (event) => {
 
 authArea.logoutBtn.addEventListener('click', () => {
   clearSession();
-  refreshAuthUI();
+  location.reload();
 });
 
 document.addEventListener('langchange', () => {

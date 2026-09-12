@@ -110,6 +110,9 @@ const adminApi = {
   },
   promoteUser(id) {
     return apiRequest(`/admin/users/${id}/promote`, { method: 'PATCH' });
+  },
+  forceDeleteUidCards(id, genshinUid) {
+    return apiRequest(`/admin/users/${id}/uids/${encodeURIComponent(genshinUid)}`, { method: 'DELETE' });
   }
 };
 
