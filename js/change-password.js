@@ -29,6 +29,7 @@ if (!getToken()) {
 }
 
 document.getElementById('welcome-text').textContent = localStorage.getItem(USERNAME_KEY);
+refreshAdminNav();
 
 document.getElementById('btn-logout').addEventListener('click', () => {
   clearSession();

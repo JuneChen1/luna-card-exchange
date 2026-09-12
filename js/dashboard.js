@@ -43,6 +43,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 document.getElementById('welcome-text').textContent = localStorage.getItem(USERNAME_KEY);
+refreshAdminNav();
 
 document.getElementById('btn-logout').addEventListener('click', () => {
   clearSession();

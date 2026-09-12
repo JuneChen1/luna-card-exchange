@@ -16,6 +16,23 @@ function clearSession() {
   localStorage.removeItem(USERNAME_KEY);
 }
 
+function getUserRole() {
+  const token = getToken();
+  if (!token) return null;
+
+  try {
+    const payload = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(atob(payload)).role || null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function refreshAdminNav() {
+  const item = document.getElementById('nav-admin-item');
+  if (item) item.classList.toggle('d-none', getUserRole() !== 'ADMIN');
+}
+
 async function apiRequest(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
   const token = getToken();
@@ -73,6 +90,23 @@ const myCardsApi = {
   },
   remove(genshinUid) {
     return apiRequest(`/my-cards?uid=${encodeURIComponent(genshinUid)}`, { method: 'DELETE' });
+  }
+};
+
+const adminApi = {
+  searchUsers({ keyword = '', banned = '', page = 1, limit = 20 } = {}) {
+    const params = new URLSearchParams();
+    if (keyword) params.set('keyword', keyword);
+    if (banned) params.set('banned', banned);
+    params.set('page', page);
+    params.set('limit', limit);
+    return apiRequest(`/admin/users?${params.toString()}`);
+  },
+  banUser(id) {
+    return apiRequest(`/admin/users/${id}/ban`, { method: 'PATCH' });
+  },
+  unbanUser(id) {
+    return apiRequest(`/admin/users/${id}/unban`, { method: 'PATCH' });
   }
 };
 

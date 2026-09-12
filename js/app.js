@@ -58,6 +58,7 @@ function refreshAuthUI() {
 
   if (isLoggedIn) {
     authArea.welcomeText.textContent = username;
+    refreshAdminNav();
   }
 }
 
