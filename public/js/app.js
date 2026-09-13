@@ -286,8 +286,17 @@ quickMatchBtn.addEventListener('click', async () => {
     uids.forEach((summary) => {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'list-group-item list-group-item-action';
-      btn.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+      btn.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2 py-3';
+
+      btn.insertAdjacentHTML(
+        'beforeend',
+        '<svg width="16" height="16" fill="currentColor" class="text-muted flex-shrink-0" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>'
+      );
+
+      const label = document.createElement('span');
+      label.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+      btn.appendChild(label);
+
       btn.addEventListener('click', () => {
         quickMatchModal.hide();
         applyQuickMatch(summary, uids);
