@@ -35,7 +35,8 @@ const myCardController = {
   async getMyCards(req, res, next) {
     const uid =
       typeof req.query.uid === 'string' ? req.query.uid.trim() : req.query.uid;
-    if (!isValidGenshinUid(uid)) return next(appError(400, 'uid 格式錯誤'));
+    if (!isValidGenshinUid(uid))
+      return next(appError(400, '原神 UID 格式錯誤'));
     try {
       const linkRepo = dataSource.getRepository('UserCards');
       const result = await linkRepo.find({
@@ -111,7 +112,8 @@ const myCardController = {
   async deleteUidCards(req, res, next) {
     const uid =
       typeof req.query.uid === 'string' ? req.query.uid.trim() : req.query.uid;
-    if (!isValidGenshinUid(uid)) return next(appError(400, 'uid 格式錯誤'));
+    if (!isValidGenshinUid(uid))
+      return next(appError(400, '原神 UID 格式錯誤'));
 
     try {
       const linkRepo = dataSource.getRepository('UserCards');
