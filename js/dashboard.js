@@ -258,6 +258,8 @@ function collectStatusMap() {
   return map;
 }
 
+const GENSHIN_UID_REGEX = /^(6\d{8}|7\d{8}|9\d{8}|18\d{8}|8\d{8})$/;
+
 document.getElementById('btn-add-uid').addEventListener('click', async () => {
   hideAlert();
   hideAddUidError();
@@ -266,6 +268,11 @@ document.getElementById('btn-add-uid').addEventListener('click', async () => {
 
   if (!uid) {
     showAddUidError(i18n.t('index.enterUid'));
+    return;
+  }
+
+  if (!GENSHIN_UID_REGEX.test(uid)) {
+    showAddUidError(i18n.t('index.uidFormatError'));
     return;
   }
 
