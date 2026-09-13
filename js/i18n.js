@@ -398,20 +398,153 @@ const i18n = (function () {
       'admin.nextPage': '次へ',
       'admin.pageInfo': '{page} / {totalPages} ページ（全 {total} 件）',
       'admin.forbidden': '管理者専用エリアへのアクセス権限がありません'
+    },
+    ko: {
+      'nav.login': '로그인',
+      'nav.register': '회원가입',
+      'nav.myPage': '마이페이지',
+      'nav.editProfile': '프로필 수정',
+      'nav.adminZone': '관리자 전용 구역',
+      'nav.logout': '로그아웃',
+
+      'footer.contact': '문의하기: ',
+
+      'title.login': '로그인 - 달 계시 카드 교환소',
+      'title.register': '회원가입 - 달 계시 카드 교환소',
+      'title.dashboard': '마이페이지 - 달 계시 카드 교환소',
+      'title.profile': '프로필 수정 - 달 계시 카드 교환소',
+      'title.changePassword': '비밀번호 변경 - 달 계시 카드 교환소',
+      'title.forgotPassword': '비밀번호 찾기 - 달 계시 카드 교환소',
+      'title.resetPassword': '비밀번호 재설정 - 달 계시 카드 교환소',
+
+      'common.username': '아이디',
+      'common.usernameCaseSensitiveHint': '※ 아이디는 대소문자를 구분합니다 (예: "UserA"와 "usera"는 다른 아이디로 처리됩니다)',
+      'common.password': '비밀번호',
+      'common.passwordRule': '비밀번호는 8자 이상이며 영문과 숫자를 모두 포함해야 합니다',
+      'common.newPasswordMismatch': '새 비밀번호가 일치하지 않습니다',
+      'common.requestFailed': '요청에 실패했습니다',
+      'common.loginHint': '로그인하면 달 계시 카드의 여유/부족 상태를 관리할 수 있습니다',
+
+      'login.title': '로그인',
+      'login.forgotPassword': '비밀번호를 잊으셨나요?',
+      'login.noAccountPrefix': '계정이 없으신가요? ',
+      'login.goRegister': '회원가입 하기',
+      'login.enterBoth': '아이디와 비밀번호를 입력해주세요',
+      'login.registeredSuccess': '회원가입이 완료되었습니다. 로그인해주세요',
+
+      'register.title': '회원가입',
+      'register.confirmPassword': '비밀번호 확인',
+      'register.hasAccountPrefix': '이미 계정이 있으신가요? ',
+      'register.goLogin': '로그인 하기',
+      'register.enterUsername': '아이디를 입력해주세요',
+      'register.usernameTooLong': '아이디는 50자를 초과할 수 없습니다',
+      'register.mismatch': '비밀번호가 일치하지 않습니다',
+
+      'profile.title': '프로필 수정',
+      'profile.emailHint': '(선택 사항, 비밀번호 재설정에 사용됩니다)',
+      'profile.contactLabel': '연락처',
+      'profile.contactHint': '(선택 사항, 입력하면 검색 결과에 공개됩니다)',
+      'profile.save': '저장',
+      'profile.changePasswordLink': '비밀번호 변경',
+      'profile.emailInvalid': '이메일 형식이 올바르지 않습니다',
+      'profile.updateSuccess': '프로필이 업데이트되었습니다',
+
+      'changePassword.title': '비밀번호 변경',
+      'changePassword.oldPassword': '현재 비밀번호',
+      'changePassword.newPassword': '새 비밀번호',
+      'changePassword.confirmNewPassword': '새 비밀번호 확인',
+      'changePassword.submit': '비밀번호 업데이트',
+      'changePassword.backToProfile': '뒤로',
+      'changePassword.updateSuccess': '비밀번호가 업데이트되었습니다',
+
+      'forgotPassword.title': '비밀번호 찾기',
+      'forgotPassword.desc': '가입 시 등록한 이메일을 입력하시면 비밀번호 재설정 링크를 보내드립니다',
+      'forgotPassword.submit': '재설정 메일 보내기',
+      'forgotPassword.backToLogin': '로그인으로 돌아가기',
+      'forgotPassword.enterEmail': '이메일을 입력해주세요',
+
+      'resetPassword.title': '비밀번호 재설정',
+      'resetPassword.submit': '비밀번호 재설정',
+      'resetPassword.invalidLink': '재설정 링크가 유효하지 않습니다. 비밀번호 재설정 절차를 다시 진행해주세요',
+      'resetPassword.resetSuccess': '비밀번호가 재설정되었습니다. 다시 로그인해주세요',
+
+      'index.findExchange': '교환 상대 찾기',
+      'index.wantedLabel': '구하는 카드',
+      'index.offeredLabel': '양도 카드',
+      'index.serverLabel': '서버',
+      'index.serverAny': '전체',
+      'index.search': '검색',
+      'index.addUidLabel': '원신 UID 추가',
+      'index.uidPlaceholder': '원신 UID 입력',
+      'index.addUidBtn': '추가',
+      'index.addUidHint': '추가하면 해당 UID의 카드 여유/부족 상태를 설정할 수 있습니다',
+      'index.supportedServersPrefix': '지원 서버: ',
+      'index.back': '뒤로',
+      'index.cardStatusTitle': '카드 현황',
+      'index.parenOpen': ' (',
+      'index.parenClose': ')',
+      'index.deleteUid': '이 UID 삭제',
+      'index.saveChanges': '변경사항 저장',
+      'index.deleteBtn': '삭제',
+      'index.badgeOffered': '양도',
+      'index.badgeWanted': '구함',
+      'index.statusNone': '미설정',
+      'index.enterUid': '원신 UID를 입력해주세요',
+      'index.deletedSuccess': '삭제되었습니다',
+      'index.saveSuccess': '저장되었습니다',
+      'index.noResults': '조건에 맞는 교환 상대가 없습니다',
+      'index.none': '없음',
+      'index.noUidsYet': '아직 등록된 원신 UID가 없습니다. 아래에서 첫 번째 UID를 추가해 보세요',
+      'index.uidLabel': 'UID: ',
+      'index.contactPrefix': '연락처: ',
+      'index.contactHidden': '비공개',
+      'index.confirmDeleteUid': 'UID {uid}의 모든 카드 데이터를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다',
+
+      'title.admin': '관리자 전용 구역 - 달 계시 카드 교환소',
+      'admin.title': '관리자 전용 구역',
+      'admin.keywordPlaceholder': '아이디로 검색',
+      'admin.statusAll': '전체 상태',
+      'admin.statusActive': '정상',
+      'admin.statusBanned': '정지됨',
+      'admin.search': '검색',
+      'admin.colName': '아이디',
+      'admin.colEmail': '이메일',
+      'admin.colContact': '연락처',
+      'admin.colRole': '권한',
+      'admin.colStatus': '상태',
+      'admin.colAction': '작업',
+      'admin.ban': '정지',
+      'admin.unban': '정지 해제',
+      'admin.promote': '관리자로 승격',
+      'admin.confirmBan': '"{name}" 계정을 정지하시겠습니까?',
+      'admin.confirmUnban': '"{name}" 계정의 정지를 해제하시겠습니까?',
+      'admin.confirmPromote': '"{name}"님을 관리자로 승격하시겠습니까?',
+      'admin.banSuccess': '"{name}" 계정을 정지했습니다',
+      'admin.unbanSuccess': '"{name}" 계정의 정지를 해제했습니다',
+      'admin.promoteSuccess': '"{name}"님을 관리자로 승격했습니다',
+      'admin.deleteUidData': '항목 삭제',
+      'admin.confirmDeleteUidData': '"{name}"의 UID {uid} 카드 데이터를 모두 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다',
+      'admin.deleteUidDataSuccess': 'UID {uid}의 카드 데이터를 삭제했습니다',
+      'admin.noResults': '일치하는 사용자가 없습니다',
+      'admin.prevPage': '이전',
+      'admin.nextPage': '다음',
+      'admin.pageInfo': '{page} / {totalPages} 페이지 (전체 {total}건)',
+      'admin.forbidden': '관리자 전용 구역에 접근할 권한이 없습니다'
     }
   };
 
   const LANGUAGES = [
     { code: 'zh', label: '繁體中文' },
     { code: 'en', label: 'English' },
-    { code: 'ja', label: '日本語' }
+    { code: 'ja', label: '日本語' },
+    { code: 'ko', label: '한국어' }
   ];
 
   function isValidLang(code) {
     return LANGUAGES.some((l) => l.code === code);
   }
 
-  const HTML_LANG_MAP = { zh: 'zh-Hant', en: 'en', ja: 'ja' };
+  const HTML_LANG_MAP = { zh: 'zh-Hant', en: 'en', ja: 'ja', ko: 'ko' };
 
   function htmlLangFor(lang) {
     return HTML_LANG_MAP[lang] || lang;
