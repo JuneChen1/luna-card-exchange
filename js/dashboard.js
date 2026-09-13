@@ -177,6 +177,8 @@ function showList() {
 
 function backToList() {
   hideAlert();
+  hideAddUidError();
+  document.getElementById('new-uid-input').value = '';
   showList();
   loadUidSummaries();
 }
