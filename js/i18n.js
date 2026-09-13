@@ -97,7 +97,7 @@ const i18n = (function () {
       'index.uidFormatError': '原神 UID 格式錯誤',
       'index.quickMatchBtn': '帶入資料',
       'index.quickMatchApplied': '已代入 UID {uid} 的資料，請按下方搜尋查看結果',
-      'index.quickMatchChooseUid': '選擇要帶入哪組 UID 的資料',
+      'index.quickMatchChooseUid': '請選擇要帶入的 UID 資料',
       'index.quickMatchNoUid': '你還沒有登記任何原神 UID，請先至個人頁面新增',
       'index.deletedSuccess': '已刪除',
       'index.saveSuccess': '儲存成功',
