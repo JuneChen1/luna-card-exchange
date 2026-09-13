@@ -4,7 +4,10 @@ let lastExchangeResults = [];
 
 function cardName(card) {
   if (!card) return '';
-  return i18n.getLang() === 'en' ? (card.english_name || card.name) : card.name;
+  const lang = i18n.getLang();
+  if (lang === 'en') return card.english_name || card.name;
+  if (lang === 'ja') return card.japanese_name || card.name;
+  return card.name;
 }
 
 const authArea = {

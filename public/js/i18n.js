@@ -266,17 +266,160 @@ const i18n = (function () {
       'admin.nextPage': 'Next',
       'admin.pageInfo': 'Page {page} / {totalPages} ({total} total)',
       'admin.forbidden': 'You do not have permission to access the admin zone'
+    },
+    ja: {
+      'nav.login': 'ログイン',
+      'nav.register': '新規登録',
+      'nav.myPage': 'マイページ',
+      'nav.editProfile': 'プロフィール編集',
+      'nav.adminZone': '管理者専用エリア',
+      'nav.logout': 'ログアウト',
+
+      'footer.contact': 'お問い合わせ：',
+
+      'title.login': 'ログイン - 月諭のアルカナ交換所',
+      'title.register': '新規登録 - 月諭のアルカナ交換所',
+      'title.dashboard': 'マイページ - 月諭のアルカナ交換所',
+      'title.profile': 'プロフィール編集 - 月諭のアルカナ交換所',
+      'title.changePassword': 'パスワード変更 - 月諭のアルカナ交換所',
+      'title.forgotPassword': 'パスワードをお忘れの方 - 月諭のアルカナ交換所',
+      'title.resetPassword': 'パスワード再設定 - 月諭のアルカナ交換所',
+
+      'common.username': 'ユーザー名',
+      'common.usernameCaseSensitiveHint': '※ ユーザー名は大文字と小文字を区別します（例：「UserA」と「usera」は異なるユーザー名として扱われます）',
+      'common.password': 'パスワード',
+      'common.passwordRule': 'パスワードは8文字以上で、英字と数字の両方を含める必要があります',
+      'common.newPasswordMismatch': '新しいパスワードが一致しません',
+      'common.requestFailed': 'リクエストに失敗しました',
+      'common.loginHint': 'ログインすると、月諭のアルカナの余剰・不足状況を管理できます',
+
+      'login.title': 'ログイン',
+      'login.forgotPassword': 'パスワードをお忘れですか？',
+      'login.noAccountPrefix': 'アカウントをお持ちでない方は',
+      'login.goRegister': 'こちらから新規登録',
+      'login.enterBoth': 'ユーザー名とパスワードを入力してください',
+      'login.registeredSuccess': '登録が完了しました。ログインしてください',
+
+      'register.title': '新規登録',
+      'register.confirmPassword': 'パスワード（確認）',
+      'register.hasAccountPrefix': 'すでにアカウントをお持ちの方は',
+      'register.goLogin': 'こちらからログイン',
+      'register.enterUsername': 'ユーザー名を入力してください',
+      'register.usernameTooLong': 'ユーザー名は50文字以内で入力してください',
+      'register.mismatch': 'パスワードが一致しません',
+
+      'profile.title': 'プロフィール編集',
+      'profile.emailHint': '（任意、パスワード再設定に使用します）',
+      'profile.contactLabel': '連絡先',
+      'profile.contactHint': '（任意。入力するとトップページの検索結果に公開されます）',
+      'profile.save': '保存',
+      'profile.changePasswordLink': 'パスワード変更',
+      'profile.emailInvalid': 'メールアドレスの形式が正しくありません',
+      'profile.updateSuccess': 'プロフィールを更新しました',
+
+      'changePassword.title': 'パスワード変更',
+      'changePassword.oldPassword': '現在のパスワード',
+      'changePassword.newPassword': '新しいパスワード',
+      'changePassword.confirmNewPassword': '新しいパスワード（確認）',
+      'changePassword.submit': 'パスワードを更新',
+      'changePassword.backToProfile': '戻る',
+      'changePassword.updateSuccess': 'パスワードを更新しました',
+
+      'forgotPassword.title': 'パスワードをお忘れの方',
+      'forgotPassword.desc': '登録時のメールアドレスを入力してください。パスワード再設定用のリンクをお送りします',
+      'forgotPassword.submit': '再設定メールを送信',
+      'forgotPassword.backToLogin': 'ログインに戻る',
+      'forgotPassword.enterEmail': 'メールアドレスを入力してください',
+
+      'resetPassword.title': 'パスワード再設定',
+      'resetPassword.submit': 'パスワードを再設定',
+      'resetPassword.invalidLink': '再設定リンクが無効です。もう一度パスワード再設定の手続きを行ってください',
+      'resetPassword.resetSuccess': 'パスワードを再設定しました。再度ログインしてください',
+
+      'index.findExchange': '交換相手を探す',
+      'index.wantedLabel': '欲しいカード',
+      'index.offeredLabel': '余っているカード',
+      'index.serverLabel': 'サーバー',
+      'index.serverAny': '指定なし',
+      'index.search': '検索',
+      'index.addUidLabel': '原神UIDを追加',
+      'index.uidPlaceholder': '原神UIDを入力',
+      'index.addUidBtn': '追加',
+      'index.addUidHint': '追加すると、そのUIDのアルカナの余剰・不足状況を設定できます',
+      'index.supportedServersPrefix': '対応サーバー：',
+      'index.back': '戻る',
+      'index.cardStatusTitle': 'アルカナの状況',
+      'index.parenOpen': '（',
+      'index.parenClose': '）',
+      'index.deleteUid': 'このUIDを削除',
+      'index.saveChanges': '変更を保存',
+      'index.deleteBtn': '削除',
+      'index.badgeOffered': '譲',
+      'index.badgeWanted': '求',
+      'index.statusNone': '未設定',
+      'index.enterUid': '原神UIDを入力してください',
+      'index.deletedSuccess': '削除しました',
+      'index.saveSuccess': '保存しました',
+      'index.noResults': '該当する交換相手が見つかりません',
+      'index.none': 'なし',
+      'index.noUidsYet': 'まだ原神UIDが登録されていません。下記から最初のUIDを追加してください',
+      'index.uidLabel': 'UID：',
+      'index.contactPrefix': '連絡先：',
+      'index.contactHidden': '非公開',
+      'index.confirmDeleteUid': 'UID {uid} のカードデータをすべて削除してもよろしいですか？この操作は取り消せません',
+
+      'title.admin': '管理者専用エリア - 月諭のアルカナ交換所',
+      'admin.title': '管理者専用エリア',
+      'admin.keywordPlaceholder': 'ユーザー名で検索',
+      'admin.statusAll': 'すべての状態',
+      'admin.statusActive': '有効',
+      'admin.statusBanned': '停止中',
+      'admin.search': '検索',
+      'admin.colName': 'ユーザー名',
+      'admin.colEmail': 'メールアドレス',
+      'admin.colContact': '連絡先',
+      'admin.colRole': '権限',
+      'admin.colStatus': 'ステータス',
+      'admin.colAction': '操作',
+      'admin.ban': '利用停止',
+      'admin.unban': '利用停止解除',
+      'admin.promote': '管理者に昇格',
+      'admin.confirmBan': 'アカウント「{name}」を利用停止にしますか？',
+      'admin.confirmUnban': 'アカウント「{name}」の利用停止を解除しますか？',
+      'admin.confirmPromote': '「{name}」を管理者に昇格させますか？',
+      'admin.banSuccess': '「{name}」を利用停止にしました',
+      'admin.unbanSuccess': '「{name}」の利用停止を解除しました',
+      'admin.promoteSuccess': '「{name}」を管理者に昇格させました',
+      'admin.deleteUidData': 'このデータを削除',
+      'admin.confirmDeleteUidData': '「{name}」のUID {uid} のカードデータをすべて削除してもよろしいですか？この操作は取り消せません',
+      'admin.deleteUidDataSuccess': 'UID {uid} のカードデータを削除しました',
+      'admin.noResults': '該当するユーザーが見つかりません',
+      'admin.prevPage': '前へ',
+      'admin.nextPage': '次へ',
+      'admin.pageInfo': '{page} / {totalPages} ページ（全 {total} 件）',
+      'admin.forbidden': '管理者専用エリアへのアクセス権限がありません'
     }
   };
 
   const LANGUAGES = [
     { code: 'zh', label: '繁體中文' },
-    { code: 'en', label: 'English' }
+    { code: 'en', label: 'English' },
+    { code: 'ja', label: '日本語' }
   ];
+
+  function isValidLang(code) {
+    return LANGUAGES.some((l) => l.code === code);
+  }
+
+  const HTML_LANG_MAP = { zh: 'zh-Hant', en: 'en', ja: 'ja' };
+
+  function htmlLangFor(lang) {
+    return HTML_LANG_MAP[lang] || lang;
+  }
 
   function getLang() {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored === 'en' ? 'en' : DEFAULT_LANG;
+    return isValidLang(stored) ? stored : DEFAULT_LANG;
   }
 
   function getLangLabel(code) {
@@ -324,9 +467,9 @@ const i18n = (function () {
 
       if (currentLabel) currentLabel.textContent = getLangLabel(lang);
 
-      if (menu && !menu.dataset.built) {
-        menu.dataset.built = 'true';
-        LANGUAGES.forEach((item) => {
+      if (menu) {
+        menu.innerHTML = '';
+        LANGUAGES.filter((item) => item.code !== lang).forEach((item) => {
           const li = document.createElement('li');
           const btn = document.createElement('button');
           btn.type = 'button';
@@ -339,12 +482,6 @@ const i18n = (function () {
           });
           li.appendChild(btn);
           menu.appendChild(li);
-        });
-      }
-
-      if (menu) {
-        menu.querySelectorAll('[data-lang-option]').forEach((item) => {
-          item.classList.toggle('active', item.getAttribute('data-lang-option') === lang);
         });
       }
 
@@ -364,14 +501,15 @@ const i18n = (function () {
   }
 
   function setLang(lang) {
-    localStorage.setItem(STORAGE_KEY, lang === 'en' ? 'en' : 'zh');
-    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
+    const normalized = isValidLang(lang) ? lang : DEFAULT_LANG;
+    localStorage.setItem(STORAGE_KEY, normalized);
+    document.documentElement.lang = htmlLangFor(normalized);
     applyI18n();
     renderLangDropdowns();
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: getLang() } }));
   }
 
-  document.documentElement.lang = getLang() === 'en' ? 'en' : 'zh-Hant';
+  document.documentElement.lang = htmlLangFor(getLang());
   applyI18n();
   renderLangDropdowns();
 
