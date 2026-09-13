@@ -85,7 +85,7 @@ const userController = {
       const { old_password, new_password, confirm_password } = req.body;
 
       if (
-        !isValidString(old_password) ||
+        !isValidPassword(old_password) ||
         !isValidPassword(new_password) ||
         !isValidPassword(confirm_password)
       )
