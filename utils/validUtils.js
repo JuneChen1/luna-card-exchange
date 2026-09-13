@@ -5,6 +5,11 @@ module.exports = {
   isValidString(value) {
     return typeof value === 'string' && value.trim() !== '';
   },
+  isValidUsername(username) {
+    const usernameRegex = /^[A-Za-z0-9_]{1,50}$/;
+
+    return typeof username === 'string' && usernameRegex.test(username.trim());
+  },
   isValidUUID(value) {
     return (
       typeof value === 'string' &&

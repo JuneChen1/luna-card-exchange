@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {
   isValidString,
+  isValidUsername,
   isValidPassword,
   isValidEmail
 } = require('../utils/validUtils');
@@ -25,8 +26,7 @@ const authController = {
     try {
       const { username, password, confirm_password } = req.body;
       if (
-        !isValidString(username) ||
-        username.trim().length > 50 ||
+        !isValidUsername(username) ||
         !isValidPassword(password) ||
         !isValidPassword(confirm_password)
       )
