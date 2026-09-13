@@ -30,6 +30,11 @@ const exchangeOfferedSelect = document.getElementById('exchange-offered');
 const exchangeServerSelect = document.getElementById('exchange-server');
 const exchangeResults = document.getElementById('exchange-results');
 const exchangeResultTemplate = document.getElementById('exchange-result-template');
+const quickMatchBtn = document.getElementById('btn-quick-match');
+const quickMatchUidList = document.getElementById('quick-match-uid-list');
+const quickMatchModalEl = document.getElementById('quick-match-modal');
+let quickMatchModal;
+let excludedUids = new Set();
 
 const ALERT_ICON_PATHS = {
   success:
@@ -59,6 +64,7 @@ function refreshAuthUI() {
   authArea.loginBtn.classList.toggle('d-none', isLoggedIn);
   authArea.registerBtn.classList.toggle('d-none', isLoggedIn);
   authArea.welcomeDropdown.classList.toggle('d-none', !isLoggedIn);
+  quickMatchBtn.classList.toggle('d-none', !isLoggedIn);
 
   if (isLoggedIn) {
     authArea.welcomeText.textContent = username;
@@ -222,7 +228,10 @@ async function searchExchange() {
 
   try {
     const result = await exchangeApi.search({ wanted, offered, server });
-    renderExchangeResults(result.data);
+    const data = excludedUids.size
+      ? result.data.filter((item) => !excludedUids.has(item.genshin_uid))
+      : result.data;
+    renderExchangeResults(data);
   } catch (error) {
     showAlert(error.message);
   }
@@ -233,6 +242,64 @@ exchangeForm.addEventListener('submit', (event) => {
   hideAlert();
   searchExchange();
   bootstrap.Collapse.getOrCreateInstance(exchangeFilterBody).hide();
+});
+
+function getServerFromUidPrefix(uid) {
+  if (/^7/.test(uid)) return 'Europe';
+  if (/^6/.test(uid)) return 'America';
+  if (/^(8|18)/.test(uid)) return 'Asia';
+  if (/^9/.test(uid)) return 'TWHKMO';
+  return '';
+}
+
+function applyQuickMatch(summary, allMyUids) {
+  exchangeWantedSelect.querySelectorAll('input').forEach((input) => {
+    input.checked = summary.wanted.includes(Number(input.value));
+  });
+  exchangeOfferedSelect.querySelectorAll('input').forEach((input) => {
+    input.checked = summary.offered.includes(Number(input.value));
+  });
+  exchangeServerSelect.value = getServerFromUidPrefix(summary.genshin_uid);
+  excludedUids = new Set(allMyUids.map((u) => u.genshin_uid));
+
+  showAlert(i18n.t('index.quickMatchApplied', { uid: summary.genshin_uid }), 'success');
+  bootstrap.Collapse.getOrCreateInstance(exchangeFilterBody).show();
+}
+
+quickMatchBtn.addEventListener('click', async () => {
+  hideAlert();
+  try {
+    const result = await myCardsApi.listUids();
+    const uids = result.data;
+
+    if (uids.length === 0) {
+      showAlert(i18n.t('index.quickMatchNoUid'));
+      return;
+    }
+
+    if (uids.length === 1) {
+      applyQuickMatch(uids[0], uids);
+      return;
+    }
+
+    quickMatchUidList.innerHTML = '';
+    uids.forEach((summary) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'list-group-item list-group-item-action';
+      btn.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+      btn.addEventListener('click', () => {
+        quickMatchModal.hide();
+        applyQuickMatch(summary, uids);
+      });
+      quickMatchUidList.appendChild(btn);
+    });
+
+    quickMatchModal = quickMatchModal || new bootstrap.Modal(quickMatchModalEl);
+    quickMatchModal.show();
+  } catch (error) {
+    showAlert(error.message);
+  }
 });
 
 authArea.logoutBtn.addEventListener('click', () => {
