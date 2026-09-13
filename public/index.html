@@ -52,6 +52,7 @@
           <button class="btn btn-outline-luna-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#exchange-filter-body" aria-expanded="false" aria-controls="exchange-filter-body">
             <span data-i18n="index.findExchange">尋找交換對象</span> <span aria-hidden="true">▾</span>
           </button>
+          <button class="btn btn-luna-primary btn-sm ms-2 d-none" type="button" id="btn-quick-match" data-i18n="index.quickMatchBtn">帶入資料</button>
           <div class="collapse" id="exchange-filter-body">
             <form id="exchange-form" class="row g-3 pt-3">
               <div class="col-md-4">
@@ -131,6 +132,21 @@
         <div class="modal-body text-center pt-0">
           <img id="card-preview-img" src="" alt="" class="card-preview-img mb-3">
           <p id="card-preview-name" class="fw-bold fs-5 mb-0"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 快速配對：多組 UID 時的選擇彈窗 -->
+  <div class="modal fade" id="quick-match-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" data-i18n="index.quickMatchChooseUid">選擇要帶入哪組 UID 的資料</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="list-group" id="quick-match-uid-list"></div>
         </div>
       </div>
     </div>
