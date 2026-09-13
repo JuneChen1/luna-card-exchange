@@ -41,7 +41,7 @@ module.exports = new EntitySchema({
   uniques: [
     {
       name: 'UQ_user_card_pair',
-      columns: ['user', 'card']
+      columns: ['user', 'genshin_uid', 'card']
     }
   ]
 });
