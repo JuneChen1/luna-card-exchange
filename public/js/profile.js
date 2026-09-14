@@ -25,7 +25,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 if (!getToken()) {
-  location.href = '/login.html';
+  location.href = 'login.html';
 }
 
 document.getElementById('welcome-text').textContent = localStorage.getItem(USERNAME_KEY);
@@ -33,7 +33,7 @@ refreshAdminNav();
 
 document.getElementById('btn-logout').addEventListener('click', () => {
   clearSession();
-  location.href = '/';
+  location.href = 'index.html';
 });
 
 const profileForm = document.getElementById('profile-form');

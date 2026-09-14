@@ -1,9 +1,9 @@
 if (!getToken()) {
-  location.href = '/login.html';
+  location.href = 'login.html';
 }
 
 if (getUserRole() !== 'ADMIN') {
-  location.href = '/';
+  location.href = 'index.html';
 }
 
 const alertBox = document.getElementById('alert-box');
@@ -35,7 +35,7 @@ refreshAdminNav();
 
 document.getElementById('btn-logout').addEventListener('click', () => {
   clearSession();
-  location.href = '/';
+  location.href = 'index.html';
 });
 
 const searchForm = document.getElementById('admin-search-form');
