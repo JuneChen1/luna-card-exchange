@@ -1,13 +1,8 @@
-<div align="center">
+
 
 # <img src="public/favicon-32x32.png" width="28" height="28" alt=""> 月諭聖牌交換站 Luna Card Exchange
-> **( 開發中 )**
 
-[![Frontend](https://img.shields.io/badge/Frontend-Bootstrap_5-purple.svg)](#專案技術架構)
-[![Backend](https://img.shields.io/badge/Backend-Node.js_|_Express-green.svg)](#專案技術架構)
-[![Database](https://img.shields.io/badge/Database-PostgreSQL-blue.svg)](#專案技術架構)
-
-</div>
+前往網站：https://junechen1.github.io/luna-card-exchange
 
 ---
 
