@@ -42,6 +42,7 @@ const i18n = (function () {
       'register.goLogin': '前往登入',
       'register.enterUsername': '請輸入帳號',
       'register.usernameTooLong': '帳號長度不可超過 50 個字元',
+      'register.usernameFormatInvalid': '帳號只能包含英文字母、數字與底線（_）',
       'register.mismatch': '兩次輸入的密碼不一致',
 
       'profile.title': '編輯個人資料',
@@ -180,6 +181,7 @@ const i18n = (function () {
       'register.goLogin': 'Log in',
       'register.enterUsername': 'Please enter a username',
       'register.usernameTooLong': 'Username must be 50 characters or fewer',
+      'register.usernameFormatInvalid': 'Username can only contain letters, numbers, and underscores (_)',
       'register.mismatch': 'The passwords do not match',
 
       'profile.title': 'Edit Profile',
@@ -318,6 +320,7 @@ const i18n = (function () {
       'register.goLogin': 'こちらからログイン',
       'register.enterUsername': 'ユーザー名を入力してください',
       'register.usernameTooLong': 'ユーザー名は50文字以内で入力してください',
+      'register.usernameFormatInvalid': 'ユーザー名は半角英数字とアンダースコア（_）のみ使用できます',
       'register.mismatch': 'パスワードが一致しません',
 
       'profile.title': 'プロフィール編集',
@@ -456,6 +459,7 @@ const i18n = (function () {
       'register.goLogin': '로그인 하기',
       'register.enterUsername': '아이디를 입력해주세요',
       'register.usernameTooLong': '아이디는 50자를 초과할 수 없습니다',
+      'register.usernameFormatInvalid': '아이디는 영문, 숫자, 밑줄(_)만 사용할 수 있습니다',
       'register.mismatch': '비밀번호가 일치하지 않습니다',
 
       'profile.title': '프로필 수정',
