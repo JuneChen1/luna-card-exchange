@@ -62,7 +62,7 @@ const i18n = (function () {
       'changePassword.updateSuccess': '密碼更新成功',
 
       'forgotPassword.title': '忘記密碼',
-      'forgotPassword.desc': '請輸入註冊時填寫的 Email，我們會寄送重設密碼的連結給你',
+      'forgotPassword.desc': '請輸入您在「個人資料」中設定的 Email，我們會寄送重設密碼的連結給您',
       'forgotPassword.submit': '寄送重設密碼信',
       'forgotPassword.backToLogin': '返回登入',
       'forgotPassword.enterEmail': '請輸入 Email',
@@ -200,7 +200,7 @@ const i18n = (function () {
       'changePassword.updateSuccess': 'Password updated successfully',
 
       'forgotPassword.title': 'Forgot Password',
-      'forgotPassword.desc': "Enter the email you registered with and we'll send you a password reset link",
+      'forgotPassword.desc': "Enter the email you set in \"Edit Profile\" and we'll send you a password reset link.",
       'forgotPassword.submit': 'Send Reset Email',
       'forgotPassword.backToLogin': 'Back to Login',
       'forgotPassword.enterEmail': 'Please enter your email',
@@ -338,7 +338,7 @@ const i18n = (function () {
       'changePassword.updateSuccess': 'パスワードを更新しました',
 
       'forgotPassword.title': 'パスワードをお忘れの方',
-      'forgotPassword.desc': '登録時のメールアドレスを入力してください。パスワード再設定用のリンクをお送りします',
+      'forgotPassword.desc': '「プロフィール編集」で設定したメールアドレスを入力してください。パスワード再設定用のリンクをお送りします。',
       'forgotPassword.submit': '再設定メールを送信',
       'forgotPassword.backToLogin': 'ログインに戻る',
       'forgotPassword.enterEmail': 'メールアドレスを入力してください',
@@ -476,7 +476,7 @@ const i18n = (function () {
       'changePassword.updateSuccess': '비밀번호가 업데이트되었습니다',
 
       'forgotPassword.title': '비밀번호 찾기',
-      'forgotPassword.desc': '가입 시 등록한 이메일을 입력하시면 비밀번호 재설정 링크를 보내드립니다',
+      'forgotPassword.desc': '"프로필 수정"에서 설정한 이메일을 입력하시면 비밀번호 재설정 링크를 보내드립니다.',
       'forgotPassword.submit': '재설정 메일 보내기',
       'forgotPassword.backToLogin': '로그인으로 돌아가기',
       'forgotPassword.enterEmail': '이메일을 입력해주세요',
