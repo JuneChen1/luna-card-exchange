@@ -22,7 +22,7 @@ function buildCardRows() {
       id: card.id,
       name: card.name,
       english_name: card.en_name,
-      image_url: path.posix.join('/card_images', imageFile)
+      image_url: path.posix.join('card_images', imageFile)
     };
   });
 }
