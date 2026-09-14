@@ -1,6 +1,8 @@
 const alertBox = document.getElementById('alert-box');
 const alertMessage = document.getElementById('alert-message');
 const alertIcon = document.getElementById('alert-icon');
+const emailError = document.getElementById('email-error');
+const emailErrorText = document.getElementById('email-error-text');
 
 const ALERT_ICON_PATHS = {
   success:
@@ -24,15 +26,25 @@ if (getToken()) {
   location.href = '/dashboard.html';
 }
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 document.getElementById('forgot-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   hideAlert();
+  emailError.classList.add('d-none');
 
   const formData = new FormData(event.target);
   const email = formData.get('email').trim();
 
   if (!email) {
-    showAlert(i18n.t('forgotPassword.enterEmail'));
+    emailErrorText.textContent = i18n.t('forgotPassword.enterEmail');
+    emailError.classList.remove('d-none');
+    return;
+  }
+
+  if (!EMAIL_REGEX.test(email)) {
+    emailErrorText.textContent = i18n.t('profile.emailInvalid');
+    emailError.classList.remove('d-none');
     return;
   }
 
@@ -41,6 +53,7 @@ document.getElementById('forgot-form').addEventListener('submit', async (event) 
     showAlert(result.message, 'success');
     event.target.reset();
   } catch (error) {
-    showAlert(error.message);
+    emailErrorText.textContent = error.message;
+    emailError.classList.remove('d-none');
   }
 });

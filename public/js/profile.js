@@ -1,6 +1,8 @@
 const alertBox = document.getElementById('alert-box');
 const alertMessage = document.getElementById('alert-message');
 const alertIcon = document.getElementById('alert-icon');
+const emailError = document.getElementById('email-error');
+const emailErrorText = document.getElementById('email-error-text');
 
 const ALERT_ICON_PATHS = {
   success:
@@ -56,12 +58,14 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 profileForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   hideAlert();
+  emailError.classList.add('d-none');
 
   const formData = new FormData(event.target);
   const email = formData.get('email').trim();
 
   if (email && !EMAIL_REGEX.test(email)) {
-    showAlert(i18n.t('profile.emailInvalid'));
+    emailErrorText.textContent = i18n.t('profile.emailInvalid');
+    emailError.classList.remove('d-none');
     return;
   }
 
@@ -72,6 +76,12 @@ profileForm.addEventListener('submit', async (event) => {
     });
     showAlert(i18n.t('profile.updateSuccess'), 'success');
   } catch (error) {
+    if (error.message === 'email 已被使用') {
+      emailErrorText.textContent = error.message;
+      emailError.classList.remove('d-none');
+      return;
+    }
+
     showAlert(error.message);
   }
 });
