@@ -126,7 +126,15 @@ function renderUidList(summaries) {
     const deleteBtn = fragment.querySelector('.uid-card-delete');
 
     i18n.applyI18n(fragment);
-    uidEl.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+    uidEl.innerHTML = '';
+    const uidArrow = document.createElement('span');
+    uidArrow.className = 'uid-arrow-icon';
+    uidArrow.setAttribute('aria-hidden', 'true');
+    uidArrow.textContent = '▸';
+    const uidText = document.createElement('span');
+    uidText.className = 'uid-card-uid-text';
+    uidText.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+    uidEl.append(uidArrow, uidText);
     renderCardChips(summary.offered, offeredEl);
     renderCardChips(summary.wanted, wantedEl);
 

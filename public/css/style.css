@@ -135,8 +135,20 @@ main {
   cursor: pointer;
 }
 
-.uid-card-uid:hover,
-.uid-card-uid:focus-visible {
+.uid-card-uid,
+.quick-match-uid-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+}
+
+.uid-arrow-icon {
+  font-size: 1.4em;
+  line-height: 1;
+}
+
+.uid-card-uid:hover .uid-card-uid-text,
+.uid-card-uid:focus-visible .uid-card-uid-text {
   text-decoration: underline;
 }
 

@@ -288,13 +288,15 @@ quickMatchBtn.addEventListener('click', async () => {
       btn.type = 'button';
       btn.className = 'list-group-item list-group-item-action d-flex align-items-center gap-2 py-3';
 
-      btn.insertAdjacentHTML(
-        'beforeend',
-        '<svg width="16" height="16" fill="currentColor" class="text-muted flex-shrink-0" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>'
-      );
-
       const label = document.createElement('span');
-      label.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+      label.className = 'quick-match-uid-label';
+      const arrow = document.createElement('span');
+      arrow.className = 'uid-arrow-icon';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '▸';
+      const text = document.createElement('span');
+      text.textContent = i18n.t('index.uidLabel') + summary.genshin_uid;
+      label.append(arrow, text);
       btn.appendChild(label);
 
       btn.addEventListener('click', () => {
