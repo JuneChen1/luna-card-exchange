@@ -110,6 +110,7 @@ const i18n = (function () {
       'index.contactPrefix': '聯絡方式：',
       'index.contactHidden': '未公開',
       'index.confirmDeleteUid': '確定要刪除 UID {uid} 的所有卡牌資料嗎？此動作無法復原',
+      'index.confirmDiscardChanges': '你有尚未儲存的變更。確定要離開嗎？離開後這些變更將會遺失。',
 
       'title.admin': '管理者專區 - 月諭聖牌交換站',
       'admin.title': '管理者專區',
@@ -249,6 +250,7 @@ const i18n = (function () {
       'index.contactPrefix': 'Contact: ',
       'index.contactHidden': 'Not public',
       'index.confirmDeleteUid': 'Are you sure you want to delete all card data for UID {uid}? This action cannot be undone.',
+      'index.confirmDiscardChanges': 'You have unsaved changes. Are you sure you want to leave? These changes will be lost.',
 
       'title.admin': 'Admin Zone - Luna Card Exchange',
       'admin.title': 'Admin Zone',
@@ -388,6 +390,7 @@ const i18n = (function () {
       'index.contactPrefix': '連絡先：',
       'index.contactHidden': '非公開',
       'index.confirmDeleteUid': 'UID {uid} のカードデータをすべて削除してもよろしいですか？この操作は取り消せません',
+      'index.confirmDiscardChanges': '保存されていない変更があります。このページを離れますか？変更内容は失われます。',
 
       'title.admin': '管理者専用エリア - 月諭のアルカナ交換所',
       'admin.title': '管理者専用エリア',
@@ -527,6 +530,7 @@ const i18n = (function () {
       'index.contactPrefix': '연락처: ',
       'index.contactHidden': '비공개',
       'index.confirmDeleteUid': 'UID {uid}의 모든 카드 데이터를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다',
+      'index.confirmDiscardChanges': '저장되지 않은 변경 사항이 있습니다. 나가시겠습니까? 변경 사항이 사라집니다.',
 
       'title.admin': '관리자 전용 구역 - 달 계시 카드 교환소',
       'admin.title': '관리자 전용 구역',
