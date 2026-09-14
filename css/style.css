@@ -207,6 +207,7 @@ main {
 
 .exchange-card-list.is-empty {
   align-content: center;
+  padding-left: 10px;
 }
 
 .exchange-card-chip {
