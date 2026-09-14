@@ -3,6 +3,8 @@ const alertMessage = document.getElementById('alert-message');
 const alertIcon = document.getElementById('alert-icon');
 const newPasswordError = document.getElementById('new-password-error');
 const newPasswordErrorText = document.getElementById('new-password-error-text');
+const oldPasswordError = document.getElementById('old-password-error');
+const oldPasswordErrorText = document.getElementById('old-password-error-text');
 
 const ALERT_ICON_PATHS = {
   success:
@@ -42,6 +44,7 @@ document.getElementById('password-form').addEventListener('submit', async (event
   event.preventDefault();
   hideAlert();
   newPasswordError.classList.add('d-none');
+  oldPasswordError.classList.add('d-none');
 
   const formData = new FormData(event.target);
   const oldPassword = formData.get('old_password');
@@ -69,6 +72,18 @@ document.getElementById('password-form').addEventListener('submit', async (event
     showAlert(i18n.t('changePassword.updateSuccess'), 'success');
     event.target.reset();
   } catch (error) {
+    if (error.message === '舊密碼錯誤') {
+      oldPasswordErrorText.textContent = error.message;
+      oldPasswordError.classList.remove('d-none');
+      return;
+    }
+
+    if (error.message === '兩次輸入的新密碼不一致') {
+      newPasswordErrorText.textContent = error.message;
+      newPasswordError.classList.remove('d-none');
+      return;
+    }
+
     showAlert(error.message);
   }
 });
