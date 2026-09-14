@@ -5,6 +5,7 @@ if (!getToken()) {
 let allCards = [];
 let cardsById = new Map();
 let currentUid = '';
+let savedStatusMap = new Map();
 
 function cardName(card) {
   if (!card) return '';
@@ -161,6 +162,7 @@ async function openEditor(uid, { onError } = {}) {
     const statusByCardId = new Map(result.data.map((item) => [item.card.id, item.status]));
 
     currentUid = uid;
+    savedStatusMap = statusByCardId;
     uidLabel.textContent = uid;
     renderCardsGrid(statusByCardId);
     unsavedUidNotice.classList.toggle('d-none', result.data.length > 0);
@@ -264,6 +266,13 @@ function collectStatusMap() {
   return map;
 }
 
+function hasUnsavedChanges() {
+  const currentStatusMap = collectStatusMap();
+  return allCards.some(
+    (card) => (currentStatusMap.get(card.id) || 'none') !== (savedStatusMap.get(card.id) || 'none')
+  );
+}
+
 const GENSHIN_UID_REGEX = /^(6\d{8}|7\d{8}|9\d{8}|18\d{8}|8\d{8})$/;
 
 document.getElementById('btn-add-uid').addEventListener('click', async () => {
@@ -286,7 +295,10 @@ document.getElementById('btn-add-uid').addEventListener('click', async () => {
   if (success) uidInput.value = '';
 });
 
-document.getElementById('btn-back-to-list').addEventListener('click', backToList);
+document.getElementById('btn-back-to-list').addEventListener('click', () => {
+  if (hasUnsavedChanges() && !window.confirm(i18n.t('index.confirmDiscardChanges'))) return;
+  backToList();
+});
 
 document.getElementById('btn-save').addEventListener('click', async () => {
   hideAlert();
