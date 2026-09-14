@@ -137,8 +137,7 @@ function renderUidList(summaries) {
         openEditor(summary.genshin_uid);
       }
     });
-    deleteBtn.addEventListener('click', async (event) => {
-      event.stopPropagation();
+    deleteBtn.addEventListener('click', async () => {
       hideAlert();
       const deleted = await deleteUid(summary.genshin_uid);
       if (!deleted) return;
