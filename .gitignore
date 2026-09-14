@@ -2,6 +2,7 @@ node_modules
 *.log
 *.gz
 .env
+public/js/config.js
 /develop
 .claude/
 .vscode

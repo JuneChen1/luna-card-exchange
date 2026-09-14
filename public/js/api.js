@@ -1,4 +1,4 @@
-const API_BASE = '/api';
+const API_BASE = window.API_BASE_URL || '/api';
 const TOKEN_KEY = 'luna_token';
 const USERNAME_KEY = 'luna_username';
 
