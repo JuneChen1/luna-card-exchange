@@ -5,7 +5,7 @@
     "english_name": "The Magician",
     "japanese_name": "魔術師",
     "korean_name": "마법사",
-    "image_url": "/card_images/1.png"
+    "image_url": "card_images/1.png"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "english_name": "The High Priestess",
     "japanese_name": "女教皇",
     "korean_name": "여사제",
-    "image_url": "/card_images/2.png"
+    "image_url": "card_images/2.png"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "english_name": "The Empress",
     "japanese_name": "女帝",
     "korean_name": "여제",
-    "image_url": "/card_images/3.png"
+    "image_url": "card_images/3.png"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "english_name": "The Emperor",
     "japanese_name": "皇帝",
     "korean_name": "황제",
-    "image_url": "/card_images/4.png"
+    "image_url": "card_images/4.png"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "english_name": "The Hierophant",
     "japanese_name": "聖職者",
     "korean_name": "성직자",
-    "image_url": "/card_images/5.png"
+    "image_url": "card_images/5.png"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@
     "english_name": "The Lovers",
     "japanese_name": "恋人",
     "korean_name": "연인",
-    "image_url": "/card_images/6.png"
+    "image_url": "card_images/6.png"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@
     "english_name": "The Chariot",
     "japanese_name": "戦車",
     "korean_name": "전차",
-    "image_url": "/card_images/7.png"
+    "image_url": "card_images/7.png"
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@
     "english_name": "Strength",
     "japanese_name": "力",
     "korean_name": "힘",
-    "image_url": "/card_images/8.png"
+    "image_url": "card_images/8.png"
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@
     "english_name": "The Hermit",
     "japanese_name": "隠者",
     "korean_name": "은둔자",
-    "image_url": "/card_images/9.png"
+    "image_url": "card_images/9.png"
   },
   {
     "id": 10,
@@ -77,7 +77,7 @@
     "english_name": "The Wheel of Fortune",
     "japanese_name": "運命の輪",
     "korean_name": "운명의 수레바퀴",
-    "image_url": "/card_images/10.png"
+    "image_url": "card_images/10.png"
   },
   {
     "id": 11,
@@ -85,7 +85,7 @@
     "english_name": "Justice",
     "japanese_name": "正義",
     "korean_name": "정의",
-    "image_url": "/card_images/11.png"
+    "image_url": "card_images/11.png"
   },
   {
     "id": 12,
@@ -93,7 +93,7 @@
     "english_name": "The Hanged Man",
     "japanese_name": "吊された男",
     "korean_name": "매달린 사람",
-    "image_url": "/card_images/12.png"
+    "image_url": "card_images/12.png"
   },
   {
     "id": 13,
@@ -101,7 +101,7 @@
     "english_name": "Death",
     "japanese_name": "死神",
     "korean_name": "사신",
-    "image_url": "/card_images/13.png"
+    "image_url": "card_images/13.png"
   },
   {
     "id": 14,
@@ -109,7 +109,7 @@
     "english_name": "Temperance",
     "japanese_name": "節制",
     "korean_name": "절제",
-    "image_url": "/card_images/14.png"
+    "image_url": "card_images/14.png"
   },
   {
     "id": 15,
@@ -117,7 +117,7 @@
     "english_name": "The Devil",
     "japanese_name": "悪魔",
     "korean_name": "악마",
-    "image_url": "/card_images/15.png"
+    "image_url": "card_images/15.png"
   },
   {
     "id": 16,
@@ -125,7 +125,7 @@
     "english_name": "The Tower",
     "japanese_name": "塔",
     "korean_name": "탑",
-    "image_url": "/card_images/16.png"
+    "image_url": "card_images/16.png"
   },
   {
     "id": 17,
@@ -133,7 +133,7 @@
     "english_name": "The Star",
     "japanese_name": "星",
     "korean_name": "별",
-    "image_url": "/card_images/17.png"
+    "image_url": "card_images/17.png"
   },
   {
     "id": 18,
@@ -141,7 +141,7 @@
     "english_name": "The Moon",
     "japanese_name": "月",
     "korean_name": "달",
-    "image_url": "/card_images/18.png"
+    "image_url": "card_images/18.png"
   },
   {
     "id": 19,
@@ -149,7 +149,7 @@
     "english_name": "The Sun",
     "japanese_name": "太陽",
     "korean_name": "태양",
-    "image_url": "/card_images/19.png"
+    "image_url": "card_images/19.png"
   },
   {
     "id": 20,
@@ -157,7 +157,7 @@
     "english_name": "Judgement",
     "japanese_name": "審判",
     "korean_name": "심판",
-    "image_url": "/card_images/20.png"
+    "image_url": "card_images/20.png"
   },
   {
     "id": 21,
@@ -165,7 +165,7 @@
     "english_name": "The World",
     "japanese_name": "世界",
     "korean_name": "세계",
-    "image_url": "/card_images/21.png"
+    "image_url": "card_images/21.png"
   },
   {
     "id": 0,
@@ -173,6 +173,6 @@
     "english_name": "The Fool",
     "japanese_name": "愚者",
     "korean_name": "우인",
-    "image_url": "/card_images/0.png"
+    "image_url": "card_images/0.png"
   }
 ]
