@@ -26,6 +26,7 @@ const cardsSection = document.getElementById('cards-section');
 const cardsGrid = document.getElementById('cards-grid');
 const uidLabel = document.getElementById('uid-label');
 const cardTemplate = document.getElementById('card-template');
+const unsavedUidNotice = document.getElementById('unsaved-uid-notice');
 
 const ALERT_ICON_PATHS = {
   success:
@@ -162,6 +163,7 @@ async function openEditor(uid, { onError } = {}) {
     currentUid = uid;
     uidLabel.textContent = uid;
     renderCardsGrid(statusByCardId);
+    unsavedUidNotice.classList.toggle('d-none', result.data.length > 0);
     uidListSection.classList.add('d-none');
     cardsSection.classList.remove('d-none');
     history.replaceState(null, '', `?uid=${encodeURIComponent(uid)}`);
@@ -224,6 +226,10 @@ function renderCardsGrid(statusByCardId) {
       radio.addEventListener('change', () => {
         cardItem.classList.remove('status-none', 'status-offered', 'status-wanted');
         cardItem.classList.add(`status-${radio.value}`);
+        const hasAnyStatus = document.querySelector(
+          '.card-item input[type="radio"]:checked[value="offered"], .card-item input[type="radio"]:checked[value="wanted"]'
+        );
+        unsavedUidNotice.classList.toggle('d-none', Boolean(hasAnyStatus));
       });
     });
 
