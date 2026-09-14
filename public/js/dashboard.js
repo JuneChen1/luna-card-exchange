@@ -285,8 +285,11 @@ document.getElementById('btn-back-to-list').addEventListener('click', backToList
 document.getElementById('btn-save').addEventListener('click', async () => {
   hideAlert();
 
+  const payload = collectStatusPayload();
+  if (payload.offered.length === 0 && payload.wanted.length === 0) return;
+
   try {
-    await myCardsApi.save(collectStatusPayload());
+    await myCardsApi.save(payload);
     backToList();
     showAlert(i18n.t('index.saveSuccess'), 'success');
   } catch (error) {
