@@ -130,11 +130,12 @@ function renderUidList(summaries) {
     renderCardChips(summary.offered, offeredEl);
     renderCardChips(summary.wanted, wantedEl);
 
-    uidEl.addEventListener('click', () => openEditor(summary.genshin_uid));
+    const activate = () => openEditor(summary.genshin_uid);
+    uidEl.addEventListener('click', activate);
     uidEl.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
-        openEditor(summary.genshin_uid);
+        activate();
       }
     });
     deleteBtn.addEventListener('click', async () => {
