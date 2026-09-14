@@ -23,6 +23,7 @@ async function main() {
   const { globalLimiter } = require('./middlewares/limiter');
 
   const app = express();
+  app.set('trust proxy', 1);
 
   const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
     .split(',')
