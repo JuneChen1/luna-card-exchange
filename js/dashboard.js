@@ -120,7 +120,6 @@ function renderUidList(summaries) {
 
   summaries.forEach((summary) => {
     const fragment = uidCardTemplate.content.cloneNode(true);
-    const cardEl = fragment.querySelector('.uid-card');
     const uidEl = fragment.querySelector('.uid-card-uid');
     const offeredEl = fragment.querySelector('.uid-card-offered');
     const wantedEl = fragment.querySelector('.uid-card-wanted');
@@ -131,7 +130,13 @@ function renderUidList(summaries) {
     renderCardChips(summary.offered, offeredEl);
     renderCardChips(summary.wanted, wantedEl);
 
-    cardEl.addEventListener('click', () => openEditor(summary.genshin_uid));
+    uidEl.addEventListener('click', () => openEditor(summary.genshin_uid));
+    uidEl.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openEditor(summary.genshin_uid);
+      }
+    });
     deleteBtn.addEventListener('click', async (event) => {
       event.stopPropagation();
       hideAlert();

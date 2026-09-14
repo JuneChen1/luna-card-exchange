@@ -131,6 +131,24 @@ main {
   color: #16324f;
 }
 
+.uid-card-uid {
+  cursor: pointer;
+}
+
+.uid-card-uid:hover,
+.uid-card-uid:focus-visible {
+  text-decoration: underline;
+}
+
+.uid-card .exchange-card-chip {
+  cursor: default;
+}
+
+.uid-card .exchange-card-chip:hover,
+.uid-card .exchange-card-chip:focus-visible {
+  background: transparent;
+}
+
 .exchange-result-user {
   font-size: 0.75rem;
   color: #6c757d;
