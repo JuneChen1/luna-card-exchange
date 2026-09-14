@@ -29,7 +29,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 if (getToken()) {
-  location.href = '/dashboard.html';
+  location.href = 'dashboard.html';
 }
 
 const USERNAME_CHARSET_REGEX = /^[A-Za-z0-9_]+$/;
@@ -72,7 +72,7 @@ document.getElementById('register-form').addEventListener('submit', async (event
 
   try {
     await authApi.register({ username, password, confirm_password: confirmPassword });
-    location.href = '/login.html?registered=1';
+    location.href = 'login.html?registered=1';
   } catch (error) {
     if (error.message === '名字已被使用') {
       usernameErrorText.textContent = error.message;

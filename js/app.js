@@ -73,7 +73,7 @@ function refreshAuthUI() {
 }
 
 async function loadCardsCatalog() {
-  const response = await fetch('/data/cards.json');
+  const response = await fetch('data/cards.json');
   allCards = await response.json();
   cardsById = new Map(allCards.map((card) => [card.id, card]));
 }

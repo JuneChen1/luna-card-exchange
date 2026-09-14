@@ -27,7 +27,7 @@ function hideAlert() {
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
 if (!getToken()) {
-  location.href = '/login.html';
+  location.href = 'login.html';
 }
 
 document.getElementById('welcome-text').textContent = localStorage.getItem(USERNAME_KEY);
@@ -35,7 +35,7 @@ refreshAdminNav();
 
 document.getElementById('btn-logout').addEventListener('click', () => {
   clearSession();
-  location.href = '/';
+  location.href = 'index.html';
 });
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;

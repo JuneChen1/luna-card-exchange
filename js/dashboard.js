@@ -1,5 +1,5 @@
 if (!getToken()) {
-  location.href = '/login.html';
+  location.href = 'login.html';
 }
 
 let allCards = [];
@@ -71,7 +71,7 @@ refreshAdminNav();
 
 document.getElementById('btn-logout').addEventListener('click', () => {
   clearSession();
-  location.href = '/';
+  location.href = 'index.html';
 });
 
 async function deleteUid(uid) {
@@ -205,7 +205,7 @@ function backToList() {
 }
 
 async function loadCardsCatalog() {
-  const response = await fetch('/data/cards.json');
+  const response = await fetch('data/cards.json');
   allCards = await response.json();
   cardsById = new Map(allCards.map((card) => [card.id, card]));
 }
