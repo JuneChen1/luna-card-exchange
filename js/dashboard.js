@@ -87,6 +87,65 @@ async function deleteUid(uid) {
   }
 }
 
+function serverLabelForUid(uid) {
+  if (/^18/.test(uid)) return 'Asia';
+  const prefix = uid[0];
+  if (prefix === '7') return 'Europe';
+  if (prefix === '6') return 'America';
+  if (prefix === '8') return 'Asia';
+  if (prefix === '9') return 'TW,HK,MO';
+  return '';
+}
+
+function cardNamesText(cardIds) {
+  const separator = i18n.t('index.shareListSeparator');
+  return cardIds.map((id) => cardName(cardsById.get(id))).filter(Boolean).join(separator);
+}
+
+function buildShareText(summary) {
+  const server = serverLabelForUid(summary.genshin_uid);
+  const offeredText = cardNamesText(summary.offered) || i18n.t('index.none');
+  const wantedText = cardNamesText(summary.wanted) || i18n.t('index.none');
+  const uidLine = `${i18n.t('index.uidLabel')}${summary.genshin_uid}`;
+
+  const lines = [];
+  if (server) lines.push(server);
+  lines.push(uidLine);
+  lines.push(i18n.t('index.shareOfferedLine', { list: offeredText }));
+  lines.push(i18n.t('index.shareWantedLine', { list: wantedText }));
+
+  return lines.join('\n');
+}
+
+const shareTextModalEl = document.getElementById('share-text-modal');
+const shareTextModal = new bootstrap.Modal(shareTextModalEl);
+const shareTextContent = document.getElementById('share-text-content');
+const shareCopyFeedback = document.getElementById('share-copy-feedback');
+
+function openShareTextModal(summary) {
+  shareTextContent.value = buildShareText(summary);
+  shareCopyFeedback.classList.add('d-none');
+  shareTextModal.show();
+}
+
+shareTextContent.addEventListener('click', () => shareTextContent.select());
+
+document.getElementById('btn-copy-share-text').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(shareTextContent.value);
+    if (typeof gtag === 'function') gtag('event', 'copy_share_text');
+    shareCopyFeedback.textContent = i18n.t('index.shareCopied');
+    shareCopyFeedback.classList.remove('d-none', 'text-danger');
+    shareCopyFeedback.classList.add('text-success');
+  } catch (error) {
+    shareTextContent.focus();
+    shareTextContent.select();
+    shareCopyFeedback.textContent = i18n.t('index.shareCopyFailed');
+    shareCopyFeedback.classList.remove('d-none', 'text-success');
+    shareCopyFeedback.classList.add('text-danger');
+  }
+});
+
 function renderCardChips(cardIds, container) {
   cardIds.forEach((cardId) => {
     const card = cardsById.get(cardId);
@@ -123,6 +182,7 @@ function renderUidList(summaries) {
     const uidEl = fragment.querySelector('.uid-card-uid');
     const offeredEl = fragment.querySelector('.uid-card-offered');
     const wantedEl = fragment.querySelector('.uid-card-wanted');
+    const shareBtn = fragment.querySelector('.uid-card-share');
     const deleteBtn = fragment.querySelector('.uid-card-delete');
 
     i18n.applyI18n(fragment);
@@ -146,6 +206,8 @@ function renderUidList(summaries) {
         activate();
       }
     });
+    shareBtn.addEventListener('click', () => openShareTextModal(summary));
+
     deleteBtn.addEventListener('click', async () => {
       hideAlert();
       const deleted = await deleteUid(summary.genshin_uid);
@@ -319,8 +381,11 @@ document.getElementById('btn-save').addEventListener('click', async () => {
   const payload = collectStatusPayload();
   if (payload.offered.length === 0 && payload.wanted.length === 0) return;
 
+  const isNewUid = savedStatusMap.size === 0;
+
   try {
     await myCardsApi.save(payload);
+    if (isNewUid && typeof gtag === 'function') gtag('event', 'add_uid');
     backToList();
     showAlert(i18n.t('index.saveSuccess'), 'success');
   } catch (error) {
