@@ -1,6 +1,7 @@
 let allCards = [];
 let cardsById = new Map();
 let lastExchangeResults = [];
+let lastExchangeIsUnfiltered = false;
 
 function cardName(card) {
   if (!card) return '';
@@ -166,14 +167,39 @@ function renderCardThumbs(cardIds, container) {
   if (isEmpty) container.textContent = i18n.t('index.none');
 }
 
-function renderExchangeResults(results) {
+function renderExchangeResults(results, isUnfiltered = lastExchangeIsUnfiltered) {
   lastExchangeResults = results;
+  lastExchangeIsUnfiltered = isUnfiltered;
   exchangeResults.innerHTML = '';
 
   if (results.length === 0) {
-    const empty = document.createElement('p');
+    const empty = document.createElement('div');
     empty.className = 'text-muted text-center py-3';
-    empty.textContent = i18n.t('index.noResults');
+
+    if (isUnfiltered) {
+      const [firstLine, ...restLines] = i18n.t('index.noDataYet').split('\n');
+
+      const firstP = document.createElement('p');
+      firstP.className = 'mb-2';
+      const strong = document.createElement('strong');
+      strong.textContent = firstLine;
+      firstP.appendChild(strong);
+      empty.appendChild(firstP);
+
+      if (restLines.length) {
+        const restP = document.createElement('p');
+        restP.className = 'mb-0';
+        restP.style.whiteSpace = 'pre-line';
+        restP.textContent = restLines.join('\n');
+        empty.appendChild(restP);
+      }
+    } else {
+      const p = document.createElement('p');
+      p.className = 'mb-0';
+      p.textContent = i18n.t('index.noResults');
+      empty.appendChild(p);
+    }
+
     exchangeResults.appendChild(empty);
     return;
   }
@@ -231,7 +257,8 @@ async function searchExchange() {
     const data = excludedUids.size
       ? result.data.filter((item) => !excludedUids.has(item.genshin_uid))
       : result.data;
-    renderExchangeResults(data);
+    const isUnfiltered = wanted.length === 0 && offered.length === 0 && !server && excludedUids.size === 0;
+    renderExchangeResults(data, isUnfiltered);
   } catch (error) {
     showAlert(error.message);
   }
