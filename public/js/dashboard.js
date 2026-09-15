@@ -133,6 +133,7 @@ shareTextContent.addEventListener('click', () => shareTextContent.select());
 document.getElementById('btn-copy-share-text').addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(shareTextContent.value);
+    if (typeof gtag === 'function') gtag('event', 'copy_share_text');
     shareCopyFeedback.textContent = i18n.t('index.shareCopied');
     shareCopyFeedback.classList.remove('d-none', 'text-danger');
     shareCopyFeedback.classList.add('text-success');
@@ -380,8 +381,11 @@ document.getElementById('btn-save').addEventListener('click', async () => {
   const payload = collectStatusPayload();
   if (payload.offered.length === 0 && payload.wanted.length === 0) return;
 
+  const isNewUid = savedStatusMap.size === 0;
+
   try {
     await myCardsApi.save(payload);
+    if (isNewUid && typeof gtag === 'function') gtag('event', 'add_uid');
     backToList();
     showAlert(i18n.t('index.saveSuccess'), 'success');
   } catch (error) {
