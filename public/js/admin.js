@@ -66,9 +66,13 @@ function renderRow(user) {
   statusBadge.classList.add(user.is_banned ? 'bg-danger' : 'bg-success');
 
   const actionBtn = fragment.querySelector('.admin-row-action');
-  actionBtn.textContent = user.is_banned ? i18n.t('admin.unban') : i18n.t('admin.ban');
-  actionBtn.classList.add(user.is_banned ? 'btn-outline-luna-primary' : 'btn-outline-danger');
-  actionBtn.addEventListener('click', () => handleToggleBan(user));
+  if (user.role === 'ADMIN') {
+    actionBtn.remove();
+  } else {
+    actionBtn.textContent = user.is_banned ? i18n.t('admin.unban') : i18n.t('admin.ban');
+    actionBtn.classList.add(user.is_banned ? 'btn-outline-luna-primary' : 'btn-outline-danger');
+    actionBtn.addEventListener('click', () => handleToggleBan(user));
+  }
 
   const promoteBtn = fragment.querySelector('.admin-row-promote');
   if (user.role === 'ADMIN') {
