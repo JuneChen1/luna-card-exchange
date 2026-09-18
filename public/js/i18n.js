@@ -622,9 +622,23 @@ const i18n = (function () {
     return HTML_LANG_MAP[lang] || lang;
   }
 
+  function detectBrowserLang() {
+    const candidates = navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language];
+
+    for (const raw of candidates) {
+      if (!raw) continue;
+      const primary = raw.toLowerCase().split('-')[0];
+      if (isValidLang(primary)) return primary;
+    }
+
+    return 'en';
+  }
+
   function getLang() {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return isValidLang(stored) ? stored : DEFAULT_LANG;
+    return isValidLang(stored) ? stored : detectBrowserLang();
   }
 
   function getLangLabel(code) {
