@@ -47,7 +47,7 @@ const i18n = (function () {
       'register.mismatch': '兩次輸入的密碼不一致',
 
       'profile.title': '編輯個人資料',
-      'profile.emailHint': '(選填，用於找回密碼)',
+      'profile.emailHint': '(選填，用於重設密碼)',
       'profile.contactLabel': '聯絡方式',
       'profile.contactHint': '(選填，填寫後會於首頁卡牌比對結果中公開顯示)',
       'profile.save': '儲存資料',
@@ -197,7 +197,7 @@ const i18n = (function () {
       'register.mismatch': 'The passwords do not match',
 
       'profile.title': 'Edit Profile',
-      'profile.emailHint': '(Optional, used for password recovery)',
+      'profile.emailHint': '(Optional, used for password reset)',
       'profile.contactLabel': 'Contact Info',
       'profile.contactHint': '(Optional, shown publicly in search results if provided)',
       'profile.save': 'Save',
