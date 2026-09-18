@@ -66,19 +66,22 @@ function renderRow(user) {
   statusBadge.classList.add(user.is_banned ? 'bg-danger' : 'bg-success');
 
   const actionBtn = fragment.querySelector('.admin-row-action');
+  actionBtn.textContent = user.is_banned ? i18n.t('admin.unban') : i18n.t('admin.ban');
   if (user.role === 'ADMIN') {
-    actionBtn.remove();
+    actionBtn.classList.add('btn-outline-secondary');
+    actionBtn.disabled = true;
   } else {
-    actionBtn.textContent = user.is_banned ? i18n.t('admin.unban') : i18n.t('admin.ban');
-    actionBtn.classList.add(user.is_banned ? 'btn-outline-luna-primary' : 'btn-outline-danger');
+    actionBtn.classList.add(user.is_banned ? 'btn-luna-primary' : 'btn-danger');
     actionBtn.addEventListener('click', () => handleToggleBan(user));
   }
 
   const promoteBtn = fragment.querySelector('.admin-row-promote');
+  promoteBtn.textContent = i18n.t('admin.promote');
   if (user.role === 'ADMIN') {
-    promoteBtn.remove();
+    promoteBtn.classList.remove('btn-luna-primary');
+    promoteBtn.classList.add('btn-outline-secondary');
+    promoteBtn.disabled = true;
   } else {
-    promoteBtn.textContent = i18n.t('admin.promote');
     promoteBtn.addEventListener('click', () => handlePromote(user));
   }
 
@@ -159,6 +162,10 @@ prevPageBtn.addEventListener('click', () => {
 
 nextPageBtn.addEventListener('click', () => {
   if (currentPage < currentTotalPages) loadUsers(currentPage + 1);
+});
+
+document.addEventListener('langchange', () => {
+  loadUsers(currentPage);
 });
 
 loadUsers(1);
