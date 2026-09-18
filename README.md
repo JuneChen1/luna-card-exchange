@@ -82,4 +82,5 @@
 ---
 
 ## ✉️ 聯絡我們
-+ card.exchange.dev@outlook.com
++ X：[@lunacardexzqul](https://x.com/lunacardexzqul)
++ Email：card.exchange.dev@outlook.com
