@@ -402,6 +402,8 @@ document.addEventListener('langchange', () => {
 });
 
 (async function init() {
+  if (typeof gtag === 'function') gtag('event', 'view_dashboard');
+
   await loadCardsCatalog();
   loadUidSummaries();
 
