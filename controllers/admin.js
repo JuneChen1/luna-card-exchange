@@ -71,13 +71,15 @@ const adminController = {
       const { id } = req.params;
       if (!isValidUUID(id)) return next(appError(400, '欄位未填寫正確'));
 
-      if (id === req.user.id) return next(appError(400, '無法停權自己的帳號'));
+      if (id === req.user.id) return next(appError(403, '無法停權自己的帳號'));
 
       const userRepo = dataSource.getRepository('Users');
       const user = await userRepo.findOneBy({ id });
       if (!user) return next(appError(404, '找不到使用者'));
+      if (user.role === 'ADMIN')
+        return next(appError(403, '無法停權管理者帳號'));
 
-      await userRepo.save({ ...user, is_banned: true });
+      await userRepo.update(user.id, { is_banned: true });
 
       res.status(200).json({
         status: 'success',
@@ -99,7 +101,7 @@ const adminController = {
       const user = await userRepo.findOneBy({ id });
       if (!user) return next(appError(404, '找不到使用者'));
 
-      await userRepo.save({ ...user, is_banned: false });
+      await userRepo.update(user.id, { is_banned: false });
 
       res.status(200).json({
         status: 'success',
