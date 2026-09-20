@@ -126,7 +126,7 @@ const adminController = {
       if (user.role === 'ADMIN')
         return next(appError(400, '此使用者已經是管理者'));
 
-      await userRepo.save({ ...user, role: 'ADMIN' });
+      await userRepo.update(user.id, { role: 'ADMIN' });
 
       res.status(200).json({
         status: 'success',
