@@ -75,18 +75,48 @@
                 <label class="form-label"><span data-i18n="profile.contactLabel">聯絡方式</span> <span class="text-muted" data-i18n="profile.contactHint">(選填，填寫後會於首頁卡牌比對結果中公開顯示)</span></label>
                 <textarea class="form-control" name="contact_info" rows="4" maxlength="255"></textarea>
               </div>
-              <button type="submit" class="btn btn-luna-primary w-100" data-i18n="profile.save">儲存資料</button>
+              <button type="submit" class="btn btn-luna-primary w-100 mb-3" data-i18n="profile.save">儲存資料</button>
+              <a href="change-password.html" class="btn btn-outline-luna-primary w-100" data-i18n="profile.changePasswordLink">修改密碼</a>
             </form>
           </div>
         </div>
 
-        <p class="text-center">
-          <a href="change-password.html" data-i18n="profile.changePasswordLink">修改密碼</a>
-        </p>
+        <div class="danger-zone rounded p-3 mx-auto" style="max-width: 400px;">
+          <h2 class="h6 text-danger mb-2" data-i18n="profile.dangerZoneTitle">危險區域</h2>
+          <p class="text-muted small mb-3" data-i18n="profile.dangerZoneWarning">刪除帳號後，你的所有卡片持有紀錄將被永久刪除，此動作無法復原。</p>
+          <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deleteAccountModal" data-i18n="profile.deleteAccountBtn">刪除帳號</button>
+        </div>
 
       </div>
     </div>
   </main>
+
+  <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteAccountModalLabel" data-i18n="profile.deleteAccountModalTitle">刪除帳號</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="delete-account-form">
+          <div class="modal-body">
+            <p class="text-muted small" data-i18n="profile.dangerZoneWarning">刪除帳號後，你的所有卡片持有紀錄將被永久刪除，此動作無法復原。</p>
+            <label for="delete-account-password" class="form-label" data-i18n="profile.deleteAccountPasswordLabel">請輸入密碼以確認</label>
+            <input type="password" id="delete-account-password" class="form-control" required>
+            <div id="delete-account-alert" class="alert d-none alert-dismissible d-flex align-items-center mt-3 mb-0" role="alert">
+              <svg id="delete-account-alert-icon" width="16" height="16" fill="currentColor" class="flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-hidden="true"></svg>
+              <div id="delete-account-alert-message" class="flex-grow-1"></div>
+              <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="profile.deleteAccountCancel">取消</button>
+            <button type="submit" class="btn btn-danger" data-i18n="profile.deleteAccountConfirm">確認刪除</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <footer class="app-footer text-center py-4 mt-5">
     <p class="mb-1 small">© 2026 月諭聖牌交換站 Luna Card Exchange</p>

@@ -81,6 +81,9 @@ const profileApi = {
   },
   updatePassword(payload) {
     return apiRequest('/users/me/password', { method: 'PATCH', body: JSON.stringify(payload) });
+  },
+  deleteMe(password) {
+    return apiRequest('/users/me', { method: 'DELETE', body: JSON.stringify({ password }) });
   }
 };
 

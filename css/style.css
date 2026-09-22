@@ -49,6 +49,11 @@ main {
   color: #fff;
 }
 
+.danger-zone {
+  background-color: #fff5f5;
+  border: 1px solid #dc3545;
+}
+
 .btn-outline-luna-primary {
   background-color: #fff;
   border-color: #2f6690;
