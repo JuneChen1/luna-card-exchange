@@ -85,3 +85,60 @@ profileForm.addEventListener('submit', async (event) => {
     showAlert(error.message);
   }
 });
+
+const deleteAccountModalEl = document.getElementById('deleteAccountModal');
+const deleteAccountForm = document.getElementById('delete-account-form');
+const deleteAccountPasswordInput = document.getElementById('delete-account-password');
+const deleteAccountAlertEl = document.getElementById('delete-account-alert');
+const deleteAccountAlertIcon = document.getElementById('delete-account-alert-icon');
+const deleteAccountAlertMessage = document.getElementById('delete-account-alert-message');
+const deleteAccountSubmitBtn = deleteAccountForm.querySelector('button[type="submit"]');
+
+function showDeleteAccountAlert(message, type = 'danger') {
+  deleteAccountAlertIcon.innerHTML = ALERT_ICON_PATHS[type] || '';
+  deleteAccountAlertMessage.textContent = message;
+  deleteAccountAlertEl.className = `alert alert-dismissible d-flex align-items-center mt-3 mb-0 alert-${type}`;
+}
+
+function hideDeleteAccountAlert() {
+  deleteAccountAlertEl.classList.add('d-none');
+}
+
+deleteAccountAlertEl.querySelector('.btn-close').addEventListener('click', hideDeleteAccountAlert);
+
+deleteAccountModalEl.addEventListener('hidden.bs.modal', () => {
+  deleteAccountForm.reset();
+  hideDeleteAccountAlert();
+});
+
+let isDeletingAccount = false;
+
+deleteAccountForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (isDeletingAccount) return;
+
+  const password = deleteAccountPasswordInput.value;
+  if (!password) {
+    showDeleteAccountAlert(i18n.t('profile.deleteAccountEnterPassword'));
+    return;
+  }
+
+  if (!window.confirm(i18n.t('profile.deleteAccountConfirmDialog'))) return;
+
+  isDeletingAccount = true;
+  deleteAccountSubmitBtn.disabled = true;
+  hideDeleteAccountAlert();
+
+  try {
+    await profileApi.deleteMe(password);
+    clearSession();
+    showDeleteAccountAlert(i18n.t('profile.deleteAccountSuccess'), 'success');
+    setTimeout(() => {
+      location.href = 'index.html';
+    }, 2000);
+  } catch (error) {
+    showDeleteAccountAlert(error.message);
+    isDeletingAccount = false;
+    deleteAccountSubmitBtn.disabled = false;
+  }
+});
