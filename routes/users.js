@@ -9,5 +9,6 @@ router.use(isAuth);
 router.get('/me', userController.getMe);
 router.patch('/me/password', authLimiter, userController.updatePassword);
 router.patch('/me', userController.updateMe);
+router.delete('/me', authLimiter, userController.deleteMe);
 
 module.exports = router;

@@ -26,7 +26,7 @@ const userController = {
 
   async updateMe(req, res, next) {
     try {
-      const { username, email, contact_info } = req.body;
+      const { username, email, contact_info } = req.body || {};
 
       if (username !== undefined) return next(appError(400, '帳號不可修改'));
 
@@ -82,7 +82,7 @@ const userController = {
 
   async updatePassword(req, res, next) {
     try {
-      const { old_password, new_password, confirm_password } = req.body;
+      const { old_password, new_password, confirm_password } = req.body || {};
 
       if (
         !isValidPassword(old_password) ||
@@ -104,6 +104,36 @@ const userController = {
       res.status(200).json({
         status: 'success',
         message: '密碼更新成功'
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+  async deleteMe(req, res, next) {
+    try {
+      if (req.user.role === 'ADMIN')
+        return next(appError(403, '不可刪除管理者帳號'));
+
+      const { password } = req.body || {};
+
+      if (!isValidPassword(password))
+        return next(appError(400, '欄位未填寫正確'));
+
+      const isMatch = await bcrypt.compare(password, req.user.password);
+      if (!isMatch) return next(appError(400, '密碼錯誤'));
+
+      const userId = req.user.id;
+
+      await dataSource.transaction(async (manager) => {
+        await manager
+          .getRepository('UserCards')
+          .delete({ user: { id: userId } });
+        await manager.getRepository('Users').delete({ id: userId });
+      });
+
+      res.status(200).json({
+        status: 'success',
+        message: '帳號已刪除'
       });
     } catch (error) {
       next(error);
