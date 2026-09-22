@@ -99,6 +99,17 @@ main {
   border-top: 1px solid #dee2e6;
 }
 
+.footer-social-link {
+  color: #6c757d;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-social-link:hover,
+.footer-social-link:focus-visible {
+  color: var(--luna-primary);
+}
+
 .exchange-card-picker {
   max-height: 320px;
   overflow-y: auto;
