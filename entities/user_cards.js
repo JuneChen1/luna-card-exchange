@@ -19,6 +19,11 @@ module.exports = new EntitySchema({
       length: 10,
       nullable: false
     },
+    is_public: {
+      type: 'boolean',
+      nullable: false,
+      default: true
+    },
     created_at: {
       type: 'timestamp',
       createDate: true
