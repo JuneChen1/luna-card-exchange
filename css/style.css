@@ -68,6 +68,18 @@ main {
   color: #fff;
 }
 
+.uid-card-visibility:focus {
+  border-color: #97b3c8;
+  box-shadow: 0 0 0 0.25rem rgba(47, 102, 144, 0.25);
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2397b3c8'/%3e%3c/svg%3e");
+}
+
+.uid-card-visibility:checked {
+  background-color: #2f6690;
+  border-color: #2f6690;
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
 .card-item img {
   aspect-ratio: 1 / 1;
   object-fit: contain;
