@@ -87,6 +87,16 @@ async function deleteUid(uid) {
   }
 }
 
+async function setUidVisibility(uid, isPublic) {
+  try {
+    await myCardsApi.setVisibility(uid, isPublic);
+    return true;
+  } catch (error) {
+    showAlert(error.message);
+    return false;
+  }
+}
+
 function serverLabelForUid(uid) {
   if (/^18/.test(uid)) return 'Asia';
   const prefix = uid[0];
@@ -183,6 +193,8 @@ function renderUidList(summaries) {
     const offeredEl = fragment.querySelector('.uid-card-offered');
     const wantedEl = fragment.querySelector('.uid-card-wanted');
     const shareBtn = fragment.querySelector('.uid-card-share');
+    const visibilitySwitch = fragment.querySelector('.uid-card-visibility');
+    const privateBadge = fragment.querySelector('.uid-card-private-badge');
     const deleteBtn = fragment.querySelector('.uid-card-delete');
 
     i18n.applyI18n(fragment);
@@ -207,6 +219,29 @@ function renderUidList(summaries) {
       }
     });
     shareBtn.addEventListener('click', () => openShareTextModal(summary));
+    shareBtn.disabled = !summary.is_public;
+    shareBtn.title = summary.is_public ? '' : i18n.t('index.shareDisabledPrivate');
+    privateBadge.classList.toggle('d-none', summary.is_public);
+    visibilitySwitch.checked = summary.is_public;
+
+    visibilitySwitch.addEventListener('change', async () => {
+      hideAlert();
+      visibilitySwitch.disabled = true;
+      const nextIsPublic = visibilitySwitch.checked;
+      const updated = await setUidVisibility(summary.genshin_uid, nextIsPublic);
+      if (!updated) {
+        visibilitySwitch.checked = !nextIsPublic;
+        visibilitySwitch.disabled = false;
+        return;
+      }
+      showAlert(
+        i18n.t(nextIsPublic ? 'index.madePublicSuccess' : 'index.madePrivateSuccess', {
+          uid: summary.genshin_uid
+        }),
+        'success'
+      );
+      loadUidSummaries();
+    });
 
     deleteBtn.addEventListener('click', async () => {
       hideAlert();

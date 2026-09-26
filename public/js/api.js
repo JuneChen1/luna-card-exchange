@@ -97,6 +97,12 @@ const myCardsApi = {
   save(payload) {
     return apiRequest('/my-cards', { method: 'POST', body: JSON.stringify(payload) });
   },
+  setVisibility(genshinUid, isPublic) {
+    return apiRequest('/my-cards/visibility', {
+      method: 'PATCH',
+      body: JSON.stringify({ genshinUid, isPublic })
+    });
+  },
   remove(genshinUid) {
     return apiRequest(`/my-cards?uid=${encodeURIComponent(genshinUid)}`, { method: 'DELETE' });
   }
