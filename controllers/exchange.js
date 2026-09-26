@@ -48,7 +48,7 @@ const cardController = {
         JOIN users u ON u.id = uc.user_id
       `;
 
-      const whereClauses = ['uc.is_public = true'];
+      const whereClauses = ['uc.is_public = true', 'u.is_banned = false'];
       if (matchConditions.length > 0)
         whereClauses.push(`(${matchConditions.join(' OR ')})`);
 
