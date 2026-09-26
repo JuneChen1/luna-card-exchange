@@ -48,7 +48,7 @@ const cardController = {
         JOIN users u ON u.id = uc.user_id
       `;
 
-      const whereClauses = [];
+      const whereClauses = ['uc.is_public = true'];
       if (matchConditions.length > 0)
         whereClauses.push(`(${matchConditions.join(' OR ')})`);
 
@@ -57,8 +57,7 @@ const cardController = {
         whereClauses.push(`uc.genshin_uid LIKE ANY($${params.length}::text[])`);
       }
 
-      if (whereClauses.length > 0)
-        sql += ` WHERE ${whereClauses.join(' AND ')}`;
+      sql += ` WHERE ${whereClauses.join(' AND ')}`;
 
       sql += ' ORDER BY uc.created_at DESC';
 

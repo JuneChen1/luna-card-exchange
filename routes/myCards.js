@@ -8,6 +8,7 @@ router.use(isAuth);
 router.get('/uids', myCardController.getUidSummary);
 router.get('/', myCardController.getMyCards);
 router.post('/', myCardController.updateCards);
+router.patch('/visibility', myCardController.updateVisibility);
 router.delete('/', myCardController.deleteUidCards);
 
 module.exports = router;

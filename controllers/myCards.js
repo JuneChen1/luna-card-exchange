@@ -1,5 +1,6 @@
 const { isValidGenshinUid, isValidCardsList } = require('../utils/validUtils');
 const appError = require('../utils/appError');
+const { In } = require('typeorm');
 const { dataSource } = require('../db/data-source');
 
 const myCardController = {
@@ -17,6 +18,7 @@ const myCardController = {
         if (!summaryByUid[item.genshin_uid])
           summaryByUid[item.genshin_uid] = {
             genshin_uid: item.genshin_uid,
+            is_public: item.is_public,
             offered: [],
             wanted: []
           };
@@ -78,6 +80,7 @@ const myCardController = {
         const deleteData = await linkRepo.find({
           where: { genshin_uid: genshinUid, user: { id: req.user.id } }
         });
+        const isPublic = deleteData.length === 0 || deleteData[0].is_public;
         await linkRepo.remove(deleteData);
 
         const newData = [];
@@ -85,6 +88,7 @@ const myCardController = {
           newData.push({
             genshin_uid: genshinUid,
             status: 'offered',
+            is_public: isPublic,
             user: { id: req.user.id },
             card: { id: cardId }
           })
@@ -93,6 +97,7 @@ const myCardController = {
           newData.push({
             genshin_uid: genshinUid,
             status: 'wanted',
+            is_public: isPublic,
             user: { id: req.user.id },
             card: { id: cardId }
           })
@@ -104,6 +109,38 @@ const myCardController = {
       res.status(200).json({
         status: 'success',
         data: result
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+  async updateVisibility(req, res, next) {
+    const { isPublic } = req.body;
+    if (
+      !isValidGenshinUid(req.body.genshinUid) ||
+      typeof isPublic !== 'boolean'
+    )
+      return next(appError(400, '欄位未填寫正確'));
+
+    const genshinUid = req.body.genshinUid.trim();
+
+    try {
+      const linkRepo = dataSource.getRepository('UserCards');
+      const targetData = await linkRepo.find({
+        where: { genshin_uid: genshinUid, user: { id: req.user.id } },
+        select: { id: true }
+      });
+
+      if (targetData.length === 0) return next(appError(400, '查無資料'));
+
+      await linkRepo.update(
+        { id: In(targetData.map((item) => item.id)) },
+        { is_public: isPublic }
+      );
+
+      res.status(200).json({
+        status: 'success',
+        data: { genshin_uid: genshinUid, is_public: isPublic }
       });
     } catch (error) {
       next(error);
