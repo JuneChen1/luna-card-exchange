@@ -219,8 +219,6 @@ function renderUidList(summaries) {
       }
     });
     shareBtn.addEventListener('click', () => openShareTextModal(summary));
-    shareBtn.disabled = !summary.is_public;
-    shareBtn.title = summary.is_public ? '' : i18n.t('index.shareDisabledPrivate');
     privateBadge.classList.toggle('d-none', summary.is_public);
     visibilitySwitch.checked = summary.is_public;
 
