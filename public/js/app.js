@@ -66,6 +66,7 @@ function refreshAuthUI() {
   authArea.registerBtn.classList.toggle('d-none', isLoggedIn);
   authArea.welcomeDropdown.classList.toggle('d-none', !isLoggedIn);
   quickMatchBtn.classList.toggle('d-none', !isLoggedIn);
+  document.getElementById('exchange-login-hint').classList.toggle('d-none', isLoggedIn);
 
   if (isLoggedIn) {
     authArea.welcomeText.textContent = username;

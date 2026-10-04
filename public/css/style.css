@@ -139,6 +139,15 @@ main {
   }
 }
 
+.exchange-login-hint {
+  padding: 10px 14px;
+  border: 1px solid #b9d3e8;
+  border-radius: 8px;
+  background: #e6f0f8;
+  color: var(--luna-primary);
+  font-size: 0.9rem;
+}
+
 .card-tile {
   position: relative;
 }
