@@ -81,19 +81,30 @@ async function loadCardsCatalog() {
 
 function createCardCheckbox(card, groupId) {
   const wrapper = document.createElement('div');
-  wrapper.className = 'form-check';
+  wrapper.className = 'card-tile';
 
   const input = document.createElement('input');
-  input.className = 'form-check-input';
+  input.className = 'card-tile-input';
   input.type = 'checkbox';
   input.value = card.id;
   input.id = `${groupId}-${card.id}`;
 
   const label = document.createElement('label');
-  label.className = 'form-check-label';
+  label.className = 'card-tile-label';
   label.setAttribute('for', input.id);
-  label.textContent = cardName(card);
 
+  const img = document.createElement('img');
+  img.className = 'card-tile-img';
+  img.src = card.image_url;
+  img.alt = '';
+  img.loading = 'lazy';
+
+  const name = document.createElement('span');
+  name.className = 'card-tile-name';
+  name.textContent = cardName(card);
+
+  label.appendChild(img);
+  label.appendChild(name);
   wrapper.appendChild(input);
   wrapper.appendChild(label);
   return wrapper;
