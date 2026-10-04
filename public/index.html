@@ -66,11 +66,17 @@
           <div class="collapse" id="exchange-filter-body">
             <form id="exchange-form" class="row g-3 pt-3">
               <div class="col-12">
-                <label class="form-label" data-i18n="index.wantedLabel">我想要的牌</label>
+                <div class="d-flex justify-content-between align-items-end mb-2">
+                  <label class="form-label mb-0" data-i18n="index.wantedLabel">我想要的牌</label>
+                  <button type="button" class="btn btn-outline-luna-primary btn-sm py-0 px-2 exchange-clear-btn" data-clear-target="exchange-wanted" data-i18n="index.clearSelection">清除</button>
+                </div>
                 <div class="exchange-card-picker" id="exchange-wanted"></div>
               </div>
               <div class="col-12">
-                <label class="form-label" data-i18n="index.offeredLabel">我多出的牌</label>
+                <div class="d-flex justify-content-between align-items-end mb-2">
+                  <label class="form-label mb-0" data-i18n="index.offeredLabel">我多出的牌</label>
+                  <button type="button" class="btn btn-outline-luna-primary btn-sm py-0 px-2 exchange-clear-btn" data-clear-target="exchange-offered" data-i18n="index.clearSelection">清除</button>
+                </div>
                 <div class="exchange-card-picker" id="exchange-offered"></div>
               </div>
               <div class="col-md-4">

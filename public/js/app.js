@@ -282,6 +282,30 @@ exchangeForm.addEventListener('submit', (event) => {
   bootstrap.Collapse.getOrCreateInstance(exchangeFilterBody).hide();
 });
 
+document.querySelectorAll('.exchange-clear-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.getElementById(btn.dataset.clearTarget)
+      .querySelectorAll('input:checked')
+      .forEach((input) => { input.checked = false; });
+  });
+});
+
+function alignClearButtons() {
+  document.querySelectorAll('.exchange-clear-btn').forEach((btn) => {
+    const picker = document.getElementById(btn.dataset.clearTarget);
+    const tiles = Array.from(picker.querySelectorAll('.card-tile'));
+    if (tiles.length === 0) return;
+
+    const firstTop = tiles[0].getBoundingClientRect().top;
+    const firstRow = tiles.filter((tile) => Math.abs(tile.getBoundingClientRect().top - firstTop) < 2);
+    const lastTileRight = firstRow[firstRow.length - 1].getBoundingClientRect().right;
+    btn.style.marginRight = `${Math.max(0, picker.getBoundingClientRect().right - lastTileRight)}px`;
+  });
+}
+
+exchangeFilterBody.addEventListener('shown.bs.collapse', alignClearButtons);
+window.addEventListener('resize', alignClearButtons);
+
 function getServerFromUidPrefix(uid) {
   if (/^7/.test(uid)) return 'Europe';
   if (/^6/.test(uid)) return 'America';
