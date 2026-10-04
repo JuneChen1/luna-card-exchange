@@ -66,6 +66,7 @@ function refreshAuthUI() {
   authArea.registerBtn.classList.toggle('d-none', isLoggedIn);
   authArea.welcomeDropdown.classList.toggle('d-none', !isLoggedIn);
   quickMatchBtn.classList.toggle('d-none', !isLoggedIn);
+  document.getElementById('exchange-login-hint').classList.toggle('d-none', isLoggedIn);
 
   if (isLoggedIn) {
     authArea.welcomeText.textContent = username;
@@ -81,19 +82,30 @@ async function loadCardsCatalog() {
 
 function createCardCheckbox(card, groupId) {
   const wrapper = document.createElement('div');
-  wrapper.className = 'form-check';
+  wrapper.className = 'card-tile';
 
   const input = document.createElement('input');
-  input.className = 'form-check-input';
+  input.className = 'card-tile-input';
   input.type = 'checkbox';
   input.value = card.id;
   input.id = `${groupId}-${card.id}`;
 
   const label = document.createElement('label');
-  label.className = 'form-check-label';
+  label.className = 'card-tile-label';
   label.setAttribute('for', input.id);
-  label.textContent = cardName(card);
 
+  const img = document.createElement('img');
+  img.className = 'card-tile-img';
+  img.src = card.image_url;
+  img.alt = '';
+  img.loading = 'lazy';
+
+  const name = document.createElement('span');
+  name.className = 'card-tile-name';
+  name.textContent = cardName(card);
+
+  label.appendChild(img);
+  label.appendChild(name);
   wrapper.appendChild(input);
   wrapper.appendChild(label);
   return wrapper;
@@ -270,6 +282,30 @@ exchangeForm.addEventListener('submit', (event) => {
   searchExchange();
   bootstrap.Collapse.getOrCreateInstance(exchangeFilterBody).hide();
 });
+
+document.querySelectorAll('.exchange-clear-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.getElementById(btn.dataset.clearTarget)
+      .querySelectorAll('input:checked')
+      .forEach((input) => { input.checked = false; });
+  });
+});
+
+function alignClearButtons() {
+  document.querySelectorAll('.exchange-clear-btn').forEach((btn) => {
+    const picker = document.getElementById(btn.dataset.clearTarget);
+    const tiles = Array.from(picker.querySelectorAll('.card-tile'));
+    if (tiles.length === 0) return;
+
+    const firstTop = tiles[0].getBoundingClientRect().top;
+    const firstRow = tiles.filter((tile) => Math.abs(tile.getBoundingClientRect().top - firstTop) < 2);
+    const lastTileRight = firstRow[firstRow.length - 1].getBoundingClientRect().right;
+    btn.style.marginRight = `${Math.max(0, picker.getBoundingClientRect().right - lastTileRight)}px`;
+  });
+}
+
+exchangeFilterBody.addEventListener('shown.bs.collapse', alignClearButtons);
+window.addEventListener('resize', alignClearButtons);
 
 function getServerFromUidPrefix(uid) {
   if (/^7/.test(uid)) return 'Europe';
