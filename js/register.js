@@ -74,7 +74,7 @@ document.getElementById('register-form').addEventListener('submit', async (event
     await authApi.register({ username, password, confirm_password: confirmPassword });
     location.href = 'login.html?registered=1';
   } catch (error) {
-    if (error.message === '名字已被使用') {
+    if (error.code === 'USERNAME_TAKEN') {
       usernameErrorText.textContent = error.message;
       usernameError.classList.remove('d-none');
       return;

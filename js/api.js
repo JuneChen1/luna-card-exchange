@@ -51,7 +51,9 @@ async function apiRequest(path, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new Error(data.message || i18n.t('common.requestFailed'));
+    const error = new Error(i18n.apiMessage(data, 'common.requestFailed'));
+    error.code = data.code;
+    throw error;
   }
 
   return data;

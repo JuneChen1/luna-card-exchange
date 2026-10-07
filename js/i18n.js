@@ -67,6 +67,7 @@ const i18n = (function () {
 
       'changePassword.title': '修改密碼',
       'changePassword.oldPassword': '舊密碼',
+      'changePassword.enterOldPassword': '請輸入舊密碼',
       'changePassword.newPassword': '新密碼',
       'changePassword.confirmNewPassword': '確認新密碼',
       'changePassword.submit': '更新密碼',
@@ -167,7 +168,38 @@ const i18n = (function () {
       'admin.prevPage': '上一頁',
       'admin.nextPage': '下一頁',
       'admin.pageInfo': '第 {page} / {totalPages} 頁（共 {total} 筆）',
-      'admin.forbidden': '您沒有權限進入管理者專區'
+      'admin.forbidden': '您沒有權限進入管理者專區',
+
+      'forgotPassword.emailSent': '若此 Email 已註冊，重設密碼信件已發送至您的信箱，請前往收信。',
+
+      'error.INVALID_FIELDS': '欄位未填寫正確',
+      'error.INVALID_UID': '原神 UID 格式錯誤',
+      'error.NOTHING_TO_UPDATE': '沒有可更新的欄位',
+      'error.CARD_CONFLICT': '同一張卡片不能同時是多餘與缺少',
+      'error.USERNAME_TAKEN': '名字已被使用',
+      'error.EMAIL_TAKEN': '此 Email 已被使用',
+      'error.USERNAME_IMMUTABLE': '帳號不可修改',
+      'error.INVALID_CREDENTIALS': '使用者不存在或密碼輸入錯誤',
+      'error.PASSWORD_MISMATCH': '兩次輸入的密碼不一致',
+      'error.NEW_PASSWORD_MISMATCH': '兩次輸入的新密碼不一致',
+      'error.OLD_PASSWORD_WRONG': '舊密碼錯誤',
+      'error.PASSWORD_WRONG': '密碼錯誤',
+      'error.RESET_LINK_INVALID': '重設連結無效或已過期',
+      'error.UNAUTHORIZED': '請先登入',
+      'error.TOKEN_INVALID': '登入狀態無效，請重新登入',
+      'error.TOKEN_EXPIRED': '登入已過期，請重新登入',
+      'error.ACCOUNT_BANNED': '您的帳號已被停權，如有疑問請聯絡管理者',
+      'error.FORBIDDEN': '您沒有權限執行此操作',
+      'error.CANNOT_BAN_SELF': '無法停權自己的帳號',
+      'error.CANNOT_BAN_ADMIN': '無法停權管理者帳號',
+      'error.CANNOT_DELETE_ADMIN': '不可刪除管理者帳號',
+      'error.ALREADY_ADMIN': '此使用者已經是管理者',
+      'error.NO_DATA': '查無資料',
+      'error.USER_NOT_FOUND': '找不到使用者',
+      'error.ROUTE_NOT_FOUND': '找不到頁面',
+      'error.TOO_MANY_REQUESTS': '請求過於頻繁，請稍後再試',
+      'error.TOO_MANY_ATTEMPTS': '嘗試次數過多，請稍後再試',
+      'error.SERVER_ERROR': '伺服器發生錯誤，請稍後再試'
     },
     en: {
       'nav.login': 'Log In',
@@ -233,6 +265,7 @@ const i18n = (function () {
 
       'changePassword.title': 'Change Password',
       'changePassword.oldPassword': 'Old Password',
+      'changePassword.enterOldPassword': 'Please enter your old password',
       'changePassword.newPassword': 'New Password',
       'changePassword.confirmNewPassword': 'Confirm New Password',
       'changePassword.submit': 'Update Password',
@@ -333,7 +366,38 @@ const i18n = (function () {
       'admin.prevPage': 'Previous',
       'admin.nextPage': 'Next',
       'admin.pageInfo': 'Page {page} / {totalPages} ({total} total)',
-      'admin.forbidden': 'You do not have permission to access the admin zone'
+      'admin.forbidden': 'You do not have permission to access the admin zone',
+
+      'forgotPassword.emailSent': 'If this email is registered, a password reset email has been sent. Please check your inbox.',
+
+      'error.INVALID_FIELDS': 'Some fields are missing or invalid',
+      'error.INVALID_UID': 'Invalid Genshin UID format',
+      'error.NOTHING_TO_UPDATE': 'Nothing to update',
+      'error.CARD_CONFLICT': 'The same card cannot be both Extra and Wanted',
+      'error.USERNAME_TAKEN': 'This username is already taken',
+      'error.EMAIL_TAKEN': 'This email is already in use',
+      'error.USERNAME_IMMUTABLE': 'Username cannot be changed',
+      'error.INVALID_CREDENTIALS': 'Incorrect username or password',
+      'error.PASSWORD_MISMATCH': 'The passwords do not match',
+      'error.NEW_PASSWORD_MISMATCH': 'The new passwords do not match',
+      'error.OLD_PASSWORD_WRONG': 'Incorrect current password',
+      'error.PASSWORD_WRONG': 'Incorrect password',
+      'error.RESET_LINK_INVALID': 'This reset link is invalid or has expired',
+      'error.UNAUTHORIZED': 'Please log in first',
+      'error.TOKEN_INVALID': 'Invalid session. Please log in again',
+      'error.TOKEN_EXPIRED': 'Your session has expired. Please log in again',
+      'error.ACCOUNT_BANNED': 'Your account has been suspended. Please contact an administrator if you have questions',
+      'error.FORBIDDEN': 'You do not have permission to perform this action',
+      'error.CANNOT_BAN_SELF': 'You cannot suspend your own account',
+      'error.CANNOT_BAN_ADMIN': 'Administrator accounts cannot be suspended',
+      'error.CANNOT_DELETE_ADMIN': 'Administrator accounts cannot be deleted',
+      'error.ALREADY_ADMIN': 'This user is already an administrator',
+      'error.NO_DATA': 'No data found',
+      'error.USER_NOT_FOUND': 'User not found',
+      'error.ROUTE_NOT_FOUND': 'Page not found',
+      'error.TOO_MANY_REQUESTS': 'Too many requests. Please try again later',
+      'error.TOO_MANY_ATTEMPTS': 'Too many attempts. Please try again later',
+      'error.SERVER_ERROR': 'Server error. Please try again later'
     },
     ja: {
       'nav.login': 'ログイン',
@@ -399,6 +463,7 @@ const i18n = (function () {
 
       'changePassword.title': 'パスワード変更',
       'changePassword.oldPassword': '現在のパスワード',
+      'changePassword.enterOldPassword': '現在のパスワードを入力してください',
       'changePassword.newPassword': '新しいパスワード',
       'changePassword.confirmNewPassword': '新しいパスワード（確認）',
       'changePassword.submit': 'パスワードを更新',
@@ -499,7 +564,38 @@ const i18n = (function () {
       'admin.prevPage': '前へ',
       'admin.nextPage': '次へ',
       'admin.pageInfo': '{page} / {totalPages} ページ（全 {total} 件）',
-      'admin.forbidden': '管理者専用エリアへのアクセス権限がありません'
+      'admin.forbidden': '管理者専用エリアへのアクセス権限がありません',
+
+      'forgotPassword.emailSent': 'このメールアドレスが登録されている場合、パスワード再設定のメールを送信しました。受信トレイをご確認ください。',
+
+      'error.INVALID_FIELDS': '入力内容が正しくありません',
+      'error.INVALID_UID': '原神 UID の形式が正しくありません',
+      'error.NOTHING_TO_UPDATE': '更新する項目がありません',
+      'error.CARD_CONFLICT': '同じカードを「譲」と「求」の両方に設定することはできません',
+      'error.USERNAME_TAKEN': 'このユーザー名は既に使用されています',
+      'error.EMAIL_TAKEN': 'このメールアドレスは既に使用されています',
+      'error.USERNAME_IMMUTABLE': 'ユーザー名は変更できません',
+      'error.INVALID_CREDENTIALS': 'ユーザー名またはパスワードが正しくありません',
+      'error.PASSWORD_MISMATCH': 'パスワードが一致しません',
+      'error.NEW_PASSWORD_MISMATCH': '新しいパスワードが一致しません',
+      'error.OLD_PASSWORD_WRONG': '現在のパスワードが正しくありません',
+      'error.PASSWORD_WRONG': 'パスワードが正しくありません',
+      'error.RESET_LINK_INVALID': '再設定リンクが無効か、有効期限が切れています',
+      'error.UNAUTHORIZED': '先にログインしてください',
+      'error.TOKEN_INVALID': 'ログイン状態が無効です。もう一度ログインしてください',
+      'error.TOKEN_EXPIRED': 'ログインの有効期限が切れました。もう一度ログインしてください',
+      'error.ACCOUNT_BANNED': 'アカウントが停止されています。ご不明な点は管理者にお問い合わせください',
+      'error.FORBIDDEN': 'この操作を行う権限がありません',
+      'error.CANNOT_BAN_SELF': '自分のアカウントを停止することはできません',
+      'error.CANNOT_BAN_ADMIN': '管理者アカウントは停止できません',
+      'error.CANNOT_DELETE_ADMIN': '管理者アカウントは削除できません',
+      'error.ALREADY_ADMIN': 'このユーザーは既に管理者です',
+      'error.NO_DATA': 'データが見つかりません',
+      'error.USER_NOT_FOUND': 'ユーザーが見つかりません',
+      'error.ROUTE_NOT_FOUND': 'ページが見つかりません',
+      'error.TOO_MANY_REQUESTS': 'リクエストが多すぎます。しばらくしてからもう一度お試しください',
+      'error.TOO_MANY_ATTEMPTS': '試行回数が多すぎます。しばらくしてからもう一度お試しください',
+      'error.SERVER_ERROR': 'サーバーエラーが発生しました。しばらくしてからもう一度お試しください'
     },
     ko: {
       'nav.login': '로그인',
@@ -565,6 +661,7 @@ const i18n = (function () {
 
       'changePassword.title': '비밀번호 변경',
       'changePassword.oldPassword': '현재 비밀번호',
+      'changePassword.enterOldPassword': '현재 비밀번호를 입력해 주세요',
       'changePassword.newPassword': '새 비밀번호',
       'changePassword.confirmNewPassword': '새 비밀번호 확인',
       'changePassword.submit': '비밀번호 업데이트',
@@ -665,7 +762,38 @@ const i18n = (function () {
       'admin.prevPage': '이전',
       'admin.nextPage': '다음',
       'admin.pageInfo': '{page} / {totalPages} 페이지 (전체 {total}건)',
-      'admin.forbidden': '관리자 전용 구역에 접근할 권한이 없습니다'
+      'admin.forbidden': '관리자 전용 구역에 접근할 권한이 없습니다',
+
+      'forgotPassword.emailSent': '등록된 이메일이라면 비밀번호 재설정 메일을 보냈습니다. 받은 편지함을 확인해 주세요.',
+
+      'error.INVALID_FIELDS': '입력 내용이 올바르지 않습니다',
+      'error.INVALID_UID': '원신 UID 형식이 올바르지 않습니다',
+      'error.NOTHING_TO_UPDATE': '업데이트할 항목이 없습니다',
+      'error.CARD_CONFLICT': '같은 카드를 양도와 구함에 동시에 설정할 수 없습니다',
+      'error.USERNAME_TAKEN': '이미 사용 중인 사용자 이름입니다',
+      'error.EMAIL_TAKEN': '이미 사용 중인 이메일입니다',
+      'error.USERNAME_IMMUTABLE': '사용자 이름은 변경할 수 없습니다',
+      'error.INVALID_CREDENTIALS': '사용자 이름 또는 비밀번호가 올바르지 않습니다',
+      'error.PASSWORD_MISMATCH': '비밀번호가 일치하지 않습니다',
+      'error.NEW_PASSWORD_MISMATCH': '새 비밀번호가 일치하지 않습니다',
+      'error.OLD_PASSWORD_WRONG': '현재 비밀번호가 올바르지 않습니다',
+      'error.PASSWORD_WRONG': '비밀번호가 올바르지 않습니다',
+      'error.RESET_LINK_INVALID': '재설정 링크가 유효하지 않거나 만료되었습니다',
+      'error.UNAUTHORIZED': '먼저 로그인해 주세요',
+      'error.TOKEN_INVALID': '로그인 상태가 유효하지 않습니다. 다시 로그인해 주세요',
+      'error.TOKEN_EXPIRED': '로그인이 만료되었습니다. 다시 로그인해 주세요',
+      'error.ACCOUNT_BANNED': '계정이 정지되었습니다. 문의 사항은 관리자에게 연락해 주세요',
+      'error.FORBIDDEN': '이 작업을 수행할 권한이 없습니다',
+      'error.CANNOT_BAN_SELF': '자신의 계정은 정지할 수 없습니다',
+      'error.CANNOT_BAN_ADMIN': '관리자 계정은 정지할 수 없습니다',
+      'error.CANNOT_DELETE_ADMIN': '관리자 계정은 삭제할 수 없습니다',
+      'error.ALREADY_ADMIN': '이 사용자는 이미 관리자입니다',
+      'error.NO_DATA': '데이터를 찾을 수 없습니다',
+      'error.USER_NOT_FOUND': '사용자를 찾을 수 없습니다',
+      'error.ROUTE_NOT_FOUND': '페이지를 찾을 수 없습니다',
+      'error.TOO_MANY_REQUESTS': '요청이 너무 많습니다. 잠시 후 다시 시도해 주세요',
+      'error.TOO_MANY_ATTEMPTS': '시도 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요',
+      'error.SERVER_ERROR': '서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요'
     }
   };
 
@@ -721,6 +849,16 @@ const i18n = (function () {
     }
 
     return str;
+  }
+
+  // 後端錯誤回應 { code, message } → 依目前語言翻譯；沒有對應的 code 時退回後端 message，再退回 fallbackKey
+  function apiMessage(body, fallbackKey) {
+    const key = body && body.code ? `error.${body.code}` : null;
+    if (key && (STRINGS[getLang()][key] || STRINGS[DEFAULT_LANG][key])) {
+      return t(key);
+    }
+
+    return (body && body.message) || t(fallbackKey);
   }
 
   function applyI18n(root = document) {
@@ -783,10 +921,27 @@ const i18n = (function () {
     });
   }
 
+  // 已顯示在畫面上的提示訊息（錯誤、成功）是 JS 用 textContent 寫入的，applyI18n 不會更新它們；
+  // 用「舊語言的譯文 → key」反查，換成新語言的譯文。含 {變數} 的訊息與沒有 key 的後端原文維持原樣
+  function retranslateMessages(prevLang) {
+    const reverse = new Map();
+    Object.entries(STRINGS[prevLang]).forEach(([key, value]) => {
+      if (!reverse.has(value)) reverse.set(value, key);
+    });
+
+    document.querySelectorAll('.alert *').forEach((el) => {
+      if (el.children.length > 0) return;
+      const key = reverse.get(el.textContent.trim());
+      if (key) el.textContent = t(key);
+    });
+  }
+
   function setLang(lang) {
     const normalized = isValidLang(lang) ? lang : DEFAULT_LANG;
+    const prevLang = getLang();
     localStorage.setItem(STORAGE_KEY, normalized);
     document.documentElement.lang = htmlLangFor(normalized);
+    if (prevLang !== normalized) retranslateMessages(prevLang);
     applyI18n();
     renderLangDropdowns();
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: getLang() } }));
@@ -801,5 +956,5 @@ const i18n = (function () {
     if (event.key === 'Escape') closeAllLangDropdowns();
   });
 
-  return { getLang, setLang, t, applyI18n };
+  return { getLang, setLang, t, apiMessage, applyI18n };
 })();
