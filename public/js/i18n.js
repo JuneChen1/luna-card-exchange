@@ -67,6 +67,7 @@ const i18n = (function () {
 
       'changePassword.title': '修改密碼',
       'changePassword.oldPassword': '舊密碼',
+      'changePassword.enterOldPassword': '請輸入舊密碼',
       'changePassword.newPassword': '新密碼',
       'changePassword.confirmNewPassword': '確認新密碼',
       'changePassword.submit': '更新密碼',
@@ -264,6 +265,7 @@ const i18n = (function () {
 
       'changePassword.title': 'Change Password',
       'changePassword.oldPassword': 'Old Password',
+      'changePassword.enterOldPassword': 'Please enter your old password',
       'changePassword.newPassword': 'New Password',
       'changePassword.confirmNewPassword': 'Confirm New Password',
       'changePassword.submit': 'Update Password',
@@ -461,6 +463,7 @@ const i18n = (function () {
 
       'changePassword.title': 'パスワード変更',
       'changePassword.oldPassword': '現在のパスワード',
+      'changePassword.enterOldPassword': '現在のパスワードを入力してください',
       'changePassword.newPassword': '新しいパスワード',
       'changePassword.confirmNewPassword': '新しいパスワード（確認）',
       'changePassword.submit': 'パスワードを更新',
@@ -658,6 +661,7 @@ const i18n = (function () {
 
       'changePassword.title': '비밀번호 변경',
       'changePassword.oldPassword': '현재 비밀번호',
+      'changePassword.enterOldPassword': '현재 비밀번호를 입력해 주세요',
       'changePassword.newPassword': '새 비밀번호',
       'changePassword.confirmNewPassword': '새 비밀번호 확인',
       'changePassword.submit': '비밀번호 업데이트',
@@ -917,10 +921,27 @@ const i18n = (function () {
     });
   }
 
+  // 已顯示在畫面上的提示訊息（錯誤、成功）是 JS 用 textContent 寫入的，applyI18n 不會更新它們；
+  // 用「舊語言的譯文 → key」反查，換成新語言的譯文。含 {變數} 的訊息與沒有 key 的後端原文維持原樣
+  function retranslateMessages(prevLang) {
+    const reverse = new Map();
+    Object.entries(STRINGS[prevLang]).forEach(([key, value]) => {
+      if (!reverse.has(value)) reverse.set(value, key);
+    });
+
+    document.querySelectorAll('.alert *').forEach((el) => {
+      if (el.children.length > 0) return;
+      const key = reverse.get(el.textContent.trim());
+      if (key) el.textContent = t(key);
+    });
+  }
+
   function setLang(lang) {
     const normalized = isValidLang(lang) ? lang : DEFAULT_LANG;
+    const prevLang = getLang();
     localStorage.setItem(STORAGE_KEY, normalized);
     document.documentElement.lang = htmlLangFor(normalized);
+    if (prevLang !== normalized) retranslateMessages(prevLang);
     applyI18n();
     renderLangDropdowns();
     document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: getLang() } }));

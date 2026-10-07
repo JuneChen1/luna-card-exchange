@@ -51,6 +51,12 @@ document.getElementById('password-form').addEventListener('submit', async (event
   const newPassword = formData.get('new_password');
   const confirmPassword = formData.get('confirm_password');
 
+  if (!oldPassword) {
+    oldPasswordErrorText.textContent = i18n.t('changePassword.enterOldPassword');
+    oldPasswordError.classList.remove('d-none');
+    return;
+  }
+
   if (!PASSWORD_REGEX.test(newPassword)) {
     newPasswordErrorText.textContent = i18n.t('common.passwordRule');
     newPasswordError.classList.remove('d-none');
