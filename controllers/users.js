@@ -28,20 +28,20 @@ const userController = {
     try {
       const { username, email, contact_info } = req.body || {};
 
-      if (username !== undefined) return next(appError(400, '帳號不可修改'));
+      if (username !== undefined) return next(appError('USERNAME_IMMUTABLE'));
 
       if (email !== undefined && email !== '' && !isValidEmail(email))
-        return next(appError(400, '欄位未填寫正確'));
+        return next(appError('INVALID_FIELDS'));
 
       if (
         contact_info !== undefined &&
         contact_info !== '' &&
         (!isValidString(contact_info) || contact_info.trim().length > 255)
       )
-        return next(appError(400, '欄位未填寫正確'));
+        return next(appError('INVALID_FIELDS'));
 
       if (email === undefined && contact_info === undefined)
-        return next(appError(400, '沒有可更新的欄位'));
+        return next(appError('NOTHING_TO_UPDATE'));
 
       const userRepo = dataSource.getRepository('Users');
       const updateData = {};
@@ -51,7 +51,7 @@ const userController = {
             email: email.trim().toLowerCase(),
             id: Not(req.user.id)
           });
-          if (existing) return next(appError(400, 'email 已被使用'));
+          if (existing) return next(appError('EMAIL_TAKEN'));
         }
 
         updateData.email = email.trim().toLowerCase() || null;
@@ -89,13 +89,13 @@ const userController = {
         !isValidPassword(new_password) ||
         !isValidPassword(confirm_password)
       )
-        return next(appError(400, '欄位未填寫正確'));
+        return next(appError('INVALID_FIELDS'));
 
       if (new_password !== confirm_password)
-        return next(appError(400, '兩次輸入的新密碼不一致'));
+        return next(appError('NEW_PASSWORD_MISMATCH'));
 
       const isMatch = await bcrypt.compare(old_password, req.user.password);
-      if (!isMatch) return next(appError(400, '舊密碼錯誤'));
+      if (!isMatch) return next(appError('OLD_PASSWORD_WRONG'));
 
       const hashedPassword = await bcrypt.hash(new_password, 10);
       const userRepo = dataSource.getRepository('Users');
@@ -112,15 +112,14 @@ const userController = {
   async deleteMe(req, res, next) {
     try {
       if (req.user.role === 'ADMIN')
-        return next(appError(403, '不可刪除管理者帳號'));
+        return next(appError('CANNOT_DELETE_ADMIN'));
 
       const { password } = req.body || {};
 
-      if (!isValidPassword(password))
-        return next(appError(400, '欄位未填寫正確'));
+      if (!isValidPassword(password)) return next(appError('INVALID_FIELDS'));
 
       const isMatch = await bcrypt.compare(password, req.user.password);
-      if (!isMatch) return next(appError(400, '密碼錯誤'));
+      if (!isMatch) return next(appError('PASSWORD_WRONG'));
 
       const userId = req.user.id;
 

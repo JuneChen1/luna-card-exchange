@@ -49,8 +49,8 @@ document.getElementById('forgot-form').addEventListener('submit', async (event) 
   }
 
   try {
-    const result = await authApi.forgotPassword(email);
-    showAlert(result.message, 'success');
+    await authApi.forgotPassword(email);
+    showAlert(i18n.t('forgotPassword.emailSent'), 'success');
     event.target.reset();
   } catch (error) {
     emailErrorText.textContent = error.message;

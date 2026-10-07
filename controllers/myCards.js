@@ -37,8 +37,7 @@ const myCardController = {
   async getMyCards(req, res, next) {
     const uid =
       typeof req.query.uid === 'string' ? req.query.uid.trim() : req.query.uid;
-    if (!isValidGenshinUid(uid))
-      return next(appError(400, '原神 UID 格式錯誤'));
+    if (!isValidGenshinUid(uid)) return next(appError('INVALID_UID'));
     try {
       const linkRepo = dataSource.getRepository('UserCards');
       const result = await linkRepo.find({
@@ -65,14 +64,13 @@ const myCardController = {
       !isValidCardsList(offered) ||
       !isValidCardsList(wanted)
     )
-      return next(appError(400, '欄位未填寫正確'));
+      return next(appError('INVALID_FIELDS'));
 
     if (offered.length === 0 && wanted.length === 0)
-      return next(appError(400, '沒有可更新的欄位'));
+      return next(appError('NOTHING_TO_UPDATE'));
 
     const overlap = offered.filter((cardId) => wanted.includes(cardId));
-    if (overlap.length > 0)
-      return next(appError(400, '同一張卡片不能同時是提供與需求'));
+    if (overlap.length > 0) return next(appError('CARD_CONFLICT'));
 
     try {
       const result = await dataSource.transaction(async (manager) => {
@@ -120,7 +118,7 @@ const myCardController = {
       !isValidGenshinUid(req.body.genshinUid) ||
       typeof isPublic !== 'boolean'
     )
-      return next(appError(400, '欄位未填寫正確'));
+      return next(appError('INVALID_FIELDS'));
 
     const genshinUid = req.body.genshinUid.trim();
 
@@ -131,7 +129,7 @@ const myCardController = {
         select: { id: true }
       });
 
-      if (targetData.length === 0) return next(appError(400, '查無資料'));
+      if (targetData.length === 0) return next(appError('NO_DATA'));
 
       await linkRepo.update(
         { id: In(targetData.map((item) => item.id)) },
@@ -149,8 +147,7 @@ const myCardController = {
   async deleteUidCards(req, res, next) {
     const uid =
       typeof req.query.uid === 'string' ? req.query.uid.trim() : req.query.uid;
-    if (!isValidGenshinUid(uid))
-      return next(appError(400, '原神 UID 格式錯誤'));
+    if (!isValidGenshinUid(uid)) return next(appError('INVALID_UID'));
 
     try {
       const linkRepo = dataSource.getRepository('UserCards');
@@ -158,7 +155,7 @@ const myCardController = {
         where: { genshin_uid: uid, user: { id: req.user.id } }
       });
 
-      if (deleteData.length === 0) return next(appError(400, '查無資料'));
+      if (deleteData.length === 0) return next(appError('NO_DATA'));
 
       await linkRepo.remove(deleteData);
 

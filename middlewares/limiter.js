@@ -1,4 +1,5 @@
 const { rateLimit } = require('express-rate-limit');
+const errorBody = require('../utils/errorBody');
 
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -6,7 +7,7 @@ const globalLimiter = rateLimit({
   standardHeaders: 'draft-8',
   legacyHeaders: false,
   ipv6Subnet: 56,
-  message: { status: 'error', message: '請求過於頻繁，請稍後再試' }
+  message: errorBody('TOO_MANY_REQUESTS')
 });
 
 const shareLimiter = rateLimit({
@@ -15,7 +16,7 @@ const shareLimiter = rateLimit({
   standardHeaders: 'draft-8',
   legacyHeaders: false,
   ipv6Subnet: 56,
-  message: { status: 'error', message: '請求過於頻繁，請稍後再試' }
+  message: errorBody('TOO_MANY_REQUESTS')
 });
 
 const authLimiter = rateLimit({
@@ -24,7 +25,7 @@ const authLimiter = rateLimit({
   standardHeaders: 'draft-8',
   legacyHeaders: false,
   ipv6Subnet: 56,
-  message: { status: 'error', message: '嘗試次數過多，請稍後再試' }
+  message: errorBody('TOO_MANY_ATTEMPTS')
 });
 
 module.exports = { globalLimiter, shareLimiter, authLimiter };

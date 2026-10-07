@@ -21,6 +21,8 @@ async function main() {
   const exchangeRouter = require('./routes/exchange');
   const adminRouter = require('./routes/admin');
   const { globalLimiter } = require('./middlewares/limiter');
+  const errors = require('./config/errors');
+  const errorBody = require('./utils/errorBody');
 
   const app = express();
   app.set('trust proxy', 1);
@@ -52,22 +54,24 @@ async function main() {
   app.use('/api/admin', adminRouter);
 
   app.use((req, res) => {
-    res.status(404).json({ status: 'error', message: 'Page Not Found' });
+    res
+      .status(errors.ROUTE_NOT_FOUND.status)
+      .json(errorBody('ROUTE_NOT_FOUND'));
   });
 
   app.use((err, req, res, next) => {
     if (err.isOperational) {
       return res.status(err.statusCode).json({
         status: 'error',
+        code: err.errorCode,
         message: err.message
       });
     }
 
     console.error(err);
-    res.status(500).json({
-      status: 'failed',
-      message: '伺服器發生錯誤，請稍後再試'
-    });
+    res
+      .status(errors.SERVER_ERROR.status)
+      .json(errorBody('SERVER_ERROR', 'failed'));
   });
 
   const PORT = process.env.PORT || 3000;

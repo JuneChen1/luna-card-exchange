@@ -12,7 +12,7 @@ const cardController = {
       (offeredRaw && typeof offeredRaw !== 'string') ||
       (server && typeof server !== 'string')
     )
-      return next(appError(400, '欄位未填寫正確'));
+      return next(appError('INVALID_FIELDS'));
 
     const wanted = parseCardIds(wantedRaw);
     const offered = parseCardIds(offeredRaw);
@@ -23,7 +23,7 @@ const cardController = {
       (offeredRaw && !isValidCardsList(offered)) ||
       (server && !uidStarts)
     )
-      return next(appError(400, '欄位未填寫正確'));
+      return next(appError('INVALID_FIELDS'));
 
     try {
       const params = [];

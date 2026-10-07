@@ -12,6 +12,7 @@
     "seed:cards": "node db/seeds/cards.seed.js",
     "seed:test-data": "node db/seeds/test-data.seed.js",
     "seed:admin": "node db/seeds/admin.seed.js",
+    "check:errors": "node scripts/checkErrorCodes.js",
     "dev": "nodemon app.js"
   },
   "repository": {

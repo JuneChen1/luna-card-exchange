@@ -72,13 +72,13 @@ document.getElementById('password-form').addEventListener('submit', async (event
     showAlert(i18n.t('changePassword.updateSuccess'), 'success');
     event.target.reset();
   } catch (error) {
-    if (error.message === '舊密碼錯誤') {
+    if (error.code === 'OLD_PASSWORD_WRONG') {
       oldPasswordErrorText.textContent = error.message;
       oldPasswordError.classList.remove('d-none');
       return;
     }
 
-    if (error.message === '兩次輸入的新密碼不一致') {
+    if (error.code === 'NEW_PASSWORD_MISMATCH') {
       newPasswordErrorText.textContent = error.message;
       newPasswordError.classList.remove('d-none');
       return;

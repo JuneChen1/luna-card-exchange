@@ -76,7 +76,7 @@ profileForm.addEventListener('submit', async (event) => {
     });
     showAlert(i18n.t('profile.updateSuccess'), 'success');
   } catch (error) {
-    if (error.message === 'email 已被使用') {
+    if (error.code === 'EMAIL_TAKEN') {
       emailErrorText.textContent = error.message;
       emailError.classList.remove('d-none');
       return;
