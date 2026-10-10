@@ -199,6 +199,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': '找不到頁面',
       'error.TOO_MANY_REQUESTS': '請求過於頻繁，請稍後再試',
       'error.TOO_MANY_ATTEMPTS': '嘗試次數過多，請稍後再試',
+      'error.PAYLOAD_TOO_LARGE': '送出的內容過大',
       'error.SERVER_ERROR': '伺服器發生錯誤，請稍後再試'
     },
     en: {
@@ -397,6 +398,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': 'Page not found',
       'error.TOO_MANY_REQUESTS': 'Too many requests. Please try again later',
       'error.TOO_MANY_ATTEMPTS': 'Too many attempts. Please try again later',
+      'error.PAYLOAD_TOO_LARGE': 'The submitted content is too large',
       'error.SERVER_ERROR': 'Server error. Please try again later'
     },
     ja: {
@@ -595,6 +597,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': 'ページが見つかりません',
       'error.TOO_MANY_REQUESTS': 'リクエストが多すぎます。しばらくしてからもう一度お試しください',
       'error.TOO_MANY_ATTEMPTS': '試行回数が多すぎます。しばらくしてからもう一度お試しください',
+      'error.PAYLOAD_TOO_LARGE': '送信された内容が大きすぎます',
       'error.SERVER_ERROR': 'サーバーエラーが発生しました。しばらくしてからもう一度お試しください'
     },
     ko: {
@@ -793,6 +796,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': '페이지를 찾을 수 없습니다',
       'error.TOO_MANY_REQUESTS': '요청이 너무 많습니다. 잠시 후 다시 시도해 주세요',
       'error.TOO_MANY_ATTEMPTS': '시도 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요',
+      'error.PAYLOAD_TOO_LARGE': '전송한 내용이 너무 큽니다',
       'error.SERVER_ERROR': '서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요'
     }
   };
