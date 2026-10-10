@@ -67,6 +67,13 @@ document.getElementById('password-form').addEventListener('submit', async (event
     return;
   }
 
+  // 改密碼 API 有登入嘗試次數限制，相同的新舊密碼先在前端擋掉，不浪費一次嘗試
+  if (newPassword === oldPassword) {
+    newPasswordErrorText.textContent = i18n.t('error.NEW_PASSWORD_SAME_AS_OLD');
+    newPasswordError.classList.remove('d-none');
+    return;
+  }
+
   try {
     await profileApi.updatePassword({
       old_password: oldPassword,
@@ -82,7 +89,7 @@ document.getElementById('password-form').addEventListener('submit', async (event
       return;
     }
 
-    if (error.code === 'NEW_PASSWORD_MISMATCH') {
+    if (error.code === 'NEW_PASSWORD_MISMATCH' || error.code === 'NEW_PASSWORD_SAME_AS_OLD') {
       newPasswordErrorText.textContent = error.message;
       newPasswordError.classList.remove('d-none');
       return;
