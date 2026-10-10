@@ -26,6 +26,7 @@ async function main() {
 
   const app = express();
   app.set('trust proxy', 1);
+  app.disable('x-powered-by');
 
   const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
     .split(',')
@@ -40,7 +41,7 @@ async function main() {
     })
   );
   app.use(express.json());
-  
+
   app.use((req, res, next) => {
     req.body ??= {};
     next();
