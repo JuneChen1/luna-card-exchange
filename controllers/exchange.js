@@ -93,6 +93,11 @@ const cardController = {
         data = Object.values(groupe);
       }
 
+      data.forEach((g) => {
+        g.offered_card_ids.sort((a, b) => a - b);
+        g.wanted_card_ids.sort((a, b) => a - b);
+      });
+
       res.status(200).json({
         status: 'success',
         data

@@ -10,7 +10,7 @@ const myCardController = {
       const result = await linkRepo.find({
         where: { user: { id: req.user.id } },
         relations: { card: true },
-        order: { genshin_uid: 'ASC' }
+        order: { genshin_uid: 'ASC', card: { id: 'ASC' } }
       });
 
       const summaryByUid = {};
