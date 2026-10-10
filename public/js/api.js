@@ -62,6 +62,12 @@ async function apiRequest(path, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
+    // 登入狀態失效（token 過期或帳號已不存在）：清掉本機 session 並回登入頁，避免停在壞掉的畫面
+    if (token && response.status === 401 && ['TOKEN_INVALID', 'TOKEN_EXPIRED'].includes(data.code)) {
+      clearSession();
+      location.href = 'login.html';
+    }
+
     const error = new Error(i18n.apiMessage(data, 'common.requestFailed'));
     error.code = data.code;
     throw error;
