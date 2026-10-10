@@ -26,7 +26,11 @@ module.exports = {
   isValidPassword(password) {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 
-    return typeof password === 'string' && passwordRegex.test(password);
+    return (
+      typeof password === 'string' &&
+      passwordRegex.test(password) &&
+      Buffer.byteLength(password, 'utf8') <= 72
+    );
   },
   isValidGenshinUid(uid) {
     const uidRegex = /^(6\d{8}|7\d{8}|9\d{8}|18\d{8}|8\d{8})$/;
