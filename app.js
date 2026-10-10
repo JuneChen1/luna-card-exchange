@@ -35,13 +35,16 @@ async function main() {
   app.use(
     cors({
       origin(origin, callback) {
-        if (!origin || allowedOrigins.includes(origin))
-          return callback(null, true);
-        callback(new Error('Not allowed by CORS'));
+        callback(null, !origin || allowedOrigins.includes(origin));
       }
     })
   );
   app.use(express.json());
+  
+  app.use((req, res, next) => {
+    req.body ??= {};
+    next();
+  });
   app.use(express.static('public'));
   app.use(globalLimiter);
 
@@ -72,6 +75,12 @@ async function main() {
       return res
         .status(errors.INVALID_FIELDS.status)
         .json(errorBody('INVALID_FIELDS'));
+    }
+
+    if (err.type === 'entity.too.large') {
+      return res
+        .status(errors.PAYLOAD_TOO_LARGE.status)
+        .json(errorBody('PAYLOAD_TOO_LARGE'));
     }
 
     console.error(err);

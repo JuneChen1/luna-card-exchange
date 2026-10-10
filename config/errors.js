@@ -38,6 +38,7 @@ module.exports = {
   ROUTE_NOT_FOUND: { status: 404, message: 'Page Not Found' },
 
   // 系統
+  PAYLOAD_TOO_LARGE: { status: 413, message: '送出的內容過大' },
   TOO_MANY_REQUESTS: { status: 429, message: '請求過於頻繁，請稍後再試' },
   TOO_MANY_ATTEMPTS: { status: 429, message: '嘗試次數過多，請稍後再試' },
   SERVER_ERROR: { status: 500, message: '伺服器發生錯誤，請稍後再試' }
