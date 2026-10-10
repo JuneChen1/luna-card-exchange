@@ -37,6 +37,11 @@ if (new URLSearchParams(location.search).get('registered')) {
   showAlert(i18n.t('login.registeredSuccess'), 'success');
 }
 
+// 被停權後由 apiRequest 導過來：訊息要留在登入頁讓使用者看到，不然只會被無聲地登出
+if (new URLSearchParams(location.search).get('banned')) {
+  showAlert(i18n.t('error.ACCOUNT_BANNED'));
+}
+
 document.getElementById('login-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   hideAlert();
