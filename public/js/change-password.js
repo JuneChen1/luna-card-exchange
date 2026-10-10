@@ -38,8 +38,6 @@ document.getElementById('btn-logout').addEventListener('click', () => {
   location.href = 'index.html';
 });
 
-const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
-
 document.getElementById('password-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   hideAlert();
@@ -57,7 +55,7 @@ document.getElementById('password-form').addEventListener('submit', async (event
     return;
   }
 
-  if (!PASSWORD_REGEX.test(newPassword)) {
+  if (!isValidPassword(newPassword)) {
     newPasswordErrorText.textContent = i18n.t('common.passwordRule');
     newPasswordError.classList.remove('d-none');
     return;

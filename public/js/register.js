@@ -33,8 +33,6 @@ if (getToken()) {
 }
 
 const USERNAME_CHARSET_REGEX = /^[A-Za-z0-9_]+$/;
-const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
-
 document.getElementById('register-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   hideAlert();
@@ -59,7 +57,7 @@ document.getElementById('register-form').addEventListener('submit', async (event
     usernameError.classList.remove('d-none');
     return;
   }
-  if (!PASSWORD_REGEX.test(password)) {
+  if (!isValidPassword(password)) {
     passwordErrorText.textContent = i18n.t('common.passwordRule');
     passwordError.classList.remove('d-none');
     return;

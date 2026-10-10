@@ -2,6 +2,17 @@ const API_BASE = window.API_BASE_URL || '/api';
 const TOKEN_KEY = 'luna_token';
 const USERNAME_KEY = 'luna_username';
 
+// 規則要和後端 utils/validUtils.js 的 isValidPassword 一致；bcrypt 只看前 72 位元組，所以上限用位元組算
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+const PASSWORD_MAX_BYTES = 72;
+
+function isValidPassword(password) {
+  return (
+    PASSWORD_REGEX.test(password) &&
+    new TextEncoder().encode(password).length <= PASSWORD_MAX_BYTES
+  );
+}
+
 function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
