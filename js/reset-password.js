@@ -25,7 +25,6 @@ function hideAlert() {
 
 document.getElementById('btn-alert-close').addEventListener('click', hideAlert);
 
-const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
 const resetToken = new URLSearchParams(location.search).get('token');
 
 if (!resetToken) {
@@ -42,7 +41,7 @@ resetForm.addEventListener('submit', async (event) => {
   const newPassword = formData.get('new_password');
   const confirmPassword = formData.get('confirm_password');
 
-  if (!PASSWORD_REGEX.test(newPassword)) {
+  if (!isValidPassword(newPassword)) {
     newPasswordErrorText.textContent = i18n.t('common.passwordRule');
     newPasswordError.classList.remove('d-none');
     return;

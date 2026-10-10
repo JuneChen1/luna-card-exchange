@@ -2,6 +2,17 @@ const API_BASE = window.API_BASE_URL || '/api';
 const TOKEN_KEY = 'luna_token';
 const USERNAME_KEY = 'luna_username';
 
+// 規則要和後端 utils/validUtils.js 的 isValidPassword 一致；bcrypt 只看前 72 位元組，所以上限用位元組算
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+const PASSWORD_MAX_BYTES = 72;
+
+function isValidPassword(password) {
+  return (
+    PASSWORD_REGEX.test(password) &&
+    new TextEncoder().encode(password).length <= PASSWORD_MAX_BYTES
+  );
+}
+
 function getToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
@@ -51,6 +62,18 @@ async function apiRequest(path, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
+    // 登入狀態失效（token 過期、帳號已不存在或被停權）：清掉本機 session 並回登入頁，避免停在壞掉的畫面
+    if (token) {
+      const isSessionInvalid =
+        response.status === 401 && ['TOKEN_INVALID', 'TOKEN_EXPIRED'].includes(data.code);
+      const isBanned = response.status === 403 && data.code === 'ACCOUNT_BANNED';
+
+      if (isSessionInvalid || isBanned) {
+        clearSession();
+        location.href = isBanned ? 'login.html?banned=1' : 'login.html';
+      }
+    }
+
     const error = new Error(i18n.apiMessage(data, 'common.requestFailed'));
     error.code = data.code;
     throw error;

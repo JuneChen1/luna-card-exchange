@@ -24,7 +24,7 @@ const i18n = (function () {
       'common.username': '帳號',
       'common.usernameCaseSensitiveHint': '※ 帳號區分大小寫（例如：UserA 與 usera 視為不同帳號）',
       'common.password': '密碼',
-      'common.passwordRule': '密碼至少需要 8 碼，且需同時包含英文字母與數字',
+      'common.passwordRule': '密碼需為 8～72 個字元（中日韓文字每字算 3 個），且需同時包含英文字母與數字',
       'common.newPasswordMismatch': '兩次輸入的新密碼不一致',
       'common.requestFailed': '請求失敗',
       'common.networkError': '網路連線失敗，請稍後再試',
@@ -182,6 +182,7 @@ const i18n = (function () {
       'error.INVALID_CREDENTIALS': '使用者不存在或密碼輸入錯誤',
       'error.PASSWORD_MISMATCH': '兩次輸入的密碼不一致',
       'error.NEW_PASSWORD_MISMATCH': '兩次輸入的新密碼不一致',
+      'error.NEW_PASSWORD_SAME_AS_OLD': '新密碼不可與目前密碼相同',
       'error.OLD_PASSWORD_WRONG': '舊密碼錯誤',
       'error.PASSWORD_WRONG': '密碼錯誤',
       'error.RESET_LINK_INVALID': '重設連結無效或已過期',
@@ -199,6 +200,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': '找不到頁面',
       'error.TOO_MANY_REQUESTS': '請求過於頻繁，請稍後再試',
       'error.TOO_MANY_ATTEMPTS': '嘗試次數過多，請稍後再試',
+      'error.PAYLOAD_TOO_LARGE': '送出的內容過大',
       'error.SERVER_ERROR': '伺服器發生錯誤，請稍後再試'
     },
     en: {
@@ -222,7 +224,7 @@ const i18n = (function () {
       'common.username': 'Username',
       'common.usernameCaseSensitiveHint': '※ Usernames are case-sensitive (e.g., "UserA" and "usera" are different)',
       'common.password': 'Password',
-      'common.passwordRule': 'Password must be at least 8 characters long and contain both letters and numbers',
+      'common.passwordRule': 'Password must be 8–72 characters long (Chinese, Japanese and Korean characters count as 3 each) and contain both letters and numbers',
       'common.newPasswordMismatch': 'The new passwords do not match',
       'common.requestFailed': 'Request failed',
       'common.networkError': 'Network error, please try again later',
@@ -380,6 +382,7 @@ const i18n = (function () {
       'error.INVALID_CREDENTIALS': 'Incorrect username or password',
       'error.PASSWORD_MISMATCH': 'The passwords do not match',
       'error.NEW_PASSWORD_MISMATCH': 'The new passwords do not match',
+      'error.NEW_PASSWORD_SAME_AS_OLD': 'The new password must be different from your current password',
       'error.OLD_PASSWORD_WRONG': 'Incorrect current password',
       'error.PASSWORD_WRONG': 'Incorrect password',
       'error.RESET_LINK_INVALID': 'This reset link is invalid or has expired',
@@ -397,6 +400,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': 'Page not found',
       'error.TOO_MANY_REQUESTS': 'Too many requests. Please try again later',
       'error.TOO_MANY_ATTEMPTS': 'Too many attempts. Please try again later',
+      'error.PAYLOAD_TOO_LARGE': 'The submitted content is too large',
       'error.SERVER_ERROR': 'Server error. Please try again later'
     },
     ja: {
@@ -420,7 +424,7 @@ const i18n = (function () {
       'common.username': 'ユーザー名',
       'common.usernameCaseSensitiveHint': '※ ユーザー名は大文字と小文字を区別します（例：「UserA」と「usera」は異なるユーザー名として扱われます）',
       'common.password': 'パスワード',
-      'common.passwordRule': 'パスワードは8文字以上で、英字と数字の両方を含める必要があります',
+      'common.passwordRule': 'パスワードは8～72文字（中国語・日本語・韓国語の文字は1文字を3文字として数えます）で、英字と数字の両方を含める必要があります',
       'common.newPasswordMismatch': '新しいパスワードが一致しません',
       'common.requestFailed': 'リクエストに失敗しました',
       'common.networkError': 'ネットワークエラーが発生しました。しばらくしてから再試行してください',
@@ -578,6 +582,7 @@ const i18n = (function () {
       'error.INVALID_CREDENTIALS': 'ユーザー名またはパスワードが正しくありません',
       'error.PASSWORD_MISMATCH': 'パスワードが一致しません',
       'error.NEW_PASSWORD_MISMATCH': '新しいパスワードが一致しません',
+      'error.NEW_PASSWORD_SAME_AS_OLD': '新しいパスワードは現在のパスワードと異なるものにしてください',
       'error.OLD_PASSWORD_WRONG': '現在のパスワードが正しくありません',
       'error.PASSWORD_WRONG': 'パスワードが正しくありません',
       'error.RESET_LINK_INVALID': '再設定リンクが無効か、有効期限が切れています',
@@ -595,6 +600,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': 'ページが見つかりません',
       'error.TOO_MANY_REQUESTS': 'リクエストが多すぎます。しばらくしてからもう一度お試しください',
       'error.TOO_MANY_ATTEMPTS': '試行回数が多すぎます。しばらくしてからもう一度お試しください',
+      'error.PAYLOAD_TOO_LARGE': '送信された内容が大きすぎます',
       'error.SERVER_ERROR': 'サーバーエラーが発生しました。しばらくしてからもう一度お試しください'
     },
     ko: {
@@ -618,7 +624,7 @@ const i18n = (function () {
       'common.username': '아이디',
       'common.usernameCaseSensitiveHint': '※ 아이디는 대소문자를 구분합니다 (예: "UserA"와 "usera"는 다른 아이디로 처리됩니다)',
       'common.password': '비밀번호',
-      'common.passwordRule': '비밀번호는 8자 이상이며 영문과 숫자를 모두 포함해야 합니다',
+      'common.passwordRule': '비밀번호는 8~72자(한중일 문자는 1자를 3자로 계산)이며 영문과 숫자를 모두 포함해야 합니다',
       'common.newPasswordMismatch': '새 비밀번호가 일치하지 않습니다',
       'common.requestFailed': '요청에 실패했습니다',
       'common.networkError': '네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요',
@@ -776,6 +782,7 @@ const i18n = (function () {
       'error.INVALID_CREDENTIALS': '사용자 이름 또는 비밀번호가 올바르지 않습니다',
       'error.PASSWORD_MISMATCH': '비밀번호가 일치하지 않습니다',
       'error.NEW_PASSWORD_MISMATCH': '새 비밀번호가 일치하지 않습니다',
+      'error.NEW_PASSWORD_SAME_AS_OLD': '새 비밀번호는 현재 비밀번호와 달라야 합니다',
       'error.OLD_PASSWORD_WRONG': '현재 비밀번호가 올바르지 않습니다',
       'error.PASSWORD_WRONG': '비밀번호가 올바르지 않습니다',
       'error.RESET_LINK_INVALID': '재설정 링크가 유효하지 않거나 만료되었습니다',
@@ -793,6 +800,7 @@ const i18n = (function () {
       'error.ROUTE_NOT_FOUND': '페이지를 찾을 수 없습니다',
       'error.TOO_MANY_REQUESTS': '요청이 너무 많습니다. 잠시 후 다시 시도해 주세요',
       'error.TOO_MANY_ATTEMPTS': '시도 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요',
+      'error.PAYLOAD_TOO_LARGE': '전송한 내용이 너무 큽니다',
       'error.SERVER_ERROR': '서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요'
     }
   };

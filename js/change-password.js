@@ -38,8 +38,6 @@ document.getElementById('btn-logout').addEventListener('click', () => {
   location.href = 'index.html';
 });
 
-const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
-
 document.getElementById('password-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   hideAlert();
@@ -57,7 +55,7 @@ document.getElementById('password-form').addEventListener('submit', async (event
     return;
   }
 
-  if (!PASSWORD_REGEX.test(newPassword)) {
+  if (!isValidPassword(newPassword)) {
     newPasswordErrorText.textContent = i18n.t('common.passwordRule');
     newPasswordError.classList.remove('d-none');
     return;
@@ -65,6 +63,13 @@ document.getElementById('password-form').addEventListener('submit', async (event
 
   if (newPassword !== confirmPassword) {
     newPasswordErrorText.textContent = i18n.t('common.newPasswordMismatch');
+    newPasswordError.classList.remove('d-none');
+    return;
+  }
+
+  // 改密碼 API 有登入嘗試次數限制，相同的新舊密碼先在前端擋掉，不浪費一次嘗試
+  if (newPassword === oldPassword) {
+    newPasswordErrorText.textContent = i18n.t('error.NEW_PASSWORD_SAME_AS_OLD');
     newPasswordError.classList.remove('d-none');
     return;
   }
@@ -84,7 +89,7 @@ document.getElementById('password-form').addEventListener('submit', async (event
       return;
     }
 
-    if (error.code === 'NEW_PASSWORD_MISMATCH') {
+    if (error.code === 'NEW_PASSWORD_MISMATCH' || error.code === 'NEW_PASSWORD_SAME_AS_OLD') {
       newPasswordErrorText.textContent = error.message;
       newPasswordError.classList.remove('d-none');
       return;
