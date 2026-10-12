@@ -139,6 +139,13 @@ main {
   }
 }
 
+.site-tagline {
+  margin-bottom: 0.75rem;
+  color: #6c757d;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .exchange-login-hint {
   padding: 10px 14px;
   border: 1px solid #b9d3e8;
