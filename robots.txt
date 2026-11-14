@@ -6,4 +6,4 @@ Disallow: /change-password.html
 Disallow: /forgot-password.html
 Disallow: /reset-password.html
 
-Sitemap: https://junechen1.github.io/luna-card-exchange/sitemap.xml
+Sitemap: https://lunacard.junenaga.com/sitemap.xml
