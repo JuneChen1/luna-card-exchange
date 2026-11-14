@@ -2,7 +2,7 @@
 
 # <img src="public/favicon-32x32.png" width="28" height="28" alt=""> 月諭聖牌交換站 Luna Card Exchange
 
-前往網站：https://junechen1.github.io/luna-card-exchange
+前往網站：https://lunacard.junenaga.com
 
 ---
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://junechen1.github.io/luna-card-exchange/</loc>
+    <loc>https://lunacard.junenaga.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://junechen1.github.io/luna-card-exchange/login.html</loc>
+    <loc>https://lunacard.junenaga.com/login.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://junechen1.github.io/luna-card-exchange/register.html</loc>
+    <loc>https://lunacard.junenaga.com/register.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
