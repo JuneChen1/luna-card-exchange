@@ -9,7 +9,7 @@ async function sendResetPasswordEmail(to, resetUrl) {
       'api-key': process.env.BREVO_API_KEY
     },
     body: JSON.stringify({
-      sender: { email: process.env.MAIL_FROM },
+      sender: { name: '月諭聖牌交換站', email: process.env.MAIL_FROM },
       to: [{ email: to }],
       subject: '重設密碼 - 月諭聖牌交換站',
       htmlContent: `
